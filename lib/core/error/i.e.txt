@@ -1,0 +1,14 @@
+Exceptions
+ + Platform Exceptions	
+ + Firebase Auth Exceptions
+ + Firebase Exceptions
+ + Platform Exceptions
+ + Format Exceptions
+
+
+Failures
+ + Platform Failures	
+ + Firebase Auth Failures
+ + Firebase Failures
+ + Platform Failures
+ + Format Failures
