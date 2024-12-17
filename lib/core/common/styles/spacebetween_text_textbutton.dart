@@ -25,6 +25,11 @@ class SpacebetweenTextTextbutton extends StatelessWidget {
         ),
 
         TextButton(onPressed: onTap,
+          style: TextButton.styleFrom(
+            padding: EdgeInsets.zero, // Removes all padding
+            minimumSize: Size.zero,  // Optional: removes minimum size constraints
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap, // Optional: shrinks the touch target
+          ),
             child: Text(buttonText,
               style: GoogleFonts.raleway(
                   textStyle: TextStyle(

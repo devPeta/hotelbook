@@ -6,37 +6,55 @@ class NotificationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+    return Scaffold(
       backgroundColor:Colors.white,
       body: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.all(16),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              ///ApplicationBar
+              ApplicationBar(title: 'Notifications',
+              leadingIcon:Icons.arrow_back,
+              leadingOnPressed: () {
+                    Navigator.pop(context);
+                },
+              ),
+              SizedBox(height: screenHeight * 0.01,),
 
-                ///AppBar
-                ApplicationBar(appbarTitle: 'Notifications',),
+              ///Children
+              Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+
+                    const NotificationTile(
+                        notificationTitle: 'Your payment was successful',
+                        notificationSubTitle: 'Your payment for hotel bookings with\nNo Reservation 0123456789 was \nsuccessful \#30,800',
+                        date: 'Today, 02:58 PM',
+                        icon: Icons.check,
+                        iconColor: Color(0xff287D3C)
+                    ),
+
+                    SizedBox(height: screenHeight * 0.03,),
 
 
-                NotificationTile(notificationTitle: 'Your payment was successful',
-                    notificationSubTitle: 'Your payment for hotel bookings with No. Reservation 0123456789 was successful \$308',
-                    date: 'Today, 02:58 PM',
-                    icon: Icons.check,
-                    iconColor: Color(0xff287D3C)
+                    const NotificationTile(
+                      notificationTitle:'Payment Failed',
+                        notificationSubTitle: 'Your payment for hotel booking failed',
+                        date: 'Tomorrow, 04:58 PM',
+                        icon: Icons.delete_outline_outlined,
+                        iconColor: Color(0xffDA1414),
+                    ),
+
+                  ],
                 ),
-
-
-                NotificationTile(notificationTitle:'Payment Failed',
-                    notificationSubTitle: 'Your payment for hotel booking failed',
-                    date: 'Tomorrow, 04:58 PM',
-                    icon: Icons.delete_outline_outlined,
-                    iconColor: Color(0xffDA1414),
-                ),
-
-              ],
-            ),
+              ),
+            ],
           )
       ),
     );
@@ -67,29 +85,36 @@ class NotificationTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-               Icon(icon, size: 20, color: iconColor,),
+                Icon(icon, size: 20, color: iconColor,),
+                const SizedBox(width: 8,),
 
-                Row(
+                  Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                             Text(notificationTitle, style: GoogleFonts.raleway(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
                               color: const Color(0xff2D2D2D),
-                            ),),
+                              ),
+                            ),
 
-                            SizedBox(height: 4,),
+                            const SizedBox(height: 8,),
                             Text(notificationSubTitle,
                               style: GoogleFonts.raleway(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                                 color: const Color(0xff2D2D2D),
                               ),
+                              softWrap: true, // Ensures the text wraps to the next line
+                              overflow: TextOverflow.visible, // Ensures the full text is visible
                             ),
-                           SizedBox(height: 8,),
+
+                            const SizedBox(height: 12,),
                             Text(date,  style: GoogleFonts.raleway(
                               fontSize:10,
                               fontWeight: FontWeight.bold,
@@ -100,8 +125,6 @@ class NotificationTile extends StatelessWidget {
                     )
                   ],
                 )
-
-
         ],
         )
       ],

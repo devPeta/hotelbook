@@ -4,10 +4,18 @@ import 'package:google_fonts/google_fonts.dart';
 class AppTextStyles{
 
 
+  static final TextStyle sectionTextStyle =  GoogleFonts.raleway(
+    textStyle: const TextStyle(
+      fontSize: 22,
+      color: Color(0xff2D2D2D),
+      fontWeight: FontWeight.w500,
+    ),
+  );
+
   static final TextStyle onBoardingTitle = GoogleFonts.raleway(
     textStyle: const TextStyle(
         fontSize: 25,
-        color: Color(0xffFFFFFF),
+        color: Color(0xff2D2D2D),
         height: 1.8,
         fontWeight: FontWeight.w500
     ),

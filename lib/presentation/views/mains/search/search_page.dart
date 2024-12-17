@@ -16,7 +16,8 @@ Widget build(BuildContext context) {
                   children: [
 
                     ///AppSearch
-                    ApplicationBar(appbarTitle: 'Search',),
+                    ApplicationBar(title: 'Search', leadingIcon: null,),
+
                   ],
                 ),
               )

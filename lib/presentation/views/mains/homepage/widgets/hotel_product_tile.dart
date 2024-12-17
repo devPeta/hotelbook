@@ -1,113 +1,220 @@
+
+
+
+
+
+
+
+
+
+
+import 'package:bookhotel/core/common/app_rounded_container.dart';
+import 'package:bookhotel/core/common/app_rounded_image.dart';
 import 'package:bookhotel/data/models/book_hotel_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+
+class HotelProductController extends GetxController {
+  var isPressed = false.obs;
+
+  void onTapDown() {
+    isPressed.value = true;
+  }
+
+  void onTapUp(Function()? onTap) {
+    isPressed.value = false;
+    if (onTap != null) {
+      onTap();
+    }
+  }
+
+  void onTapCancel() {
+    isPressed.value = false;
+  }
+}
+
 class HotelProductTile extends StatefulWidget {
   final BookHotelProduct bookHotelProduct;
-  
-  const HotelProductTile({Key? key,
-    required this.bookHotelProduct}) : super(key: key);
+  final Function()? onTapNow;
+
+  const HotelProductTile({
+    Key? key,
+    required this.bookHotelProduct,
+    this.onTapNow,
+  }) : super(key: key);
 
   @override
   State<HotelProductTile> createState() => _HotelProductTileState();
 }
 
 class _HotelProductTileState extends State<HotelProductTile> {
-  bool isActive = false;
+  bool isActive = false; // To track the favorite icon state
+  final HotelProductController controller = HotelProductController();
+
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 180,
-      height: 120,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(4),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.9), // Grey shadow with some transparency
-                spreadRadius: 0, // Spread of the shadow
-                blurRadius: 6, // Softness of the shadow
-                offset: Offset(0, 4), // Position of the shadow (horizontal, vertical)
-            ),
-          ]
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ///Image
-            Container(
-                  width: double.infinity,
-                  height: 80,
-                  decoration:  BoxDecoration(
-                  image: DecorationImage(
-                      image: AssetImage(
-                          widget.bookHotelProduct.imgPaths,
-                      ),
-                    fit: BoxFit.fill,
+    return  Container(
+      width: 300,
+      decoration: BoxDecoration(
+        color: const Color(0xfff4f4f4),
+        borderRadius: BorderRadius.circular(4),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.9),
+            spreadRadius: 0,
+            blurRadius: 6,
+            offset: const Offset(0, 4), // Shadow position
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          SizedBox(width: 6,),
+          ///Image Url And Thumb Nail Design
+          Container(
+            height: 120,
+            padding: const EdgeInsets.all(1),
+            color: Colors.white,
+            child: Stack(
+              children: [
+                ///Thumbnail
+                SizedBox(
+                  height:120,
+                  width: 120,
+                  child: AppRoundedImage(
+                    fit: BoxFit.cover,
+                    imageUrl: widget.bookHotelProduct.imgPaths,
+                    padding: const EdgeInsets.all(2),
+                    applyImageRadius: true,
                   ),
                 ),
-                 child: Container(
-                    decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.black.withOpacity(0.4),
-                        Colors.black.withOpacity(0.6),
-                      ],
-                      begin: Alignment.bottomCenter,
-                      stops: const [0.85, 0.45],
-                      end: Alignment.topRight,
+
+                ///Sale Tag
+                Positioned(
+                    top: 12,
+                    left: 8,
+                    child: SizedBox(
+                      height:24, width: 36,
+                      child: AppRoundedContainer(
+                        isCircleShape: false,
+                        radius: 4,
+                        color: Colors.red.withOpacity(0.5),
+                        padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                        child: Text('25%', style: GoogleFonts.inter(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 10,
+                        ),
+                        ),),
+                    ),
+                    ),
+
+                ///ToggleIcon
+                Positioned(
+                  top: 12,
+                  right: 8,
+                  child: SizedBox(
+                    height: 24, width: 24,
+                    child: AppRoundedContainer(
+                      isCircleShape: false,
+                      radius: 4,
+                      color: Colors.white.withOpacity(0.5),
+                      padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                      child: GestureDetector(
+                        onTap: _toggleFavorite,
+                        child: Icon(
+                          Icons.favorite_outlined,
+                          color: isActive ? const Color(0xffDA1414) : const Color(0xff6B6B6B),
+                          size: 14,
+                        ),
+                      ),
                     ),
                   ),
-            ),
-            ),
-
-            const SizedBox(height: 4),
-            ///Title
-            Padding(
-              padding: const EdgeInsets.only(left: 4.0),
-              child: Text(widget.bookHotelProduct.name, style: GoogleFonts.raleway(
-                color: const Color(0xff2D2D2D),
-                fontSize: 12,
-                fontWeight: FontWeight.w800,
                 ),
-              ),
+              ],
             ),
-            ///Location And Favourite Icon
-            Padding(
-              padding: const EdgeInsets.only(left: 4.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
+          ),
+
+
+          /// Hotel Name, Location Details And Location Icon
+          SizedBox(
+            width: 160,
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 16.0, right: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      const Icon(Icons.location_on_outlined, color: Color(0xff969696), size: 12,),
-                      const SizedBox(width: 4,),
-                      Text(widget.bookHotelProduct.location, style: GoogleFonts.raleway(
-                        color: const Color(0xff6B6B6B),
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                          ),
+
+                      const SizedBox(height: 12),
+                      /// Hotel Name
+                      Text(
+                        widget.bookHotelProduct.name,
+                        style: GoogleFonts.raleway(
+                          color: const Color(0xff2D2D2D),
+                          fontSize: 14,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
+
+                      const SizedBox(height: 8),
+                      /// Location and Favorite Icon
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          /// Location Details
+                          Row(
+                            children: [
+                              const Icon(
+                                Icons.location_on_outlined,
+                                color: Color(0xff2194FF),
+                                size: 12,
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                widget.bookHotelProduct.location,
+                                style: GoogleFonts.raleway(
+                                  color: const Color(0xff6B6B6B),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w800,
+                                ),
+                                overflow: TextOverflow.fade,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(height: 8),
+                      ///Price And Cart Page
+                      Text(widget.bookHotelProduct.price,  style: GoogleFonts.inter(
+                        color:const Color(0xff2194FF),
+                        fontWeight: FontWeight.w800,
+                        fontSize: 14,
+                      ),
+                      ),
+
+
+
                     ],
                   ),
-
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        isActive = !isActive; // Toggle the state
-                      });
-                    },
-                    icon: Icon(
-                      Icons.favorite_outlined,
-                      color: isActive ? const Color(0xffDA1414) : const Color(0xff6B6B6B),
-                      size: 14, // Adjust the size as needed
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
+          ),
+      ],
+    ),
     );
+  }
+
+  /// Toggles the favorite state
+  void _toggleFavorite() {
+    setState(() {
+      isActive = !isActive;
+    });
   }
 }

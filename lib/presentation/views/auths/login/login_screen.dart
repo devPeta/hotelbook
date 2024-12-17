@@ -7,6 +7,7 @@ import 'package:bookhotel/core/theme/custom_theme/theme_textfield.dart';
 import 'package:bookhotel/presentation/views/app_navigator.dart';
 import 'package:bookhotel/presentation/views/auths/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 class LoginScreen extends StatelessWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -74,7 +75,11 @@ class LoginScreen extends StatelessWidget {
                       text: 'Forgot Password?',
                     ),
                   ],
-                ),
+                ).animate().fadeIn().scale().move(
+                    delay: 100.ms,
+                    duration: 300.ms,
+                    begin: const Offset(0, 200),
+                  ),
                 SizedBox(height: height * 0.01,),
 
                 ///Login Button
@@ -112,22 +117,26 @@ class LoginScreen extends StatelessWidget {
                   children: [
                     Text('Don\'t have an account yet?', style: AppTextStyles.orLogIn.copyWith(
                     color: const Color(0xff2D2D2D),
-                    fontSize: 12,
-                    fontWeight: FontWeight.w200,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                          ),
                     ),
-                    const SizedBox(width: 4,),
+                    const SizedBox(width: 8,),
 
                     TextButton(onPressed: (){
                       Get.to(const SignupScreen());
                     },
                         child: Text(' Sign up',style: AppTextStyles.orLogIn.copyWith(
                           color: const Color(0xff2D2D2D),
-                          fontSize: 10,
+                          fontSize: 12,
                           fontWeight: FontWeight.w800,
                         ),
                         ))
                   ],
+                ).animate().fadeIn().scale().move(
+                  delay: 100.ms,
+                  duration: 600.ms,
+                  begin: const Offset(0, 200),
                 ),
               ],
             ),

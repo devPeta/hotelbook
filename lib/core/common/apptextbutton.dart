@@ -18,8 +18,8 @@ class AppKTextButton extends StatelessWidget {
           child: Text(text,
             style: GoogleFonts.raleway(
             color: const Color(0xff6B6B6B),
-            fontSize: 12,
-            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            fontWeight: FontWeight.w700,
               ),
             ),
         ),

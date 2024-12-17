@@ -6,6 +6,7 @@ import 'package:bookhotel/core/common/apptextbutton.dart';
 import 'package:bookhotel/core/common/apptextfield.dart';
 import 'package:bookhotel/core/constant/textstyle_constant.dart';
 import 'package:get/get.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({Key? key}) : super(key: key);
@@ -23,7 +24,7 @@ class SignupScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: height * 0.03,),
+              SizedBox(height: height * 0.01,),
               Center(
                 child: Text('Create your Account', style: AppTextStyles.onBoardingTitle.copyWith(
                   color: const Color(0xff2D2D2D),
@@ -35,16 +36,40 @@ class SignupScreen extends StatelessWidget {
               SizedBox(height: height * 0.02,),
 
               ///Sign Up Form
-             Form(
+              Form(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       ///Name TextField
+                      const Row(
+                        children: [
+                          Expanded(
+                            child: AppKTextField(
+                              labelText: 'First name',
+                              hintText: 'First name',
+                              prefixIcon: Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D),
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 16,),
+                          Expanded(
+                            child: AppKTextField(
+                              labelText: 'Last name',
+                              hintText: 'Last name',
+                              prefixIcon: Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: height * 0.01,),
+
+                      ///Email TextField
                       const AppKTextField(
-                        labelText: 'Your name',
-                        hintText: 'input',
-                        prefixIcon: Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D),
+                        labelText: 'Username',
+                        hintText: 'Username',
+                        prefixIcon: Icon(Icons.manage_accounts_outlined, color: Color(0xff2D2D2D),
                         ),
                       ),
                       SizedBox(height: height * 0.01,),
@@ -58,10 +83,19 @@ class SignupScreen extends StatelessWidget {
                       ),
                       SizedBox(height: height * 0.01,),
 
+                      ///Email TextField
+                      const AppKTextField(
+                        labelText: 'Phone number',
+                        hintText: 'input',
+                        prefixIcon: Icon(Icons.phone, color: Color(0xff2D2D2D),
+                        ),
+                      ),
+                      SizedBox(height: height * 0.01,),
+
                       ///Password TextField
                       const AppKTextField(
-                        labelText: 'Set Password',
-                        hintText: 'input',
+                        labelText: 'Password',
+                        hintText: 'Password',
                         prefixIcon: Icon(Icons.key_rounded, color: Color(0xff2D2D2D),
                         ),
                       ),
@@ -70,8 +104,6 @@ class SignupScreen extends StatelessWidget {
                     ],
                   )
               ),
-
-
               SizedBox(height: height * 0.01,),
 
               ///Login Button
@@ -98,14 +130,14 @@ class SignupScreen extends StatelessWidget {
               const AppKSocialButtons(),
               SizedBox(height: height * 0.01,),
 
-              ///Dont have an accountButton
+              ///Don't have an accountButton
               Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text('Already have an account yet?', style: AppTextStyles.orLogIn.copyWith(
                     color: const Color(0xff2D2D2D),
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
                   ),
@@ -116,11 +148,15 @@ class SignupScreen extends StatelessWidget {
                   },
                       child: Text(' Login',style: AppTextStyles.orLogIn.copyWith(
                         color: const Color(0xff2D2D2D),
-                        fontSize: 10,
+                        fontSize: 12,
                         fontWeight: FontWeight.w800,
                       ),
                       ))
                 ],
+              ).animate().fadeIn().scale().move(
+                delay: 100.ms,
+                duration: 600.ms,
+                begin: const Offset(0, 200),
               ),
             ],
           ),

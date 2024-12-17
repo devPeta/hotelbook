@@ -3,6 +3,7 @@ import 'package:bookhotel/core/constant/textstring_constant.dart';
 import 'package:bookhotel/core/constant/textstyle_constant.dart';
 import 'package:bookhotel/presentation/views/auths/login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -41,11 +42,25 @@ class OnBoardingScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(height: height * 0.1,),
-                        ///Text
-                        Text(AppString.boardingTitle, style: AppTextStyles.onBoardingTitle,),
+                        ///Text + Animation
+                        Animate(
+                          effects:const [
+                            FadeEffect(
+                              duration: Duration(
+                                seconds: 1
+                              ),
+                            ),
+                            ScaleEffect(
+                              duration: Duration(
+                                seconds: 1
+                              ),
+                            ),
+                          ],
+                            child: Text(AppString.boardingTitle, style: AppTextStyles.onBoardingTitle,)
+                        ),
                         SizedBox(height: height * 0.6,),
 
-                        ///Button
+                        ///Button + Animation
                         Center(
                           child: GestureDetector(
                             onTap: (){
@@ -66,12 +81,16 @@ class OnBoardingScreen extends StatelessWidget {
                               ),
                               child: Center(
                                 child:  Text('Get Started', style: AppTextStyles.onBoardingTitle.copyWith(
-                                      fontSize: 20,
+                                      fontSize: 20, color: const Color(0xffffffff),
                                     )),
                                 ),
                               ),
                             ),
-                          ),
+                          ).animate().fadeIn().scale().move(
+                          delay: 1200.ms,
+                          duration: 1200.ms,
+                          begin: const Offset(0, 200),
+                        ),
                       ],
                     ),
                   ),

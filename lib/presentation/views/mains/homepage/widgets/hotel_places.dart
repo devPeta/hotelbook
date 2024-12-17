@@ -11,8 +11,8 @@ class HotelPlacesAroundTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140,
-      width: 160,
+      height: 190,
+      width: 152,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: const BorderRadius.only(
@@ -43,7 +43,7 @@ class HotelPlacesAroundTile extends StatelessWidget {
                   child: Text(visitAroundModel.title,
                     style: GoogleFonts.inter(
                     color: const Color(0xffFFFFFF),
-                    fontSize: 16,
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
                     ),
                     textAlign: TextAlign.center,
