@@ -3,7 +3,6 @@ import 'package:bookhotel/core/common/appsocialbutton.dart';
 import 'package:bookhotel/core/common/apptextbutton.dart';
 import 'package:bookhotel/core/common/apptextfield.dart';
 import 'package:bookhotel/core/constant/textstyle_constant.dart';
-import 'package:bookhotel/core/theme/custom_theme/theme_textfield.dart';
 import 'package:bookhotel/presentation/views/app_navigator.dart';
 import 'package:bookhotel/presentation/views/auths/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
@@ -56,8 +55,11 @@ class LoginScreen extends StatelessWidget {
                             const AppKTextField(
                               labelText: 'Set Password',
                               hintText: '*******',
-                              prefixIcon: Icon(Icons.key_rounded, color: Color(0xff2D2D2D),
+                              prefixIcon: Icon(Icons.lock_outline, color: Color(0xff2D2D2D),
                               ),
+                              suffixIcon:  Icon(Icons.visibility, color: Color(0xff2D2D2D),
+                              ),
+                              obscureText: true,
                             ),
                             SizedBox(height: height * 0.01,),
                           ],

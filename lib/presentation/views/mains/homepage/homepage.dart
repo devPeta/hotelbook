@@ -1,4 +1,3 @@
-
 import 'package:bookhotel/core/common/styles/spacebetween_text_textbutton.dart';
 import 'package:bookhotel/data/models/book_hotel_product_model.dart';
 import 'package:bookhotel/data/models/visit_model.dart';
@@ -6,8 +5,7 @@ import 'package:bookhotel/presentation/views/mains/homepage/widgets/homepage_hea
 import 'package:bookhotel/presentation/views/mains/homepage/widgets/hotel_places.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/widgets/hotel_product_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:get/get.dart';
+
 class AppHomePage extends StatefulWidget {
   const AppHomePage({Key? key}) : super(key: key);
 
@@ -42,9 +40,9 @@ class _AppHomePageState extends State<AppHomePage> {
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: SafeArea(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -54,19 +52,21 @@ class _AppHomePageState extends State<AppHomePage> {
               SizedBox(height: height * 0.01,),
 
 
-              ///OtherBody Header
+              ///Others Body Content
               Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      ///Around you
+                      ///Around you Text
                       SpacebetweenTextTextbutton(
                           text: 'Around you',
                           buttonText: 'See More', onTap: (){}
                       ),
                       const SizedBox(height: 4,),
+
+                      ///Book Hotel
                       SizedBox(
                         height: 150,
                         child: ListView.separated(
@@ -85,12 +85,14 @@ class _AppHomePageState extends State<AppHomePage> {
                       ),
                       SizedBox(height: height * 0.02,),
 
-                      ///Place you can
+                      ///Place you can Text
                       SpacebetweenTextTextbutton(
                           text: 'Place you can visit',
                           buttonText: 'See More', onTap: (){}
                       ),
                       const SizedBox(height: 4,),
+
+                      ///Visit Model tile
                       SizedBox(
                         height: 200,
                         child: ListView.separated(
@@ -107,7 +109,6 @@ class _AppHomePageState extends State<AppHomePage> {
                           },
                         ),
                       ),
-                      SizedBox(height: height * 0.01,),
                     ]
                   )
                 ),
@@ -117,6 +118,6 @@ class _AppHomePageState extends State<AppHomePage> {
       ),
     );
   }
-    }
+}
 
 

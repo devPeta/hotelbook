@@ -1,5 +1,6 @@
 import 'package:bookhotel/presentation/views/mains/homepage/details_page.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/homepage.dart';
+import 'package:bookhotel/presentation/views/mains/search/search_page.dart';
 import 'package:bookhotel/presentation/views/others/profile/profile_page.dart';
 import 'package:bookhotel/presentation/views/others/schedule/schedule_page.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,7 @@ class _AppNavigatorState extends State<AppNavigator> {
   final screens =  [
     const AppHomePage(),
     const SchedulePage(),
-    DetailsPage(),
+    const SearchPage(),
     const ProfilePage(),
 
   ];
@@ -58,8 +59,8 @@ class _AppNavigatorState extends State<AppNavigator> {
                       label:'Scheduling',
                   ),
                   BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite_outline_rounded),
-                    label: 'Favourite',
+                    icon: Icon(Icons.search),
+                    label: 'Search',
                   ),
                   BottomNavigationBarItem(
                 icon :Icon(Icons.people,),

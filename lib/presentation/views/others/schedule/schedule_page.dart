@@ -2,10 +2,13 @@ import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:bookhotel/core/common/buttonliketextfieldcontainer.dart';
 import 'package:bookhotel/core/common/styles/spacebetween_text_textbutton.dart';
-import 'package:bookhotel/presentation/views/others/schedule/personal_data.dart';
+import 'package:bookhotel/presentation/views/others/schedule/personal_data_page.dart';
+import 'package:bookhotel/presentation/views/others/schedule/widgets/list_items.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
+
+import 'widgets/text_header.dart';
 class SchedulePage extends StatefulWidget {
   const SchedulePage({Key? key}) : super(key: key);
 
@@ -24,6 +27,31 @@ class _SchedulePageState extends State<SchedulePage> {
     DateTimeRange? _selectedDateRange;
 
 
+    Future<void> selectDateRange(BuildContext context) async {
+      final DateTimeRange? picked = await showDateRangePicker(
+        context: context,
+        firstDate: DateTime.now(),
+        lastDate: DateTime.now().add(const Duration(days: 365)),
+      );
+
+      if (picked != null && picked != _selectedDateRange) {
+        setState(() {
+          _selectedDateRange = picked;
+        });
+      }
+    }
+    Future<void> selectTime(BuildContext context) async {
+      final TimeOfDay? picked = await showTimePicker(
+        context: context,
+        initialTime: _selectedTime,
+      );
+
+      if (picked != null && picked != _selectedTime) {
+        setState(() {
+          _selectedTime = picked;
+        });
+      }
+    }
     Future<void> selectedDateFrom(BuildContext context) async {
       final DateTime? picked = await showDatePicker(context: context,
           firstDate: DateTime(2024),
@@ -58,24 +86,7 @@ class _SchedulePageState extends State<SchedulePage> {
         });
       }
     }
-    Future<void> selectDateRange(BuildContext context) async {
-      final DateTimeRange? picked = await showDateRangePicker(
-        context: context,
-        initialDateRange: _selectedDateRange ??
-            DateTimeRange(
-              start: DateTime.now(),
-              end: DateTime.now().add(const Duration(days: 1)),
-            ),
-        firstDate: DateTime(2024),
-        lastDate: DateTime(2025),
-      );
 
-      if (picked != null) {
-        setState(() {
-          _selectedDateRange = picked;
-        });
-      }
-    }
 
 
     var textHeaderStyle = const TextStyle(
@@ -106,12 +117,10 @@ class _SchedulePageState extends State<SchedulePage> {
                       children: [
                         const TextHeader( textHeader: 'Personal Data',),
                         ButtonLikeTextField(
-                          prefixIcon: Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D), size: 24,),
-                          onTap: (){
-                            Get.to(PersonalData(),);
-                          },
+                          prefixIcon:  const Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D), size: 24,),
+                          onTap: () => Get.to(const PersonalData()),
                           text: 'Check',
-                          suffixIcon: Icon(Icons.navigate_next_sharp, color: Color(0xff2D2D2D), size: 24,
+                          suffixIcon: const Icon(Icons.navigate_next_sharp, color: Color(0xff2D2D2D), size: 24,
                           ),
                         ),
                         SizedBox(height: height * 0.02,),
@@ -136,35 +145,43 @@ class _SchedulePageState extends State<SchedulePage> {
                         ButtonLikeTextField(
                             onTap: () => selectedDateTo(context),
                             text: ' $_selectedDateTo',
-                            prefixIcon: Icon(Icons.timer,
+                            prefixIcon: const Icon(Icons.timer,
                                 color: Color(0xff2D2D2D), size: 24),
                         ),
                         SizedBox(height: height * 0.01,),
-                  
-                        const TextHeader( textHeader: 'Check In & Check Out Date',),
+
+                        const TextHeader(textHeader: 'Check In & Check Out Date'),
                         ButtonLikeTextField(
                           onTap: () => selectDateRange(context),
                           text: _selectedDateRange == null
                               ? "Select Check-In Date"
                               : "${_selectedDateRange!.start.day}/${_selectedDateRange!.start.month}/${_selectedDateRange!.start.year}",
-                          prefixIcon2: const Icon(Icons.calendar_month_rounded,
-                              color: Color(0xff287D3C), size: 24),
+                          prefixIcon2: const Icon(
+                            Icons.calendar_month_rounded,
+                            color: Color(0xff287D3C),
+                            size: 24,
+                          ),
                           onTap2: () => selectDateRange(context),
                           text2: _selectedDateRange == null
                               ? "Select Check-Out Date"
                               : "${_selectedDateRange!.end.day}/${_selectedDateRange!.end.month}/${_selectedDateRange!.end.year}",
-                          prefixIcon: const Icon(Icons.calendar_month_rounded,
-                              color: Color(0xffDA1414), size: 24),
+                          prefixIcon: const Icon(
+                            Icons.calendar_month_rounded,
+                            color: Color(0xffDA1414),
+                            size: 24,
+                          ),
                         ),
-                        SizedBox(height: height * 0.01,),
+                        SizedBox(height: height * 0.01),
                         ButtonLikeTextField(
-                          prefixIcon: const Icon(Icons.lock_clock, color: Color(0xff2D2D2D), size: 24,),
-                          onTap: (){
-                            selectedTime;
-                          },
+                          prefixIcon: const Icon(
+                            Icons.lock_clock,
+                            color: Color(0xff2D2D2D),
+                            size: 24,
+                          ),
+                          onTap: () => selectTime(context),
                           text: _selectedTime.format(context),
                         ),
-                        SizedBox(height: height * 0.02,),
+                        SizedBox(height: height * 0.02),
                   
                   
                         ///Room And Quantity
@@ -208,7 +225,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         AppKButton(
                           label: 'Pay',
                           width: double.infinity,
-                          color: Color(0xff2d2d2d),
+                          color: const Color(0xff2d2d2d),
                         ),
                       ],
                     ),
@@ -222,70 +239,6 @@ class _SchedulePageState extends State<SchedulePage> {
     );
   }
 }
-
-class ListItems extends StatelessWidget {
-  final String itemName;
-  final Color itemColor;
-  final String itemCost;
-  final Color itemCostColor;
-  const ListItems({
-    super.key,
-    required this.itemName,
-    required this.itemCost, 
-    required this.itemColor, 
-    required this.itemCostColor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(itemName, style: GoogleFonts.raleway(
-          textStyle: TextStyle(
-            fontSize: 16,
-            color: itemColor,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-        ),
-
-        Text(itemCost, style: GoogleFonts.inter(
-          textStyle: TextStyle(
-            fontSize: 16,
-            color: itemCostColor,
-            fontWeight: FontWeight.w800,
-          ),
-        ),
-        ),
-      ],
-    );
-  }
-}
-
-class TextHeader extends StatelessWidget {
-  final String textHeader;
-
-  const TextHeader({
-    super.key,
-    required this.textHeader,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      textHeader, style: GoogleFonts.raleway(
-      textStyle: const TextStyle(
-        fontSize: 16,
-        color: Color(0xff2D2D2D),
-        fontWeight: FontWeight.w600,
-      ),
-    ),
-    );
-  }
-}
-
-
 
 
 

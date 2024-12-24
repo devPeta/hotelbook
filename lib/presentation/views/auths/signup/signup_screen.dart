@@ -96,8 +96,11 @@ class SignupScreen extends StatelessWidget {
                       const AppKTextField(
                         labelText: 'Password',
                         hintText: 'Password',
-                        prefixIcon: Icon(Icons.key_rounded, color: Color(0xff2D2D2D),
+                        prefixIcon: Icon(Icons.lock_outline, color: Color(0xff2D2D2D),
                         ),
+                          suffixIcon:  Icon(Icons.visibility, color: Color(0xff2D2D2D),
+                        ),
+                        obscureText: true,
                       ),
                       SizedBox(height: height * 0.01,),
 

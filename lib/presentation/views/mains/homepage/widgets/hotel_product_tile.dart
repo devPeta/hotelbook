@@ -1,38 +1,14 @@
 
-
-
-
-
-
-
-
-
-
 import 'package:bookhotel/core/common/app_rounded_container.dart';
 import 'package:bookhotel/core/common/app_rounded_image.dart';
 import 'package:bookhotel/data/models/book_hotel_product_model.dart';
+import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:circular_infinity_loader/circular_infinity_loader.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
-class HotelProductController extends GetxController {
-  var isPressed = false.obs;
 
-  void onTapDown() {
-    isPressed.value = true;
-  }
-
-  void onTapUp(Function()? onTap) {
-    isPressed.value = false;
-    if (onTap != null) {
-      onTap();
-    }
-  }
-
-  void onTapCancel() {
-    isPressed.value = false;
-  }
-}
 
 class HotelProductTile extends StatefulWidget {
   final BookHotelProduct bookHotelProduct;
@@ -53,8 +29,13 @@ class _HotelProductTileState extends State<HotelProductTile> {
   final HotelProductController controller = HotelProductController();
 
 
+
+
   @override
   Widget build(BuildContext context) {
+    // Trigger the image loading simulation
+    controller.loadImage();
+
     return  Container(
       width: 300,
       decoration: BoxDecoration(
@@ -80,16 +61,29 @@ class _HotelProductTileState extends State<HotelProductTile> {
             child: Stack(
               children: [
                 ///Thumbnail
-                SizedBox(
+              Obx(() {
+                return SizedBox(
                   height:120,
                   width: 120,
-                  child: AppRoundedImage(
+                  child: controller.isImageLoaded.value
+                      ? AppRoundedImage(
                     fit: BoxFit.cover,
                     imageUrl: widget.bookHotelProduct.imgPaths,
                     padding: const EdgeInsets.all(2),
                     applyImageRadius: true,
+                  )
+                      : const Center(
+                   child: SizedBox(
+                     height: 50,
+                     width: 50,
+                     child: CircularInfinityLoader(
+                         color: Color(0xff2D2D2D),
+                      ),
+                   ),
                   ),
-                ),
+                );
+              }),
+
 
                 ///Sale Tag
                 Positioned(

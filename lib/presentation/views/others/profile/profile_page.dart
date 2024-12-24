@@ -1,12 +1,35 @@
+import 'dart:io';
+
 import 'package:bookhotel/core/common/appbar.dart';
+import 'package:bookhotel/presentation/views/others/profile/widgets/profile_menu.dart';
+import 'package:bookhotel/presentation/views/others/profile/widgets/profile_section_header.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-class ProfilePage extends StatelessWidget {
+import 'package:image_picker/image_picker.dart';
+
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  State<ProfilePage> createState() => _ProfileScreenState();
+}
 
+class _ProfileScreenState extends State<ProfilePage> {
+  File? _imageFile; // Stores the selected image file
+  final ImagePicker _picker = ImagePicker(); // Image picker instance
+
+  // Function to pick an image from the gallery
+  Future<void> _pickImage() async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+
+    if (pickedFile != null) {
+      setState(() {
+        _imageFile = File(pickedFile.path); // Update the file
+      });
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
 
@@ -23,28 +46,35 @@ class ProfilePage extends StatelessWidget {
                 ApplicationBar(title: 'Profile', leadingIcon: null, showBackArrow: false, ),
 
                 Center(
-                  child: Column(
-                    children: [
-                      SizedBox(height: height * 0.01,),
+                    child: Column(
+                        children: [
+                          SizedBox(height: height * 0.01,),
 
-                      ///Circle Avatar
-                      Container(
-                        height: 140,
-                        width: 140,
-                        decoration:BoxDecoration(
-                          shape: BoxShape.circle,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(4.0),
-                          child: Image.asset('assets/images/hotel/place2.png', height: 140,),
-                        ),
-                      ),
+                          ///Circle Avatar
+                          CircleAvatar(
+                            radius: 34,
+                            backgroundColor: const Color(0xff2D2D2D),
+                            child: CircleAvatar(
+                              radius: 30,
+                              backgroundImage: _imageFile != null ? FileImage(_imageFile!) : null,
+                              child: _imageFile == null
+                                  ? const Icon(
+                                Icons.person,
+                                size: 60,
+                              )
+                                  : null,
+                            ),
+                            ),
 
-                      SizedBox(height: height * 0.01,),
-                      ///Edit Profile Pic
-                      TextButton(onPressed: (){}, child: const Text('Change Profile Pictures'), ),
-                     ]
-                  )
+
+                          SizedBox(height: height * 0.01,),
+
+                          ///Edit Profile Pic
+                          TextButton(onPressed: _pickImage,
+                            child: const Text('Change Profile Pictures'),
+                          ),
+                        ]
+                    )
                 ),
                 SizedBox(height: height * 0.02,),
                 const Divider(),
@@ -90,88 +120,9 @@ class ProfilePage extends StatelessWidget {
                   ),
                 ),
 
-
-
               ],
             ),
           )
-      ),
-    );
-  }
-}
-
-class ProfileSectionHeader extends StatelessWidget {
-  final String title;
-  const ProfileSectionHeader({
-    super.key,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(title, style: GoogleFonts.raleway(
-      textStyle: const TextStyle(
-        color: Color(0xff2D2D2D),
-        fontWeight: FontWeight.bold,
-        fontSize: 18,
-      ),
-    ),
-    );
-  }
-}
-
-class ProfileMenu extends StatelessWidget {
-  final String title;
-  final String value;
-  final VoidCallback onPressed;
-  final IconData icon;
-
-  const ProfileMenu({
-    super.key,
-    required this.title,
-    required this.value,
-    required this.onPressed,
-    required this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 4),
-        child: Row(
-          children: [
-            Expanded( flex: 3,
-              child: Text(title, style: GoogleFonts.raleway(
-                textStyle: const TextStyle(
-                  color: Color(0xff2D2D2D),
-                  fontWeight: FontWeight.w400,
-                  fontSize: 16,
-                ),
-              ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-
-            Expanded(
-              flex: 5,
-              child: Text(value, style: GoogleFonts.inter(
-                textStyle: const TextStyle(
-                  color: Color(0xff2D2D2D),
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-
-            Expanded(
-                child: Icon(icon, size: 18,)
-            ),
-          ],
-        ),
       ),
     );
   }
