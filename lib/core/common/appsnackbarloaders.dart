@@ -5,21 +5,30 @@ import 'package:get/get.dart';
 class AppLoaders{
   static hideSnackBar() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
 
-
   static customToast({required message}){
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       SnackBar(
         elevation: 0,
-        duration: const Duration(seconds: 3),
+        duration: const Duration(seconds: 5),
         backgroundColor: Colors.transparent,
         content: Container(
           padding: const EdgeInsets.all(12.0),
           margin: const  EdgeInsets.symmetric(horizontal: 30),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: Colors.grey
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                spreadRadius: 2,
+                blurRadius: 4,
+                offset: const Offset(0, 2),
+              ),
+            ] ,
+              borderRadius: BorderRadius.circular(15),
+              color: Colors.grey,
           ),
-          child: Center(child: Text(message, style: AppTextStyles.kBodyTextFieldFilled,),),
+          child: Center(
+            child: Text(message, style: AppTextStyles.kBodyTextFieldFilled,),
+          ),
         ),
       ),
     );
@@ -34,7 +43,7 @@ class AppLoaders{
       colorText: Colors.white,
       backgroundColor: Colors.green,
       snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
       margin: const  EdgeInsets.all(10),
       icon: const  Icon(Icons.warning_amber,color: Colors.white,),
     );
@@ -49,7 +58,7 @@ class AppLoaders{
       colorText: Colors.white,
       backgroundColor: Colors.orange,
       snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
       margin: const  EdgeInsets.all(10),
       icon: const  Icon(Icons.warning_amber,color: Colors.white,),
     );
@@ -65,7 +74,7 @@ class AppLoaders{
       colorText: Colors.white,
       backgroundColor: Colors.red.shade600,
       snackPosition: SnackPosition.BOTTOM,
-      duration: Duration(seconds: 5),
+      duration: const Duration(seconds: 5),
       margin: const  EdgeInsets.all(10),
       icon: const  Icon(Icons.warning_amber,color: Colors.white,),
     );

@@ -5,7 +5,6 @@ import 'package:bookhotel/core/common/styles/spacebetween_text_textbutton.dart';
 import 'package:bookhotel/presentation/views/others/schedule/personal_data_page.dart';
 import 'package:bookhotel/presentation/views/others/schedule/widgets/list_items.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
 import 'widgets/text_header.dart';
@@ -220,13 +219,7 @@ class _SchedulePageState extends State<SchedulePage> {
                         SizedBox(height: height * 0.01,),
                   
                         const ListItems(itemName: 'Total', itemCost: '\#30,600', itemColor: Color(0xffB95000), itemCostColor: Color(0xffB95000),),
-                  
-                  
-                        AppKButton(
-                          label: 'Pay',
-                          width: double.infinity,
-                          color: const Color(0xff2d2d2d),
-                        ),
+
                       ],
                     ),
                   ),
@@ -235,6 +228,18 @@ class _SchedulePageState extends State<SchedulePage> {
               ],
             ),
           )
+      ),
+      bottomSheet: Padding(
+        padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
+        child:  Row(
+          children: [
+            IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_outline_rounded, color: Color(0xff969696), size: 18,)),
+            const SizedBox(width: 8,),
+            Expanded(
+              child: AppKButton(label: 'Pay', width: double.infinity, color: const Color(0xff2D2D2D),),
+            ),
+          ],
+        ),
       ),
     );
   }

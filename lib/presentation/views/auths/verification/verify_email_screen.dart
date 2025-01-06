@@ -2,7 +2,8 @@ import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 class VerifyEmailScreen extends StatelessWidget {
-  const VerifyEmailScreen({Key? key}) : super(key: key);
+  final String? email;
+  const VerifyEmailScreen({Key? key, this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,7 @@ class VerifyEmailScreen extends StatelessWidget {
                 ),
                 ),
                 const SizedBox(height: 8,),
-                Text('yakubupeta@gmail.com', style: GoogleFonts.raleway(
+                Text('Kindly, check your mail $email', style: GoogleFonts.raleway(
                   textStyle: const TextStyle(
                     fontSize: 20,
                     color: Color(0xff2D2D2D),

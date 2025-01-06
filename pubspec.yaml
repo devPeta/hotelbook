@@ -75,8 +75,7 @@ dependencies:
   #Fire_base
   firebase_auth: ^5.3.0
   cloud_firestore: ^5.4.2
-  firebase_core:
-  firebase_storage:
+  firebase_core: ^3.5.0
   google_sign_in: ^6.1.6
 
 
@@ -107,6 +106,7 @@ flutter:
      - assets/images/
      - assets/images/socials/
      - assets/images/hotel/
+     - assets/images/places/
      - assets/images/bernard-hermant-KqOLr8OiQLU-unsplash 1.png
 
   # An image asset can refer to one or more resolution-specific "variants", see

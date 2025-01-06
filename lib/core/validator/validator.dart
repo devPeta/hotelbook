@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 
-class KValidator{
+class Validator{
 
   static String? validateEmptyText(String? fieldName, String? value){
     if (value == null || value.isEmpty){

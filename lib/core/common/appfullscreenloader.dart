@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class FullScreenLoader{
 
@@ -12,13 +13,25 @@ class FullScreenLoader{
             color: Colors.white,
             width: double.infinity,
             height: double.infinity,
-            child: const Center(
-              child:  CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Color(0xff2D2D2D),), // Customize the color here
+            child: Center(
+              child:  Column(
+                children: [
+                  const CircularProgressIndicator(
+                    valueColor: AlwaysStoppedAnimation<Color>(Color(0xff2D2D2D),
+                    ), // Customize the color here
+                  ),
+                  const SizedBox(height: 16,),
+                  Text(text, style: GoogleFonts.raleway(
+                    color: const Color(0xff2D2D2D),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                  ),
+                ],
               ),
             ),
           ),
-        )
+        ),
     );
   }
 

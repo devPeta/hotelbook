@@ -1,4 +1,5 @@
 import 'package:bookhotel/core/common/appbutton.dart';
+import 'package:bookhotel/presentation/views/auths/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 class SuccessfulScreen extends StatelessWidget {
@@ -43,7 +44,11 @@ class SuccessfulScreen extends StatelessWidget {
                       color: const Color(0xff2D2D2D),
                       shadowOpacity: 0.2,
                       height: 51,
-                      onTap: (){},
+                      onTap:  (){
+                        Navigator.push( context, MaterialPageRoute( builder: (context) =>
+                        const LoginScreen()),
+                        );
+                      },
                     ),
                   ),
 

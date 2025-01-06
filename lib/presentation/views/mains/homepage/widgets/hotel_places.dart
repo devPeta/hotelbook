@@ -38,7 +38,7 @@ class _HotelPlacesAroundTileState extends State<HotelPlacesAroundTile> {
       width: 152,
       decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomRight: Radius.circular(16),
         ),
       ),
@@ -94,14 +94,17 @@ class _HotelPlacesAroundTileState extends State<HotelPlacesAroundTile> {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 20),
-                child: Text(
-                  widget.visitAroundModel.title,
-                  style: GoogleFonts.inter(
-                    color: Colors.white,
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
+                child: GestureDetector(
+                  onTap: widget.visitAroundModel.onTap,
+                  child: Text(
+                    widget.visitAroundModel.title,
+                    style: GoogleFonts.inter(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                    ),
+                    textAlign: TextAlign.center,
                   ),
-                  textAlign: TextAlign.center,
                 ),
               ),
             ),

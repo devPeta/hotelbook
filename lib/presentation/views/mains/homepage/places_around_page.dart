@@ -1,5 +1,6 @@
 import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
+import 'package:bookhotel/data/models/visit_model.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -8,32 +9,40 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
+
+
 class PlacesAroundPage extends StatefulWidget {
-  const PlacesAroundPage({Key? key}) : super(key: key);
+  final VisitAroundModel visitAroundModel;
+
+  const PlacesAroundPage({Key? key, required this.visitAroundModel}) : super(key: key);
 
   @override
   State<PlacesAroundPage> createState() => _PlacesAroundPageState();
 }
 
 class _PlacesAroundPageState extends State<PlacesAroundPage> {
+  int activeImageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    final visitAroundModel = widget.visitAroundModel;
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
+            /// Image Carousel with `CarouselSlider`
+            // PlacesAroundCarouselSlider(
+            //   images: visitAroundModel.images ?? [],
+            //   onPageChanged: (index) {
+            //     setState(() => activeImageIndex = index);
+            //   },
+            // ),
 
-            ///AppBar
-            const ApplicationBar(
-              title: 'Search',
-              centerTitle: true,
-              showBackArrow: true,
-            ),
-
-            ///Other Body Content
+            /// Main Content
             Expanded(
               child:  SingleChildScrollView(
                 scrollDirection: Axis.vertical,
@@ -54,77 +63,93 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
                             RatingBarIndicator(
                               rating: 3.5,
                               itemCount: 5,
-                              itemSize: 24,
+                              itemSize: 18,
                               itemBuilder: (context, index) => const Icon(Icons.star_border_outlined, color: Colors.amber,),
                               direction: Axis.horizontal,
                             ),
 
-                           const PlaceACallTextButton(),
-                          ]
+                            const PlaceACallTextButton(phoneNumber:'08129425802')
+                          ],
                         ),
-                        ///Short Description
-                        const Text(''),
-                        ///Maps
-                        SizedBox(
-                          height: 400,
-                          child: PlacesAroundMap(),
-                        ),
-                        ///Share
-                      ]
-                  ),
-                ),
+
+                    /// Description
+                    Text(
+                      visitAroundModel.description,
+                      style: GoogleFonts.raleway(
+                        color: const Color(0xff2D2D2D),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+
+                    /// Map Integration
+                    SizedBox(
+                      height: 300,
+                      child: PlacesAroundMap(
+                        latitude: visitAroundModel.latitude,
+                        longitude: visitAroundModel.longitude,
+                      ),
+                    ),
+
+                      ],
               ),
             ),
+        ),
+            ),
           ],
-        )
+        ),
       ),
 
-
-
-      ///Book Now
+      /// Bottom Button
       bottomSheet: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-        child:  SizedBox(
+        padding: const EdgeInsets.all(16),
+        child: SizedBox(
           width: double.infinity,
-          child: AppKButton(label: 'Book Now', width: double.infinity, color: const Color(0xff2D2D2D),),
+          child: AppKButton(
+            label: 'Book Now',
+            color: const Color(0xff2D2D2D),
+            onTap: (){},
+          ),
         ),
       ),
     );
   }
 }
 
+/// Updated PlaceACallTextButton
 class PlaceACallTextButton extends StatelessWidget {
+  final String phoneNumber;
 
-  final String phoneNumber = '08129425802';
+  const PlaceACallTextButton({Key? key, required this.phoneNumber}) : super(key: key);
 
-  Future<void> makePhoneCall (String phoneNumber) async {
+  Future<void> makePhoneCall(String phoneNumber) async {
     final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
-    if (await canLaunchUrl(phoneUri)){
+    if (await canLaunchUrl(phoneUri)) {
       await launchUrl(phoneUri);
     } else {
-      throw 'Could not reach $phoneNumber';
+      throw 'Could not place a call to $phoneNumber';
     }
   }
-  const PlaceACallTextButton({
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => makePhoneCall,
+      onTap: () => makePhoneCall(phoneNumber),
       child: Row(
-       children: [
-         const Icon(Icons.call, color: Color(0xff2D2D2D),),
-         const SizedBox(width: 8,),
-         Text('$phoneNumber',  style: GoogleFonts.inter(
-           color: const Color(0xff2D2D2D),
-           fontSize: 16,
-           fontWeight: FontWeight.w500,
-         ),
-         ),
-       ],
-        ),
+        children: [
+          const Icon(Icons.call, color: Color(0xff2D2D2D)),
+          const SizedBox(width: 8),
+          Text(
+            phoneNumber,
+            style: GoogleFonts.inter(
+              color: const Color(0xff2D2D2D),
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -132,15 +157,17 @@ class PlaceACallTextButton extends StatelessWidget {
 
 
 class PlacesAroundMap extends StatelessWidget {
-  final LatLng initalCenter = const LatLng(37.7749, -122.4194);
+  final double latitude;
+  final double longitude;
+  //final LatLng initalCenter = const LatLng(37.7749, -122.4194);
 
-  PlacesAroundMap({Key? key}) : super(key: key);
+  PlacesAroundMap({Key? key, required this.latitude, required this.longitude}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FlutterMap(
-      options:const MapOptions(
-        center: LatLng(10.5105, 7.4165),
+      options:MapOptions(
+        center: LatLng(latitude, longitude),
         zoom:13.0,
       ),
       children: [
@@ -150,16 +177,16 @@ class PlacesAroundMap extends StatelessWidget {
         ),
 
         //MarkerLayer
-        const MarkerLayer(
+        MarkerLayer(
             markers: [
               Marker(
                 width: 80.0,
                 height: 80.0,
-                point:LatLng(10.5105, 7.4165),
-                child: Icon(
+                point:LatLng(latitude, longitude),
+                child: const Icon(
                   Icons.location_pin,
                   color: Colors.red,
-                  size: 14,
+                  size: 20,
                 ),
               )
 
@@ -206,6 +233,17 @@ class _PlacesAroundCarouselSliderState extends State<PlacesAroundCarouselSlider>
           items: images.map((image) {
             return Container(
               margin: const EdgeInsets.symmetric(horizontal: 8.0),
+              width: double.infinity,
+              decoration: BoxDecoration(
+                boxShadow:  [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.4),
+                    spreadRadius: 2,
+                    blurRadius: 4,
+                    offset: const Offset(0, 2),
+                  ),
+                ],
+              ),
               child: Image.asset(
                 image,
                 fit: BoxFit.cover,
@@ -236,4 +274,3 @@ class _PlacesAroundCarouselSliderState extends State<PlacesAroundCarouselSlider>
     );
   }
 }
-

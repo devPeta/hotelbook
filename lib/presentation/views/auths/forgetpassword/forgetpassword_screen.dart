@@ -1,14 +1,19 @@
 import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:bookhotel/core/common/apptextfield.dart';
+import 'package:bookhotel/core/validator/validator.dart';
+import 'package:bookhotel/presentation/controller/forgetpassword_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ForgetPasswordController());
     return Scaffold(
+      backgroundColor: const Color(0xffffffff),
       body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -40,13 +45,22 @@ class ForgetPasswordScreen extends StatelessWidget {
               ),
               const SizedBox(height: 16,),
 
-             const AppKTextField(
-                labelText: 'Enter your mail',
-                hintText: 'devpeta34@gmail.com',
-                prefixIcon: Icon(Icons.lock_outline, color: Color(0xff2D2D2D),
-                ),
-              ),
-
+             Form(
+               key: controller.forgetPasswordFormKey,
+               child: Column(
+                 children: [
+                   AppKTextField(
+                     controller: controller.email,
+                     validator: (value) => Validator.validateEmail(value),
+                      labelText: 'Enter your mail',
+                      hintText: 'devpxxxx@gmail.com',
+                      prefixIcon: const Icon(Icons.mail_outline_outlined, color: Color(0xff2D2D2D),
+                      ),
+                    ),
+                 ],
+               ),
+             ),
+              const SizedBox(height: 8,),
               SizedBox(
                 width: double.infinity,
                 child: AppKButton(
@@ -55,7 +69,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                   color: const Color(0xff2D2D2D),
                   shadowOpacity: 0.2,
                   height: 51,
-                  onTap: (){},
+                  onTap: ()=> controller.sendPasswordResetEmail(),
                 ),
               ),
             ],

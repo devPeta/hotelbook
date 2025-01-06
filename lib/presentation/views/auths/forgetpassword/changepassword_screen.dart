@@ -1,9 +1,12 @@
 import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:bookhotel/core/common/apptextfield.dart';
+import 'package:bookhotel/presentation/controller/forgetpassword_controller.dart';
+import 'package:bookhotel/presentation/views/auths/login/login_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-class SuccessfulScreen extends StatelessWidget {
-  const SuccessfulScreen({Key? key}) : super(key: key);
+class SentScreen extends StatelessWidget {
+  const SentScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +43,19 @@ class SuccessfulScreen extends StatelessWidget {
                     hintText: 'Enter your new password',
                     prefixIcon: Icon(Icons.lock_outline, color: Color(0xff2D2D2D),
                     ),
+                    suffixIcon: IconButton(onPressed: null,
+                      icon:Icon(Icons.visibility_off_outlined),),
+                    ),
+                  const SizedBox(height: 8,),
+                  const AppKTextField(
+                    labelText: 'Confirm Password',
+                    hintText: 'Enter your new password',
+                    prefixIcon: Icon(Icons.lock_outline, color: Color(0xff2D2D2D),
+                    ),
+                    suffixIcon: IconButton(onPressed: null,
+                      icon:Icon(Icons.visibility_off_outlined),),
                   ),
+
 
                   const SizedBox(height: 16,),
 
@@ -52,7 +67,7 @@ class SuccessfulScreen extends StatelessWidget {
                       color: const Color(0xff2D2D2D),
                       shadowOpacity: 0.2,
                       height: 51,
-                      onTap: (){},
+                      onTap: ()=> Get.offAll(()=> const LoginScreen()),
                     ),
                   ),
 
@@ -61,13 +76,17 @@ class SuccessfulScreen extends StatelessWidget {
                     child: AppKButton(
                       label: 'Resend mail',
                       width: double.infinity,
-                      color: const Color(0xff2D2D2D),
+                      color: const Color(0xffffffff),
+                      textStyle: const TextStyle(
+                        color:  Color(0xff2D2D2D),
+                        fontSize: 15,
+                        fontWeight: FontWeight.w800,
+                      ),
                       shadowOpacity: 0.2,
                       height: 51,
-                      onTap: (){},
+                      onTap: ()=> ForgetPasswordController.instance.resendPasswordResetEmail,
                     ),
                   ),
-
                 ],
               ),
             ),

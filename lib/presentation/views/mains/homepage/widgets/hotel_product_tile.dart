@@ -3,6 +3,7 @@ import 'package:bookhotel/core/common/app_rounded_container.dart';
 import 'package:bookhotel/core/common/app_rounded_image.dart';
 import 'package:bookhotel/data/models/book_hotel_product_model.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
+import 'package:bookhotel/presentation/views/mains/homepage/details_page.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_infinity_loader/circular_infinity_loader.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,12 +13,10 @@ import 'package:get/get.dart';
 
 class HotelProductTile extends StatefulWidget {
   final BookHotelProduct bookHotelProduct;
-  final Function()? onTapNow;
 
   const HotelProductTile({
     Key? key,
     required this.bookHotelProduct,
-    this.onTapNow,
   }) : super(key: key);
 
   @override
@@ -183,7 +182,7 @@ class _HotelProductTileState extends State<HotelProductTile> {
                         ],
                       ),
 
-                      SizedBox(height: 8),
+                     const SizedBox(height: 8),
                       ///Price And Cart Page
                       Text(widget.bookHotelProduct.price,  style: GoogleFonts.inter(
                         color:const Color(0xff2194FF),
@@ -192,6 +191,22 @@ class _HotelProductTileState extends State<HotelProductTile> {
                       ),
                       ),
 
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          TextButton(onPressed:  widget.bookHotelProduct.onTap,
+                              style: TextButton.styleFrom(
+                                padding: const EdgeInsets.only(top: 2, bottom: 2, left: 0, right: 0)
+                              ),
+                              child: Text("See More",  style: GoogleFonts.raleway(
+                                color: Colors.blue,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w800,
+                              ),
+                              ),
+                          ),
+                        ],
+                      )
 
 
                     ],

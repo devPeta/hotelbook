@@ -19,55 +19,56 @@ import 'package:google_sign_in/google_sign_in.dart';
 class AuthenticationRepository extends GetxController{
   static AuthenticationRepository get instance => Get.find();
 
-  ///Variables
-  final deviceStorage = GetStorage();
-  final _auth = FirebaseAuth.instance;
+      ///Variables
+      final deviceStorage = GetStorage();
+      final _auth = FirebaseAuth.instance;
 
-  ///Get Authenticated User Data
-  User? get authUser => _auth.currentUser;
+      ///Get Authenticated User Data
+      User? get authUser => _auth.currentUser;
 
 
-  ///Called from main.dart on app launch
-  @override
-  void onReady(){
-    FlutterNativeSplash.remove();
-    //screenRedirect();
+      ///Called from main.dart on app launch
+      @override
+      void onReady(){
+        FlutterNativeSplash.remove();
+        screenRedirect();
+      }
+
+  ///Function To Show Relevant Screen; redirect if it is user first time to log in to the application to login or onboarding screen
+      screenRedirect() async {
+        final user = _auth.currentUser;
+        if(user != null){
+          if(user.emailVerified){
+            Get.offAll(()=> const AppNavigator());
+          } else {
+            Get.offAll(()=> VerifyEmailScreen(email: _auth.currentUser?.email,));
+          }
+        }
+        else {
+          ///local Storage
+          deviceStorage.writeIfNull('IsFirstTime', true);
+
+          ///Check if its the first time of launching the application.
+          deviceStorage.read('IsFirstTime') != true ? Get.offAll(() => const LoginScreen()) : Get.offAll(() => const OnBoardingScreen());
+        }
   }
-
-  ///Function To Show Relevant Screen
-  // screenRedirect() async {
-  //   final user = _auth.currentUser;
-  //   if(user != null){
-  //     if(user.emailVerified){
-  //       Get.offAll(()=> const AppNavigator());
-  //     } else {
-  //       Get.offAll(()=> VerifyEmailScreen(email: _auth.currentUser?.email,));
-  //     }
-  //   }
-  //   else {
-  //     //local Storage
-  //     deviceStorage.writeIfNull('IsFirstTime', true);
-  //     //Check if its the first time of launching the application.
-  //     deviceStorage.read('IsFirstTime') != true ? Get.offAll(() => const LoginScreen()) : Get.offAll(() => const OnBoardingScreen());
-  //   }
-  // }
 
 
   ///Sign In  With Google
   Future<UserCredential?> signInWithGoogle() async  {
     try {
-      // Trigger the authenticate user
+      /// Trigger the authenticate user
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
-      // Obtain the auth details from the request
+      /// Obtain the auth details from the request
       final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
 
-      //create a new user credentials
+      /// create a new user credentials
       final credentials = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-      // Once SignIn, return UserCredentials
+      /// Once SignIn, return UserCredentials
       return await _auth.signInWithCredential(credentials);
     } on FirebaseAuthException catch (e){
       throw TFirebaseAuthExceptions(e.code).message;
