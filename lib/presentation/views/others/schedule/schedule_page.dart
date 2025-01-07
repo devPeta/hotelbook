@@ -2,6 +2,7 @@ import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:bookhotel/core/common/buttonliketextfieldcontainer.dart';
 import 'package:bookhotel/core/common/styles/spacebetween_text_textbutton.dart';
+import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:bookhotel/presentation/views/others/schedule/personal_data_page.dart';
 import 'package:bookhotel/presentation/views/others/schedule/widgets/list_items.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,8 @@ class SchedulePage extends StatefulWidget {
 class _SchedulePageState extends State<SchedulePage> {
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
+    final  HotelProductController productController = Get.find<HotelProductController>();
+    final product = productController.selectedProduct.value;
     final double height = MediaQuery.of(context).size.height;
     DateTime _selectedDateFrom = DateTime.now();
     DateTime _selectedDateTo = DateTime.now();
@@ -125,18 +127,18 @@ class _SchedulePageState extends State<SchedulePage> {
                         SizedBox(height: height * 0.02,),
                   
                         const TextHeader( textHeader: 'Hotel name',),
-                        const ButtonLikeTextField(
-                          prefixIcon: Icon(Icons.home_repair_service_outlined, color: Color(0xff2D2D2D), size: 24,),
-                          text: 'Palm Palace Hotel',
-                          suffixIcon: Icon(Icons.navigate_next_sharp, color: Color(0xff2D2D2D), size: 24,
+                        ButtonLikeTextField(
+                          prefixIcon: const Icon(Icons.home_repair_service_outlined, color: Color(0xff2D2D2D), size: 24,),
+                          text: product!.name,
+                          suffixIcon: const Icon(Icons.navigate_next_sharp, color: Color(0xff2D2D2D), size: 24,
                           ),
                         ),
                         SizedBox(height: height * 0.02,),
                   
                         const TextHeader( textHeader: 'Location',),
-                        const ButtonLikeTextField(
-                          prefixIcon: Icon(Icons.location_on_outlined, color: Color(0xff2D2D2D), size: 24,),
-                          text: 'Ungwan Boro',
+                         ButtonLikeTextField(
+                          prefixIcon: const Icon(Icons.location_on_outlined, color: Color(0xff2D2D2D), size: 24,),
+                          text: product!.location,
                         ),
                         SizedBox(height: height * 0.02,),
 
@@ -198,17 +200,6 @@ class _SchedulePageState extends State<SchedulePage> {
                         SizedBox(height: height * 0.02,),
                   
                         ///Payment
-                        SpacebetweenTextTextbutton(text: 'Payment',
-                            buttonText: 'Change ',
-                            onTap: (){}
-                        ),
-                        const ButtonLikeTextField(
-                          prefixIcon: Icon(Icons.credit_card_rounded, color: Color(0xff2D2D2D), size: 24,),
-                          text: 'Master Card',
-                        ),
-                        SizedBox(height: height * 0.02,),
-                  
-                  
                         const Divider(
                           color: Color(0xffD5D5D5),
                           thickness: 2,
@@ -220,6 +211,7 @@ class _SchedulePageState extends State<SchedulePage> {
                   
                         const ListItems(itemName: 'Total', itemCost: '\#30,600', itemColor: Color(0xffB95000), itemCostColor: Color(0xffB95000),),
 
+                        AppKButton(label: 'Pay', width: double.infinity, color: const Color(0xff2D2D2D),),
                       ],
                     ),
                   ),
@@ -228,18 +220,6 @@ class _SchedulePageState extends State<SchedulePage> {
               ],
             ),
           )
-      ),
-      bottomSheet: Padding(
-        padding: const EdgeInsets.only(left: 16, right: 16, top: 8, bottom: 8),
-        child:  Row(
-          children: [
-            IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_outline_rounded, color: Color(0xff969696), size: 18,)),
-            const SizedBox(width: 8,),
-            Expanded(
-              child: AppKButton(label: 'Pay', width: double.infinity, color: const Color(0xff2D2D2D),),
-            ),
-          ],
-        ),
       ),
     );
   }

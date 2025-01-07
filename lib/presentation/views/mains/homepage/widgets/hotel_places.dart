@@ -1,14 +1,16 @@
-import 'package:bookhotel/data/models/visit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:circular_infinity_loader/circular_infinity_loader.dart';
 
 class HotelPlacesAroundTile extends StatefulWidget {
-  final VisitAroundModel visitAroundModel;
+  final String visitTitle;
+  final String visitImgPaths;
+
 
   const HotelPlacesAroundTile({
     Key? key,
-    required this.visitAroundModel}) : super(key: key);
+    required this.visitTitle,
+    required this.visitImgPaths,
+   }) : super(key: key);
 
   @override
   State<HotelPlacesAroundTile> createState() => _HotelPlacesAroundTileState();
@@ -52,7 +54,7 @@ class _HotelPlacesAroundTileState extends State<HotelPlacesAroundTile> {
             decoration: BoxDecoration(
               image: _isImageLoaded
                   ? DecorationImage(
-                image: AssetImage(widget.visitAroundModel.imgPaths),
+                image: AssetImage(widget.visitImgPaths),
                 fit: BoxFit.fill,
               )
                   : null, // Only apply the image if it's loaded
@@ -65,11 +67,13 @@ class _HotelPlacesAroundTileState extends State<HotelPlacesAroundTile> {
 
           // Circular loader (visible only while the image is loading)
           if (!_isImageLoaded)
-            const SizedBox(
-              height: 50,
-              width: 50,
-              child: CircularInfinityLoader(
-                color: Color(0xff2D2D2D),
+            const Center(
+              child: SizedBox(
+                height: 20,
+                width: 20,
+                child: CircularProgressIndicator(
+                  color: Color(0xff2D2D2D),
+                ),
               ),
             ),
 
@@ -94,10 +98,8 @@ class _HotelPlacesAroundTileState extends State<HotelPlacesAroundTile> {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 20),
-                child: GestureDetector(
-                  onTap: widget.visitAroundModel.onTap,
                   child: Text(
-                    widget.visitAroundModel.title,
+                    widget.visitTitle,
                     style: GoogleFonts.inter(
                       color: Colors.white,
                       fontSize: 18,
@@ -108,7 +110,6 @@ class _HotelPlacesAroundTileState extends State<HotelPlacesAroundTile> {
                 ),
               ),
             ),
-          ),
         ],
       ),
     );

@@ -50,9 +50,10 @@ dependencies:
   flutter_animate: any
   cupertino_icons: ^1.0.6
   shimmer: ^3.0.0
-  circular_infinity_loader: ^0.1.4
+  loading_animation_widget: any
   carousel_slider: any
   flutter_rating_bar: any
+  fan_carousel_image_slider: any
 
   #Map, And Launcher Caller
   flutter_map: ^6.1.0

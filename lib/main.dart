@@ -1,5 +1,7 @@
 import 'package:bookhotel/core/theme/theme.dart';
 import 'package:bookhotel/data/authentication/authentication_respository.dart';
+import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
+import 'package:bookhotel/presentation/controller/places_around_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
@@ -41,6 +43,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    ///Initializing Product Controller
+    Get.put(HotelProductController());
+    Get.put(PlacesAroundController());
+
+
     return GetMaterialApp(
       title: 'Book Hotel',
       debugShowCheckedModeBanner: false,

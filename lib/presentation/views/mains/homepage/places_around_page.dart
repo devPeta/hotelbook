@@ -1,32 +1,38 @@
-import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:bookhotel/data/models/visit_model.dart';
+import 'package:bookhotel/presentation/controller/places_around_controller.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 
 
 
 
 class PlacesAroundPage extends StatefulWidget {
-  final VisitAroundModel visitAroundModel;
 
-  const PlacesAroundPage({Key? key, required this.visitAroundModel}) : super(key: key);
+
+  const PlacesAroundPage({Key? key, }) : super(key: key);
 
   @override
   State<PlacesAroundPage> createState() => _PlacesAroundPageState();
 }
 
 class _PlacesAroundPageState extends State<PlacesAroundPage> {
-  int activeImageIndex = 0;
+
 
   @override
   Widget build(BuildContext context) {
-    final visitAroundModel = widget.visitAroundModel;
+
+
+    final PlacesAroundController placesController = Get.find<PlacesAroundController>();
+    final places = placesController.selectedProduct.value;
+    double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -35,12 +41,17 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// Image Carousel with `CarouselSlider`
-            // PlacesAroundCarouselSlider(
-            //   images: visitAroundModel.images ?? [],
-            //   onPageChanged: (index) {
-            //     setState(() => activeImageIndex = index);
-            //   },
-            // ),
+            FanCarouselImageSlider.sliderType1(
+              imagesLink: places!.images,
+              isAssets: false,
+              autoPlay: false,
+              sliderHeight: 200,
+              currentItemShadow: const [], // Shadow is handled by Container now
+              sliderDuration: const Duration(milliseconds: 200),
+              imageRadius: 16, // Adds slight rounding to images
+              slideViewportFraction: 1.2,
+              showIndicator: true,
+            ),
 
             /// Main Content
             Expanded(
@@ -53,9 +64,27 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
                       children: [
                         ///Image Caurosel
                         ///PlaceName
-                        const Text(''),
+                        Text(places!.title, style:  GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff2D2D2D),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        ),
+                        SizedBox(height: 4,),
+
                         ///Address
-                        const Text(''),
+                        Text(places!.address,  style:  GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Color(0xff2D2D2D),
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        ),
+                        SizedBox(height: 8,),
+
                         ///Rating And Review, Contact Info
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -74,7 +103,7 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
 
                     /// Description
                     Text(
-                      visitAroundModel.description,
+                      places!.description,
                       style: GoogleFonts.raleway(
                         color: const Color(0xff2D2D2D),
                         fontSize: 16,
@@ -85,10 +114,10 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
 
                     /// Map Integration
                     SizedBox(
-                      height: 300,
+                      height: 200,
                       child: PlacesAroundMap(
-                        latitude: visitAroundModel.latitude,
-                        longitude: visitAroundModel.longitude,
+                        latitude: places!.latitude,
+                        longitude: places!.longitude,
                       ),
                     ),
 

@@ -1,6 +1,3 @@
-import 'package:bookhotel/presentation/views/mains/homepage/details_page.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class BookHotelProduct{
       final String imgPaths;
@@ -15,7 +12,7 @@ class BookHotelProduct{
 
   const BookHotelProduct( {
       required this.imgPaths,
-      required  this.price,
+      required this.price,
       required this.name,
       required this.location,
       required this.description,
@@ -28,9 +25,4 @@ class BookHotelProduct{
       String get productHotelName => name;
       String get productHotelLocation => location;
       String get productPrice => price;
-
-      void onTap(){
-        Get.to(()=> DetailsPage(bookHotelModel: this),);
-      }
-
 }

@@ -1,22 +1,27 @@
 
 import 'package:bookhotel/core/common/app_rounded_container.dart';
 import 'package:bookhotel/core/common/app_rounded_image.dart';
-import 'package:bookhotel/data/models/book_hotel_product_model.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
-import 'package:bookhotel/presentation/views/mains/homepage/details_page.dart';
 import 'package:flutter/material.dart';
-import 'package:circular_infinity_loader/circular_infinity_loader.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 
 
 
 class HotelProductTile extends StatefulWidget {
-  final BookHotelProduct bookHotelProduct;
+  // final BookHotelProduct bookHotelProduct;
+  final String hotelName;
+  final String hotelAddress;
+  final String hotelImg;
+  final String hotelPrice;
 
   const HotelProductTile({
     Key? key,
-    required this.bookHotelProduct,
+    required this.hotelName,
+    required this.hotelAddress,
+    required this.hotelImg,
+    required this.hotelPrice,
   }) : super(key: key);
 
   @override
@@ -67,18 +72,18 @@ class _HotelProductTileState extends State<HotelProductTile> {
                   child: controller.isImageLoaded.value
                       ? AppRoundedImage(
                     fit: BoxFit.cover,
-                    imageUrl: widget.bookHotelProduct.imgPaths,
+                    imageUrl: widget.hotelImg,
                     padding: const EdgeInsets.all(2),
                     applyImageRadius: true,
                   )
                       : const Center(
-                   child: SizedBox(
-                     height: 50,
-                     width: 50,
-                     child: CircularInfinityLoader(
-                         color: Color(0xff2D2D2D),
+                      child: SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                        color: Color(0xff2D2D2D),
+                                           ),
                       ),
-                   ),
                   ),
                 );
               }),
@@ -146,7 +151,7 @@ class _HotelProductTileState extends State<HotelProductTile> {
                       const SizedBox(height: 12),
                       /// Hotel Name
                       Text(
-                        widget.bookHotelProduct.name,
+                        widget.hotelName,
                         style: GoogleFonts.raleway(
                           color: const Color(0xff2D2D2D),
                           fontSize: 14,
@@ -169,7 +174,7 @@ class _HotelProductTileState extends State<HotelProductTile> {
                               ),
                               const SizedBox(width: 4),
                               Text(
-                                widget.bookHotelProduct.location,
+                                widget.hotelAddress,
                                 style: GoogleFonts.raleway(
                                   color: const Color(0xff6B6B6B),
                                   fontSize: 12,
@@ -184,31 +189,12 @@ class _HotelProductTileState extends State<HotelProductTile> {
 
                      const SizedBox(height: 8),
                       ///Price And Cart Page
-                      Text(widget.bookHotelProduct.price,  style: GoogleFonts.inter(
+                      Text(widget.hotelPrice,  style: GoogleFonts.inter(
                         color:const Color(0xff2194FF),
                         fontWeight: FontWeight.w800,
                         fontSize: 14,
                       ),
                       ),
-
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(onPressed:  widget.bookHotelProduct.onTap,
-                              style: TextButton.styleFrom(
-                                padding: const EdgeInsets.only(top: 2, bottom: 2, left: 0, right: 0)
-                              ),
-                              child: Text("See More",  style: GoogleFonts.raleway(
-                                color: Colors.blue,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w800,
-                              ),
-                              ),
-                          ),
-                        ],
-                      )
-
-
                     ],
                   ),
                 ),

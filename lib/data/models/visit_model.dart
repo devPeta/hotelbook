@@ -24,15 +24,4 @@ class VisitAroundModel{
   String get visitImgPaths => imgPaths;
   String get visitTitle => title;
 
-  ///Navigation to PlacesAroundPage
-  void onTap(){
-    Get.to(()=> PlacesAroundPage( visitAroundModel: this),);
-  }
-
-  ///Navigate too Booking Screen
-  void onTapBooking(){
-    Get.to(()=> PlacesAroundPage( visitAroundModel: this),);
-  }
-
-
 }

@@ -1,16 +1,16 @@
 import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
-import 'package:bookhotel/core/constant/textstring_constant.dart';
 import 'package:bookhotel/core/constant/textstyle_constant.dart';
-import 'package:bookhotel/data/models/book_hotel_product_model.dart';
+import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/widgets/details_public_facilities_tile.dart';
-import 'package:bookhotel/core/common/app_rounded_image.dart';
+import 'package:bookhotel/presentation/views/others/schedule/schedule_page.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 
 class DetailsPage extends StatelessWidget {
-  final BookHotelProduct bookHotelModel;
-  DetailsPage({Key? key, required this.bookHotelModel}) : super(key: key);
+  DetailsPage({Key? key, }) : super(key: key);
 
   final List<Map<String, dynamic>> items = [
     {'icon': Icons.pool_outlined, 'text': 'Swimming Pool',},
@@ -24,8 +24,8 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
 
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
-
+    final  HotelProductController productController = Get.find<HotelProductController>();
+    final product = productController.selectedProduct.value;
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -48,16 +48,17 @@ class DetailsPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      ///Product Image Slider
-                      const Center(
-                        child: AppRoundedImage(
-                          fit: BoxFit.cover,
-                          imageUrl:  'assets/images/hotel/place3.png',
-                          padding: EdgeInsets.all(2),
-                          applyImageRadius: true,
-                        ),
+                      FanCarouselImageSlider.sliderType2(
+                        imagesLink: product!.images,
+                        isAssets: false,
+                        autoPlay: false,
+                        sliderHeight: 200,
+                        currentItemShadow: const [], // Shadow is handled by Container now
+                        sliderDuration: const Duration(milliseconds: 200),
+                        imageRadius: 16, // Adds slight rounding to images
+                        slideViewportFraction: 1.2,
                       ),
-              
+
                       SizedBox(height: height * 0.01),
                       ///Rating
                       Row(
@@ -77,15 +78,15 @@ class DetailsPage extends StatelessWidget {
                               ),
                             ],
                           ),
-              
+
                           IconButton(onPressed: (){}, icon: const Icon(Icons.share, color: Colors.black45, size: 24,),
                           ),
                         ],
                       ),
                       SizedBox(height: height * 0.01),
-              
+
                       ///HotelName
-                      Text(bookHotelModel.name, style: GoogleFonts.raleway(
+                      Text(product!.name, style: GoogleFonts.raleway(
                         textStyle: const TextStyle(
                           fontSize: 20,
                           color: Color(0xff2D2D2D),
@@ -93,9 +94,9 @@ class DetailsPage extends StatelessWidget {
                         ),
                       ),),
                       SizedBox(height: 2),
-              
+
                       ///Address
-                      Text(bookHotelModel.location, style: GoogleFonts.raleway(
+                      Text(product!.location, style: GoogleFonts.raleway(
                         textStyle: const TextStyle(
                           fontSize: 16,
                           color: Color(0xff2D2D2D),
@@ -103,7 +104,7 @@ class DetailsPage extends StatelessWidget {
                         ),
                       ),),
                       SizedBox(height: height * 0.01),
-              
+
                       ///Public Facillities
                       SizedBox(
                         height: 42,
@@ -120,13 +121,13 @@ class DetailsPage extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: height * 0.01),
-              
+
                       ///Description TExt
                       Text('Description', style:  AppTextStyles.sectionTextStyle),
                       SizedBox(height: height * 0.02),
-              
+
                       ///DetailsSubTextButton
-                      Text(AppString.detailssubText, style: AppTextStyles.sectionTextStyle.copyWith(color:  const Color(0xff969696), fontSize: 14, fontWeight: FontWeight.w700, ),),
+                      Text(product!.description, style: AppTextStyles.sectionTextStyle.copyWith(color:  const Color(0xff969696), fontSize: 14, fontWeight: FontWeight.w700, ),),
                     ],
                   ),
                 ),
@@ -142,7 +143,9 @@ class DetailsPage extends StatelessWidget {
             IconButton(onPressed: (){}, icon: const Icon(Icons.favorite_outline_rounded, color: Color(0xff969696), size: 18,)),
             const SizedBox(width: 8,),
             Expanded(
-              child: AppKButton(label: 'Book Now', width: double.infinity, color: const Color(0xff2D2D2D),),
+              child: AppKButton(label: 'Book Now', width: double.infinity, color: const Color(0xff2D2D2D),
+                onTap: ()=>const SchedulePage(),
+              ),
             ),
           ],
         ),
