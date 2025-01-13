@@ -144,7 +144,11 @@ class DetailsPage extends StatelessWidget {
             const SizedBox(width: 8,),
             Expanded(
               child: AppKButton(label: 'Book Now', width: double.infinity, color: const Color(0xff2D2D2D),
-                onTap: ()=>const SchedulePage(),
+                onTap: () {
+                  Get.to(() => SchedulePage(),
+                    transition: Transition.rightToLeftWithFade, // You can try other transitions like zoom, cupertino, etc.
+                    duration: const Duration(milliseconds: 500),);
+                },
               ),
             ),
           ],

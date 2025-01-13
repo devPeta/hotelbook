@@ -1,7 +1,6 @@
+import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
-import 'package:bookhotel/data/models/visit_model.dart';
 import 'package:bookhotel/presentation/controller/places_around_controller.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -12,11 +11,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:fan_carousel_image_slider/fan_carousel_image_slider.dart';
 
 
-
-
 class PlacesAroundPage extends StatefulWidget {
-
-
   const PlacesAroundPage({Key? key, }) : super(key: key);
 
   @override
@@ -40,6 +35,9 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const ApplicationBar(title: 'Places Details', leadingIcon: null,),
+            SizedBox(height: height * 0.01,),
+
             /// Image Carousel with `CarouselSlider`
             FanCarouselImageSlider.sliderType1(
               imagesLink: places!.images,
@@ -53,6 +51,7 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
               showIndicator: true,
             ),
 
+
             /// Main Content
             Expanded(
               child:  SingleChildScrollView(
@@ -62,7 +61,8 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        ///Image Caurosel
+                        SizedBox(height: height * 0.01,),
+
                         ///PlaceName
                         Text(places!.title, style:  GoogleFonts.raleway(
                           textStyle: const TextStyle(
@@ -72,7 +72,7 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
                           ),
                         ),
                         ),
-                        SizedBox(height: 4,),
+                        SizedBox(height: height * 0.02,),
 
                         ///Address
                         Text(places!.address,  style:  GoogleFonts.raleway(
@@ -83,7 +83,7 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
                           ),
                         ),
                         ),
-                        SizedBox(height: 8,),
+                        SizedBox(height: height * 0.03,),
 
                         ///Rating And Review, Contact Info
                         Row(
@@ -100,14 +100,14 @@ class _PlacesAroundPageState extends State<PlacesAroundPage> {
                             const PlaceACallTextButton(phoneNumber:'08129425802')
                           ],
                         ),
-
+                        SizedBox(height: height * 0.05,),
                     /// Description
                     Text(
                       places!.description,
                       style: GoogleFonts.raleway(
                         color: const Color(0xff2D2D2D),
                         fontSize: 16,
-                        fontWeight: FontWeight.w400,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -188,8 +188,6 @@ class PlaceACallTextButton extends StatelessWidget {
 class PlacesAroundMap extends StatelessWidget {
   final double latitude;
   final double longitude;
-  //final LatLng initalCenter = const LatLng(37.7749, -122.4194);
-
   PlacesAroundMap({Key? key, required this.latitude, required this.longitude}) : super(key: key);
 
   @override
@@ -226,80 +224,3 @@ class PlacesAroundMap extends StatelessWidget {
   }
 }
 
-class PlacesAroundCarouselSlider extends StatefulWidget {
-  PlacesAroundCarouselSlider({Key? key}) : super(key: key);
-
-  @override
-  _PlacesAroundCarouselSliderState createState() => _PlacesAroundCarouselSliderState();
-}
-
-class _PlacesAroundCarouselSliderState extends State<PlacesAroundCarouselSlider> {
-  final List<String> images = [
-    'assets/images/image1.jpg',
-    'assets/images/image2.jpg',
-    'assets/images/image3.jpg',
-  ];
-
-  int _currentIndex = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        /// Carousel Slider
-        CarouselSlider(
-          options: CarouselOptions(
-            height: 200,
-            autoPlay: true,
-            enlargeCenterPage: true,
-            onPageChanged: (index, reason) {
-              setState(() {
-                _currentIndex = index;
-              });
-            },
-          ),
-          items: images.map((image) {
-            return Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8.0),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                boxShadow:  [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.4),
-                    spreadRadius: 2,
-                    blurRadius: 4,
-                    offset: const Offset(0, 2),
-                  ),
-                ],
-              ),
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ),
-            );
-          }).toList(),
-        ),
-
-        /// Circle Indicators
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: images.asMap().entries.map((entry) {
-            return Container(
-              width: _currentIndex == entry.key ? 12.0 : 8.0,
-              height: _currentIndex == entry.key ? 12.0 : 8.0,
-              margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: _currentIndex == entry.key
-                    ? Colors.blue
-                    : Colors.grey.withOpacity(0.5),
-              ),
-            );
-          }).toList(),
-        ),
-      ],
-    );
-  }
-}

@@ -71,7 +71,11 @@ class _AppHomePageState extends State<AppHomePage> {
                                     /// Set the selected product
                                     productController.selectProduct(product);
                                     /// Navigate to the product page
-                                    Get.to(() => DetailsPage());
+                                    Get.to(() => DetailsPage(),
+                                      transition: Transition.fadeIn, // You can try other transitions like zoom, cupertino, etc.
+                                      duration: const Duration(milliseconds: 500),
+                                    );
+
                                   },
                                   child: HotelProductTile(
                                    hotelName: product.name,
@@ -109,7 +113,10 @@ class _AppHomePageState extends State<AppHomePage> {
                                    /// Set the selected product
                                    placesController.selectProduct(places);
                                    /// Navigate to the product page
-                                   Get.to(() => PlacesAroundPage());
+                                   Get.to(() => PlacesAroundPage(),
+                                     transition: Transition.rightToLeftWithFade, // You can try other transitions like zoom, cupertino, etc.
+                                     duration: const Duration(milliseconds: 500),
+                                   );
                                  },
                                   child: HotelPlacesAroundTile(
                                     visitTitle: places.title,

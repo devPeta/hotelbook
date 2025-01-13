@@ -1,12 +1,9 @@
-import 'package:bookhotel/core/common/appiconpop.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 class ApplicationBar extends StatelessWidget {
 
-  final String title; // Title of the AppBar, it has title and subtitle use column
+  final String? title; // Title of the AppBar, it has title and subtitle use column
   final IconData? leadingIcon; // Optional leading icon
   final List<Widget>? actions; // Optional actions
   final bool centerTitle; // Center the title or not
@@ -18,7 +15,7 @@ class ApplicationBar extends StatelessWidget {
 
   const ApplicationBar({
     Key? key,
-    required this.title,
+    this.title,
     this.leadingIcon,
     this.actions,
     this.centerTitle = true,
@@ -43,7 +40,7 @@ class ApplicationBar extends StatelessWidget {
           onPressed: leadingOnPressed, icon: Icon(leadingIcon)
       ) : null,
       title: Text(
-        title,
+        title!,
         style: GoogleFonts.raleway(
           fontSize: 20,
           fontWeight: FontWeight.bold,

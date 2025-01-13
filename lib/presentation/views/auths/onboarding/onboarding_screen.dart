@@ -64,7 +64,10 @@ class OnBoardingScreen extends StatelessWidget {
                         Center(
                           child: GestureDetector(
                             onTap: (){
-                              Get.to(const LoginScreen());
+                              Get.to(const LoginScreen(),
+                                transition: Transition.rightToLeftWithFade, // You can try other transitions like zoom, cupertino, etc.
+                                duration: const Duration(milliseconds: 500),
+                              );
                             },
                             child: Container(
                               height: 70,

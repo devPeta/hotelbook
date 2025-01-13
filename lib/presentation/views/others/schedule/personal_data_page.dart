@@ -17,42 +17,43 @@ class PersonalData extends StatelessWidget {
               const ApplicationBar(title: 'Personal Data', leadingIcon: null,),
               const SizedBox(height: 4),
 
-
-
               ///Body
               Expanded(child:
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                 children: [
-                  Text('Data', style: GoogleFonts.raleway(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xff2D2D2D),
-                  ),
-                  ),
-                  const SizedBox(height: 4),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                   children: [
+                    Text('Data', style: GoogleFonts.raleway(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff2D2D2D),
+                    ),
+                    ),
+                    const SizedBox(height: 4),
 
-                  const PersonalDataTile(
-                    prefixIcon: Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D),size: 24,), text: 'Yusuf Bagoe', title: 'Full name',
-                    prefixIcon2: Icon(Icons.location_on_outlined, color: Color(0xff2D2D2D),size: 24,), text2: '12 Galadima Road', title2: 'Address',
-                    prefixIcon3: Icon(Icons.credit_card_sharp, color: Color(0xff2D2D2D),size: 24,), text3: '3125089', title3: 'ID number',
-                  ),
+                    const PersonalDataTile(
+                      prefixIcon: Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D),size: 24,), text: 'Yusuf Bagoe', title: 'Full name',
+                      prefixIcon2: Icon(Icons.location_on_outlined, color: Color(0xff2D2D2D),size: 24,), text2: '12 Galadima Road', title2: 'Address',
+                      prefixIcon3: Icon(Icons.credit_card_sharp, color: Color(0xff2D2D2D),size: 24,), text3: '3125089', title3: 'ID number',
+                    ),
 
-                  const SizedBox(height: 12),
-                  Text('Contact', style: GoogleFonts.raleway(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xff2D2D2D),
-                  ),
-                  ),
+                    const SizedBox(height: 12),
+                    Text('Contact', style: GoogleFonts.raleway(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xff2D2D2D),
+                    ),
+                    ),
 
-                  const SizedBox(height: 4),
-                  const PersonalDataTile(
-                    prefixIcon: Icon(Icons.email, color: Color(0xff2D2D2D),size: 24,), text: 'yusufbago@gmail.com', title: 'Email',
-                    prefixIcon2: Icon(Icons.phone, color: Color(0xff2D2D2D),size: 24,), text2: '+2348129425802', title2: 'Phone number',
-                  ),
-                ],
+                    const SizedBox(height: 4),
+                    const PersonalDataTile(
+                      prefixIcon: Icon(Icons.email, color: Color(0xff2D2D2D),size: 24,), text: 'yusufbago@gmail.com', title: 'Email',
+                      prefixIcon2: Icon(Icons.phone, color: Color(0xff2D2D2D),size: 24,), text2: '+2348129425802', title2: 'Phone number',
+                    ),
+                  ],
+                ),
               )),
             ],
           ),
