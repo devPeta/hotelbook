@@ -90,6 +90,7 @@ class SignUpForm extends StatelessWidget {
                   hintText: 'Password',
                   controller: controller.password,
                   validator: (value) => Validator.validatePassword(value),
+                  obscureText: controller.hidePassword.value,
               prefixIcon: const Icon(Icons.lock_outline, color: Color(0xff2D2D2D),
               ),
               suffixIcon: IconButton(

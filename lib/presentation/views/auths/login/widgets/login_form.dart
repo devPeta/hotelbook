@@ -44,6 +44,7 @@ class LoginForm extends StatelessWidget {
                     hintText: '*******',
                     controller: controller.password,
                     validator: (value) =>  Validator.validateEmptyText('Password',value),
+                    obscureText: controller.hidePassword.value,
                     prefixIcon: const Icon(Icons.lock_outline, color: Color(0xff2D2D2D),
               ),
                   suffixIcon: IconButton(onPressed: () => controller.hidePassword.value = !controller.hidePassword.value,
@@ -72,7 +73,9 @@ class LoginForm extends StatelessWidget {
                 ),
                 AppKTextButton(
                   onPressed: (){
-                    Get.to(const ForgetPasswordScreen(),);
+                    Get.to(
+                      transition: Transition.size,
+                      const ForgetPasswordScreen(),);
                   },
                   text: 'Forgot Password?',
                 ),

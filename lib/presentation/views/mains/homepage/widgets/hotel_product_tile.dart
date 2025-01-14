@@ -3,7 +3,6 @@ import 'package:bookhotel/core/common/app_rounded_container.dart';
 import 'package:bookhotel/core/common/app_rounded_image.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
 

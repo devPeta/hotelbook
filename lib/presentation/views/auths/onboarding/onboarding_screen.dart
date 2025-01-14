@@ -32,7 +32,7 @@ class OnBoardingScreen extends StatelessWidget {
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
                         colors: [ const Color(0xffffffff).withOpacity(0.3), const Color(0xff000000).withOpacity(0.5)],
-                        stops: const [0.75, 1.0],
+                        stops: const [1.0, 0.75],
                     )
                   ),
                   child: Padding(
@@ -65,7 +65,7 @@ class OnBoardingScreen extends StatelessWidget {
                           child: GestureDetector(
                             onTap: (){
                               Get.to(const LoginScreen(),
-                                transition: Transition.rightToLeftWithFade, // You can try other transitions like zoom, cupertino, etc.
+                                  transition: Transition.rightToLeftWithFade, // You can try other transitions like zoom, cupertino, etc.
                                 duration: const Duration(milliseconds: 500),
                               );
                             },

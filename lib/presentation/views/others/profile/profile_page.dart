@@ -1,10 +1,8 @@
 import 'dart:io';
-
 import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/presentation/views/others/profile/widgets/profile_menu.dart';
 import 'package:bookhotel/presentation/views/others/profile/widgets/profile_section_header.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -66,7 +64,6 @@ class _ProfileScreenState extends State<ProfilePage> {
                             ),
                             ),
 
-
                           SizedBox(height: height * 0.01,),
 
                           ///Edit Profile Pic
@@ -88,7 +85,7 @@ class _ProfileScreenState extends State<ProfilePage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         ///Profile Menu
-                        ProfileSectionHeader(title: 'Profile Information',),
+                        const ProfileSectionHeader(title: 'Profile Information',),
                         SizedBox(height: height * 0.01),
                         ProfileMenu(title: 'Name', value: 'Yakubu Peter', onPressed: () {}, icon: Icons.navigate_next,),
                         ProfileMenu(title: 'Username', value: 'Peta', onPressed: () {  }, icon: Icons.navigate_next,),

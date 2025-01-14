@@ -72,8 +72,8 @@ class _AppHomePageState extends State<AppHomePage> {
                                     productController.selectProduct(product);
                                     /// Navigate to the product page
                                     Get.to(() => DetailsPage(),
-                                      transition: Transition.fadeIn, // You can try other transitions like zoom, cupertino, etc.
-                                      duration: const Duration(milliseconds: 500),
+                                        transition: Transition.rightToLeftWithFade, // You can try other transitions like zoom, cupertino, etc.
+                                      duration: const Duration(milliseconds: 300),
                                     );
 
                                   },
