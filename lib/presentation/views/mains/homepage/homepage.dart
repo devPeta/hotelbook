@@ -1,6 +1,4 @@
 import 'package:bookhotel/core/common/styles/spacebetween_text_textbutton.dart';
-import 'package:bookhotel/data/models/book_hotel_product_model.dart';
-import 'package:bookhotel/data/models/visit_model.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:bookhotel/presentation/controller/places_around_controller.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/details_page.dart';

@@ -75,6 +75,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
               SizedBox(height: height * 0.01),
 
+
               /// Display List
               Expanded(
                 child: displayList.isEmpty
@@ -98,8 +99,11 @@ class _SearchPageState extends State<SearchPage> {
                   ),
                 )
                     : ListView.builder(
-                  itemBuilder: (context, index) => SearchTile(
-                    searchHotelModel: displayList[index],
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: (){},
+                    child: SearchTile(
+                      searchHotelModel: displayList[index],
+                    ),
                   ),
                   itemCount: displayList.length,
                 ),

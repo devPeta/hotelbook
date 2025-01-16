@@ -11,7 +11,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
 class UserRepository extends GetxController{
   static UserRepository get instance => Get.find();
   final FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -164,5 +163,4 @@ class UserRepository extends GetxController{
   Future<void> reAuthenticateEmailAndPasswordUser() async {
 
   }
-
 }

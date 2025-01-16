@@ -48,7 +48,6 @@ class MyApp extends StatelessWidget {
     Get.put(HotelProductController());
     Get.put(PlacesAroundController());
 
-
     return GetMaterialApp(
       title: 'Book Hotel',
       debugShowCheckedModeBanner: false,

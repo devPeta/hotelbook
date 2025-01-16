@@ -70,6 +70,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '240141652886',
     projectId: 'bookhotel-c5c98',
     storageBucket: 'bookhotel-c5c98.firebasestorage.app',
+    androidClientId: '240141652886-pjbr8oesqp1r8stude8sovl2jqre2c2k.apps.googleusercontent.com',
     iosClientId: '240141652886-lhvf06h0s6csk86o88m7hgml665pmel9.apps.googleusercontent.com',
     iosBundleId: 'com.example.bookhotel',
   );
