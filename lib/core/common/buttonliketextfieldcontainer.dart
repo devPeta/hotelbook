@@ -65,6 +65,8 @@ class _ButtonLikeTextFieldState extends State<ButtonLikeTextField> {
                           color: Color(0xff2D2D2D)
                         ),
                       ),
+                      overflow:TextOverflow.ellipsis,
+                      maxLines: 1,
                     ),
                   ],
                 ),
@@ -90,14 +92,16 @@ class _ButtonLikeTextFieldState extends State<ButtonLikeTextField> {
                      onTap: widget.onTap2,
                      child: widget.prefixIcon2!),
                  const SizedBox(width: 8,),
-                 Text(widget.text2!, style: GoogleFonts.inter(
-                   textStyle:  const TextStyle(
-                     fontSize: 15,
-                     fontWeight: FontWeight.w400,
-                       color: Color(0xff2D2D2D),
-                   ),
-                 ),
-                 ),
+          Text(widget.text2!, style: GoogleFonts.inter(
+             textStyle:  const TextStyle(
+               fontSize: 15,
+               fontWeight: FontWeight.w400,
+                 color: Color(0xff2D2D2D),
+             ),
+           ),
+          overflow:TextOverflow.ellipsis,
+          maxLines: 1,
+           ),
                ],
                            ),
               const SizedBox(height: 2,),
@@ -126,6 +130,7 @@ class _ButtonLikeTextFieldState extends State<ButtonLikeTextField> {
                     color: Color(0xff2D2D2D),
                   ),
                 ),
+                  overflow:TextOverflow.ellipsis,
                 ),
                 const SizedBox(height: 2,),
               ],

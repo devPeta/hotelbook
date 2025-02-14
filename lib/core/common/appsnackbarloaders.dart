@@ -9,7 +9,7 @@ class AppLoaders{
     ScaffoldMessenger.of(Get.context!).showSnackBar(
       SnackBar(
         elevation: 0,
-        duration: const Duration(seconds: 5),
+        duration: const Duration(seconds: 2),
         backgroundColor: Colors.transparent,
         content: Container(
           padding: const EdgeInsets.all(12.0),
@@ -34,7 +34,7 @@ class AppLoaders{
     );
   }
 
-  static successSnackBar({required title, message = '', duration = 3}){
+  static successSnackBar({required title, message = '', duration = 1}){
     Get.snackbar(
       title,
       message,
@@ -49,7 +49,7 @@ class AppLoaders{
     );
   }
 
-  static warningSnackBar({required title, message = '', duration = 3}){
+  static warningSnackBar({required title, message = '', duration = 1}){
     Get.snackbar(
       title,
       message,
@@ -65,7 +65,7 @@ class AppLoaders{
   }
 
 
-  static errorSnackBar({required title, message = '', duration = 3}){
+  static errorSnackBar({required title, message = '', duration = 1}){
     Get.snackbar(
       title,
       message,

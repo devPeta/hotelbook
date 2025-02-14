@@ -1,85 +1,61 @@
 import 'package:bookhotel/core/common/appfullscreenloader.dart';
-import 'package:bookhotel/core/common/appnetworkmanager.dart';
 import 'package:bookhotel/core/common/appsnackbarloaders.dart';
-import 'package:bookhotel/data/authentication/authentication_respository.dart';
-import 'package:bookhotel/presentation/controller/user_controller.dart';
-import 'package:flutter/material.dart';
+import 'package:bookhotel/presentation/views/app_navigator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-class LogInController extends GetxController {
-  static LogInController get instance => Get.find();
 
-  /// Variables
-  final localStorage = GetStorage();
-  final email = TextEditingController();
-  final password = TextEditingController();
-  final rememberMe = false.obs;
+class SignInController extends GetxController {
+  static SignInController get instance => Get.find();
+
+  /// Text Controllers
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  /// Observables
   final hidePassword = true.obs;
+  final privacyPolicy = true.obs;
+  final rememberMe = true.obs;
+
+  /// Form Key
   final logInFormKey = GlobalKey<FormState>();
 
-  @override
-  void onInit() {
-    super.onInit();
-    email.text = localStorage.read('REMEMBER_ME_EMAIL') ?? '';
-    password.text = localStorage.read('REMEMBER_ME_PASSWORD') ?? '';
-  }
+  /// ✅ Login Function
+  Future<void> loginUser() async {
+    if (logInFormKey.currentState!.validate()) {
+      final email = emailController.text.trim();
+      final password = passwordController.text.trim();
 
-  /// Email and Password Sign-In
-  Future<void> emailAndPasswordSignIn() async {
-    FullScreenLoader.openLoadingDialog('Logging you in...');
-    try {
-      // Check Internet Connectivity
-      final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) throw Exception('No internet connection');
-
-      // Validate Form
-      if (!logInFormKey.currentState!.validate()) throw Exception('Invalid form input');
-
-      // Save Credentials if Remember Me is Checked
-      if (rememberMe.value) {
-        localStorage.write('REMEMBER_ME_EMAIL', email.text.trim());
-        localStorage.write('REMEMBER_ME_PASSWORD', password.text.trim());
+      if ([email, password].any((element) => element.isEmpty)) {
+        AppLoaders.warningSnackBar(title: 'All fields are required');
+        return;
       }
 
-      // Firebase Authentication
-      final userCredentials = await AuthenticationRepository.instance
-          .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+      AppFullScreenLoader.openLoadingDialog('Processing your information...');
 
-      // Redirect After Login
-      AuthenticationRepository.instance.screenRedirect();
-    } catch (e) {
-      AppLoaders.errorSnackBar(
-        title: 'Login Failed',
-        message: e.toString(),
-      );
-    } finally {
-      FullScreenLoader.stopLoading();
-    }
-  }
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .signInWithEmailAndPassword(email: email, password: password);
 
-  /// Google Sign-In
-  Future<void> googleSignIn() async {
-    FullScreenLoader.openLoadingDialog('Logging you in...');
-    try {
-      // Check Internet Connectivity
-      final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) throw Exception('No internet connection');
+        AppFullScreenLoader.stopLoading(); // Stop loading before navigation
 
-      // Google Authentication
-      final userCredentials = await AuthenticationRepository.instance.signInWithGoogle();
+        AppLoaders.successSnackBar(
+          title: 'Successful',
+          message: 'Welcome back',
+        );
 
-      // Save User Record
-      await Get.find<UserController>().saveUserRecord(userCredentials);
+        Get.off(() => const AppNavigator()); // Navigate after stopping the loader
+      } on FirebaseAuthException catch (e) {
+        AppFullScreenLoader.stopLoading(); // Ensure the loader stops on error
 
-      // Redirect After Login
-      AuthenticationRepository.instance.screenRedirect();
-    } catch (e) {
-      AppLoaders.errorSnackBar(
-        title: 'Google Sign-In Failed',
-        message: e.toString(),
-      );
-    } finally {
-      FullScreenLoader.stopLoading();
+        if (e.code == 'weak-password') {
+          AppLoaders.warningSnackBar(title: 'Password provided is too weak');
+        } else if (e.code == 'email-already-in-use') {
+          AppLoaders.warningSnackBar(title: 'Account already exists');
+        } else {
+          AppLoaders.errorSnackBar(title: 'Login failed: ${e.message}');
+        }
+      }
     }
   }
 }

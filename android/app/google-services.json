@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "77635846971",
+    "project_id": "bookmebackend",
+    "storage_bucket": "bookmebackend.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77635846971:android:dd8c72ad8bc16af64a2d1e",
+        "android_client_info": {
+          "package_name": "com.example.bookhotel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "77635846971-srj7i41dv6s66c3gjt9tm1jbv3p6t6f0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.bookhotel",
+            "certificate_hash": "2dc23c7c0bc3408a4aa043bdc499f6166a61c0dc"
+          }
+        },
+        {
+          "client_id": "77635846971-qgpec2o8tg483ieuitljkk7pfnigob1o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe_cDQ-IIjf-M-mO7XHH2VFoUAJONGyrw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "77635846971-qgpec2o8tg483ieuitljkk7pfnigob1o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "77635846971-j2fm5gvtdkn6kfbq9e85oecpbafthc0a.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bookhotel"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

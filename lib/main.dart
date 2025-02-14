@@ -1,15 +1,14 @@
 import 'package:bookhotel/core/theme/theme.dart';
 import 'package:bookhotel/data/authentication/authentication_respository.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
-import 'package:bookhotel/presentation/controller/places_around_controller.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'presentation/views/auths/onboarding/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:get_storage/get_storage.dart';
+import 'firebase_options.dart';
 
 
 Future<void> main() async {
@@ -30,11 +29,12 @@ Future<void> main() async {
   ]);
 
 
-  ///Initialize Firebase And Checking If Users Is Login, Log Out or Restart
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
-  ).then((FirebaseApp value)=>Get.put(AuthenticationRepository()),
   );
+  // .then((FirebaseApp value)=>Get.put(AuthenticationRepository()),
+  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -46,8 +46,6 @@ class MyApp extends StatelessWidget {
 
     ///Initializing Product Controller
     Get.put(HotelProductController());
-    Get.put(PlacesAroundController());
-
     return GetMaterialApp(
       title: 'Book Hotel',
       debugShowCheckedModeBanner: false,

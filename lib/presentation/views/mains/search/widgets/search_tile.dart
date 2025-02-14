@@ -1,67 +1,81 @@
 import 'package:flutter/material.dart';
-import 'package:bookhotel/data/models/search_product_model.dart';
+import 'package:bookhotel/data/models/book_hotel_product_model.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
 class SearchTile extends StatelessWidget {
-  final SearchHotelModel searchHotelModel;
-  const SearchTile({Key? key, required this.searchHotelModel}) : super(key: key);
+  final BookHotelProduct bookHotelProduct;
+  const SearchTile({Key? key, required this.bookHotelProduct}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Row(
+    return Padding(
+        padding: const EdgeInsets.only(bottom: 4.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ///Image
-            Container(
-              height: 100, width: 80,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(4),
-                image: DecorationImage(
-                  image: AssetImage(searchHotelModel.hotelImage, ),
+            Row(
+              children: [
+                /// Image
+                Container(
+                  height: 70,
+                  width: 110,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(4),
+                    image: DecorationImage(
+                      image: AssetImage(bookHotelProduct.imgPaths),
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ),
+
+                const SizedBox(width: 8),
+
+                /// Column with Hotel Name and Location
+                Center(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        bookHotelProduct.title,
+                        style: GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            color: Color(0xff2D2D2D),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 2),
+                      Text(
+                        bookHotelProduct.location,
+                        style: GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            color: Color(0xff2D2D2D),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+
+            /// Price
+            GestureDetector(
+              onTap: () {},
+              child: const Center(
+                child: Icon(
+                  Icons.circle,
+                  color: Colors.green,
+                  size: 10,
                 ),
               ),
             ),
-
-            const SizedBox(width: 8,),
-
-            ///Column Hotel Name, Location
-            Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(searchHotelModel.searchHotelName, style: GoogleFonts.raleway(
-                    textStyle: const TextStyle(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                    ),
-                  ),
-                  ),
-                  const SizedBox(height: 2,),
-                  Text(searchHotelModel.searchHotelLocation, style: GoogleFonts.raleway(
-                    textStyle: const TextStyle(
-                      color: Color(0xff2D2D2D),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 10,
-                    ),
-                  ),
-                  ),
-                ],
-              ),
-            ),
           ],
-        ),
-
-        ///Price
-        GestureDetector(
-          onTap: searchHotelModel.searchHotelTap,
-          child: const Center(child: Icon(Icons.circle, color: Colors.green, size: 10,)),
-          ),
-      ],
+      ),
     );
   }
 }

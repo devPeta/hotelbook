@@ -1,10 +1,11 @@
 import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/constant/textstyle_constant.dart';
-import 'package:bookhotel/data/models/search_product_model.dart';
+import 'package:bookhotel/data/models/book_hotel_product_model.dart';
+import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:bookhotel/presentation/views/mains/search/widgets/search_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:bookhotel/core/common/apptextfield.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
@@ -14,31 +15,20 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  List<SearchHotelModel> displayList = [];
-  final List<SearchHotelModel> searchHotelModel = const [
-    SearchHotelModel(hotelName: 'Palm Palace', hotelLocation: 'After former valid, Sabon Tasha, Kaduna', hotelImage: 'assets/images/hotel/hotel1.png'),
-    SearchHotelModel(hotelName: 'Royal Guest', hotelLocation: 'Kachia Road, Sabon Tasha, Kaduna', hotelImage: 'assets/images/hotel/hotel2.png'),
-    SearchHotelModel(hotelName: 'Goshen Garden', hotelLocation: 'Kachia Road, Sabon Tasha, Kaduna', hotelImage: 'assets/images/hotel/hotel4.png'),
-    SearchHotelModel(hotelName: 'Delicia Rest', hotelLocation: 'Ungwan Rimi, Kaduna North', hotelImage: 'assets/images/hotel/hotel3.png'),
-    SearchHotelModel(hotelName: 'Starz Hotel', hotelLocation: 'Barnawa, Kaduna South', hotelImage: 'assets/images/hotel/hotel4.png'),
-    SearchHotelModel(hotelName: 'Chris Lounge', hotelLocation: 'Ungwan Romi, Kaduna South', hotelImage: 'assets/images/hotel/hotel2.png'),
-    SearchHotelModel(hotelName: 'Epitome', hotelLocation: 'Kurmin Mashi, Kaduna North', hotelImage: 'assets/images/hotel/hotel3.png'),
-    SearchHotelModel(hotelName: 'Ten Toes', hotelLocation: 'Kafancha, Kaduna South', hotelImage: 'assets/images/hotel/hotel2.png'),
-    SearchHotelModel(hotelName: 'Apple Lounge', hotelLocation: 'Sabon Tasha, Kaduna', hotelImage: 'assets/images/hotel/hotel1.png'),
-  ];
+  final _hotelController = Get.put(HotelProductController());
+  List<BookHotelProduct> displayList = [];
 
   @override
   void initState() {
     super.initState();
-    displayList = List.from(searchHotelModel);
+    displayList = List.from(_hotelController.bookHotel);
   }
 
   void updateList(String value) {
     setState(() {
-      displayList = searchHotelModel
+      displayList = _hotelController.bookHotel
           .where((element) =>
-      element.hotelName != null &&
-          element.hotelName!.toLowerCase().contains(value.toLowerCase()))
+          element.title.toLowerCase().contains(value.toLowerCase()))
           .toList();
     });
   }
@@ -55,15 +45,11 @@ class _SearchPageState extends State<SearchPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              /// App Bar
               const ApplicationBar(
                 title: 'Search',
                 centerTitle: false,
               ),
               SizedBox(height: height * 0.02),
-
-
-
               AppKTextField(
                 labelText: 'Search',
                 onChanged: updateList,
@@ -74,9 +60,6 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
               SizedBox(height: height * 0.01),
-
-
-              /// Display List
               Expanded(
                 child: displayList.isEmpty
                     ? Center(
@@ -100,16 +83,16 @@ class _SearchPageState extends State<SearchPage> {
                 )
                     : ListView.builder(
                   itemBuilder: (context, index) => GestureDetector(
-                    onTap: (){},
+                    onTap: () {
+                      _hotelController.selectProduct(displayList[index]);
+                    },
                     child: SearchTile(
-                      searchHotelModel: displayList[index],
+                      bookHotelProduct: displayList[index],
                     ),
                   ),
                   itemCount: displayList.length,
                 ),
               ),
-
-
             ],
           ),
         ),
@@ -117,3 +100,4 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
+

@@ -2,6 +2,7 @@ import 'package:bookhotel/presentation/views/mains/homepage/details_page.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/homepage.dart';
 import 'package:bookhotel/presentation/views/mains/search/search_page.dart';
 import 'package:bookhotel/presentation/views/others/profile/profile_page.dart';
+import 'package:bookhotel/presentation/views/others/profile/setting_page.dart';
 import 'package:bookhotel/presentation/views/others/schedule/schedule_page.dart';
 import 'package:flutter/material.dart';
 
@@ -21,7 +22,7 @@ class _AppNavigatorState extends State<AppNavigator> {
     const AppHomePage(),
     const SchedulePage(),
     const SearchPage(),
-    const ProfilePage(),
+    const SettingPage(),
 
   ];
 

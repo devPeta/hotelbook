@@ -49,10 +49,6 @@ class LoginScreen extends StatelessWidget {
                     begin: const Offset(0, 200),
                   ),
 
-                  TextButton(
-                    onPressed: ()=> Get.to(AppNavigator()),
-                    child: Text('Skip',),
-                  )
                 ],
               ),
             ),

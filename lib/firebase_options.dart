@@ -47,29 +47,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyA1dfbAjn6TM0jDW2IfAbUhqfEYxhTdZ_U',
-    appId: '1:857109791419:web:37949084bea9d396301f9e',
-    messagingSenderId: '857109791419',
-    projectId: 'ebookme-3b8bc',
-    authDomain: 'ebookme-3b8bc.firebaseapp.com',
-    storageBucket: 'ebookme-3b8bc.firebasestorage.app',
+    apiKey: 'AIzaSyDekop9EHRxhj0Z9mYHjMJuD95DucB_Jgs',
+    appId: '1:77635846971:web:a17455f04d6719434a2d1e',
+    messagingSenderId: '77635846971',
+    projectId: 'bookmebackend',
+    authDomain: 'bookmebackend.firebaseapp.com',
+    storageBucket: 'bookmebackend.firebasestorage.app',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBvsaJT9qbVO3J6EYewFbxckyoacoWhyRA',
-    appId: '1:857109791419:android:4b1aff36a84ac100301f9e',
-    messagingSenderId: '857109791419',
-    projectId: 'ebookme-3b8bc',
-    storageBucket: 'ebookme-3b8bc.firebasestorage.app',
+    apiKey: 'AIzaSyCe_cDQ-IIjf-M-mO7XHH2VFoUAJONGyrw',
+    appId: '1:77635846971:android:dd8c72ad8bc16af64a2d1e',
+    messagingSenderId: '77635846971',
+    projectId: 'bookmebackend',
+    storageBucket: 'bookmebackend.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBJR3HjQfW3JDohAVu3deVIr39ALlW4EvA',
-    appId: '1:857109791419:ios:3e698fe870fe5900301f9e',
-    messagingSenderId: '857109791419',
-    projectId: 'ebookme-3b8bc',
-    storageBucket: 'ebookme-3b8bc.firebasestorage.app',
-    iosClientId: '857109791419-gth5cs04u28unt5g8q7uhfmsgve4516u.apps.googleusercontent.com',
+    apiKey: 'AIzaSyBPSZWtgeCJ7YovsNySge0uGmDkCzCeVUQ',
+    appId: '1:77635846971:ios:5d0aa2054ca69b7c4a2d1e',
+    messagingSenderId: '77635846971',
+    projectId: 'bookmebackend',
+    storageBucket: 'bookmebackend.firebasestorage.app',
+    androidClientId: '77635846971-srj7i41dv6s66c3gjt9tm1jbv3p6t6f0.apps.googleusercontent.com',
+    iosClientId: '77635846971-j2fm5gvtdkn6kfbq9e85oecpbafthc0a.apps.googleusercontent.com',
     iosBundleId: 'com.example.bookhotel',
   );
 

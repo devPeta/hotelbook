@@ -111,6 +111,7 @@ class PersonalDataTile extends StatelessWidget {
                 color: Color(0xff2D2D2D),
               ),
             ),
+              overflow:TextOverflow.ellipsis,
              ),
             const SizedBox(height: 2,),
             Row(
@@ -119,12 +120,14 @@ class PersonalDataTile extends StatelessWidget {
               children: [
                 prefixIcon,
                 const SizedBox(width: 8,),
-                Text(text, style: GoogleFonts.raleway(
+                Text(text,
+                  style: GoogleFonts.raleway(
                   textStyle:  const TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w400,
                   ),
                 ),
+                  overflow:TextOverflow.ellipsis,
                 ),
               ],
             ),
@@ -145,6 +148,7 @@ class PersonalDataTile extends StatelessWidget {
                   color: Color(0xff2D2D2D),
                 ),
               ),
+                overflow:TextOverflow.ellipsis,
               ),
               const SizedBox(height: 2,),
               Row(
@@ -160,6 +164,7 @@ class PersonalDataTile extends StatelessWidget {
                       color: Color(0xff2D2D2D),
                     ),
                   ),
+                    overflow:TextOverflow.ellipsis,
                   ),
                 ],
               ),
@@ -180,6 +185,7 @@ class PersonalDataTile extends StatelessWidget {
                   color: Color(0xff2D2D2D),
                 ),
               ),
+                overflow:TextOverflow.ellipsis,
               ),
               const SizedBox(height: 2,),
               Row(
@@ -195,6 +201,7 @@ class PersonalDataTile extends StatelessWidget {
                       color: Color(0xff2D2D2D),
                     ),
                   ),
+                    overflow:TextOverflow.ellipsis,
                   ),
                 ],
               ),

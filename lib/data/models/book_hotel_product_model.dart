@@ -1,71 +1,79 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class BookHotelProduct {
-  final String imgPaths;
-  final String name;
+  final String imgPaths; // Consider renaming to `imagePaths` if it's a list
+  final String title;
   final String location;
   final String price;
   final String description;
   final double latitude;
   final double longitude;
   final List<String> images;
-  final String parentID;
+  final String categoryId; // Make categoryId final
 
-  // Constructor
+  /// Creates a [BookHotelProduct] instance.
+  ///
+  /// - [imgPaths]: The main image path or paths for the hotel.
+  /// - [name]: The name of the hotel.
+  /// - [title]: The title or tagline of the hotel.
+  /// - [location]: The location of the hotel.
+  /// - [price]: The price of the hotel stay.
+  /// - [description]: A description of the hotel.
+  /// - [latitude]: The latitude coordinate of the hotel.
+  /// - [longitude]: The longitude coordinate of the hotel.
+  /// - [images]: A list of additional images for the hotel.
+  /// - [categoryId]: The category ID of the hotel (defaults to an empty string).
   const BookHotelProduct({
     required this.imgPaths,
-    required this.price,
-    required this.name,
+    required this.title,
     required this.location,
+    required this.price,
     required this.description,
     required this.latitude,
     required this.longitude,
     required this.images,
-    this.parentID = '',
+    this.categoryId = '', // Default categoryId is empty
   });
 
-  /// Helper Function: Create an empty `BookHotelProduct`
-  factory BookHotelProduct.empty() {
-    return const BookHotelProduct(
-      imgPaths: '',
-      price: '',
-      name: '',
-      location: '',
-      description: '',
-      latitude: 0.0,
-      longitude: 0.0,
-      images: [],
-      parentID: '',
-    );
-  }
-
-  /// Convert to JSON for Firebase storage
-  Map<String, dynamic> toJson() {
-    return {
-      'imgPaths': imgPaths,
-      'price': price,
-      'name': name,
-      'location': location,
-      'description': description,
-      'geoLocation': GeoPoint(latitude, longitude), // Store latitude & longitude as GeoPoint
-      'images': images,
-      'parentID': parentID,
-    };
-  }
-
-  /// Create an object from JSON retrieved from Firebase
-  factory BookHotelProduct.fromJson(Map<String, dynamic> json) {
-    GeoPoint geoPoint = json['geoLocation'] as GeoPoint; // Extract GeoPoint
+  /// Creates a copy of this [BookHotelProduct] with updated fields.
+  ///
+  /// - [imgPaths]: Updated image paths.
+  /// - [name]: Updated name.
+  /// - [title]: Updated title.
+  /// - [location]: Updated location.
+  /// - [price]: Updated price.
+  /// - [description]: Updated description.
+  /// - [latitude]: Updated latitude.
+  /// - [longitude]: Updated longitude.
+  /// - [images]: Updated images.
+  /// - [categoryId]: Updated category ID.
+  BookHotelProduct copyWith({
+    String? imgPaths,
+    String? title,
+    String? location,
+    String? price,
+    String? description,
+    double? latitude,
+    double? longitude,
+    List<String>? images,
+    String? categoryId,
+  }) {
     return BookHotelProduct(
-      imgPaths: json['ImgPaths'],
-      price: json['Price'],
-      name: json['Name'],
-      location: json['Location'],
-      description: json['Description'],
-      latitude: geoPoint.latitude, // Get latitude from GeoPoint
-      longitude: geoPoint.longitude, // Get longitude from GeoPoint
-      images: List<String>.from(json['Images']), // Convert list to List<String>
-      parentID: json['ParentID'] ?? '', // Default to empty if null
+      imgPaths: imgPaths ?? this.imgPaths,
+      title: title ?? this.title,
+      location: location ?? this.location,
+      price: price ?? this.price,
+      description: description ?? this.description,
+      latitude: latitude ?? this.latitude,
+      longitude: longitude ?? this.longitude,
+      images: images ?? this.images,
+      categoryId: categoryId ?? this.categoryId,
     );
+  }
+
+  /// Creates a copy of this [BookHotelProduct] with a new [categoryId].
+  ///
+  /// - [category]: The new category ID.
+  BookHotelProduct withCategoryId(String category) {
+    return copyWith(categoryId: category);
   }
 }
+

@@ -1,85 +1,67 @@
 import 'package:bookhotel/core/common/appfullscreenloader.dart';
-import 'package:bookhotel/core/common/appnetworkmanager.dart';
 import 'package:bookhotel/core/common/appsnackbarloaders.dart';
-import 'package:bookhotel/data/authentication/authentication_respository.dart';
-import 'package:bookhotel/data/users/user_model.dart';
-import 'package:bookhotel/data/users/user_respository.dart';
-import 'package:bookhotel/presentation/views/auths/verification/verify_email_screen.dart';
+import 'package:bookhotel/presentation/views/app_navigator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+
 class SignupController extends GetxController {
   static SignupController get instance => Get.find();
 
-  /// Variables
-  final email = TextEditingController();
-  final lastName = TextEditingController();
-  final firstName = TextEditingController();
-  final userName = TextEditingController();
-  final phoneNumber = TextEditingController();
-  final password = TextEditingController();
+  /// Text Controllers
+  final firstNameController = TextEditingController();
+  final lastNameController = TextEditingController();
+  final userNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final phoneNumberController = TextEditingController();
+
+  /// Observables
   final hidePassword = true.obs;
   final privacyPolicy = true.obs;
+
+  /// Form Key
   final signupFormKey = GlobalKey<FormState>();
 
-  /// Sign Up Method
-  Future<void> signup() async {
-    FullScreenLoader.openLoadingDialog('Processing your information...');
-    try {
-      // Check Internet Connectivity
-      final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) {
-        throw Exception('No internet connection. Please check your network.');
+  /// ✅ Registration Function
+  Future<void> registerUser() async {
+    if (signupFormKey.currentState!.validate()) {
+      final firstName = firstNameController.text.trim();
+      final lastName = lastNameController.text.trim();
+      final username = userNameController.text.trim();
+      final email = emailController.text.trim();
+      final password = passwordController.text.trim();
+      final phoneNumber = phoneNumberController.text.trim();
+
+      if ([firstName, lastName, username, email, password, phoneNumber]
+          .any((element) => element.isEmpty)) {
+        AppLoaders.warningSnackBar(title: 'All fields are required');
+        return;
       }
 
-      // Validate Form
-      if (!signupFormKey.currentState!.validate()) {
-        throw Exception('Invalid form input. Please correct errors and try again.');
+      AppFullScreenLoader.openLoadingDialog('Processing your information...');
+
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password);
+
+        AppLoaders.successSnackBar(
+          title: 'Registered Successfully',
+          message: 'Your account has been created! Please verify your email.',
+        );
+
+        Get.off(() => AppNavigator());
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          AppLoaders.warningSnackBar(title: 'Password provided is too weak');
+        } else if (e.code == 'email-already-in-use') {
+          AppLoaders.warningSnackBar(title: 'Account already exists');
+        } else {
+          AppLoaders.errorSnackBar(title: 'Registration failed: ${e.message}');
+        }
+      } finally {
+        AppFullScreenLoader.stopLoading();
       }
-
-      // Privacy Policy Check
-      if (!privacyPolicy.value) {
-        throw Exception('You must accept the privacy policy to create an account.');
-      }
-
-      // Register User with Firebase Authentication
-      final userCredential = await AuthenticationRepository.instance.registerWithEmailAndPassword(
-        email.text.trim(),
-        password.text.trim(),
-      );
-
-      // Save User Data to Firebase
-      final newUser = UserModel(
-        id: userCredential.user!.uid,
-        firstName: firstName.text.trim(),
-        lastName: lastName.text.trim(),
-        username: userName.text.trim(),
-        email: email.text.trim(),
-        phoneNumber: phoneNumber.text.trim(),
-        profilePicture: '',
-      );
-
-      // Save User Record in Repository
-      final userRepository = Get.find<UserRepository>();
-      await userRepository.saveUserRecord(newUser);
-
-      // Show Success Message
-      AppLoaders.successSnackBar(
-        title: 'Congratulations',
-        message: 'Your account has been created! Please verify your email.',
-      );
-
-      // Navigate to Verify Email Screen
-      Get.to(() => VerifyEmailScreen(email: email.text.trim()));
-    } catch (e) {
-      // Show Error Message
-      AppLoaders.errorSnackBar(
-        title: 'Signup Failed',
-        message: 'An error occurred while signing up.'
-
-      );
-    } finally {
-      // Stop Loader
-      FullScreenLoader.stopLoading();
     }
   }
 }

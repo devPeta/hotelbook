@@ -1,76 +1,48 @@
 import 'package:bookhotel/core/common/appfullscreenloader.dart';
-import 'package:bookhotel/core/common/appnetworkmanager.dart';
 import 'package:bookhotel/core/common/appsnackbarloaders.dart';
-import 'package:bookhotel/presentation/views/auths/forgetpassword/changepassword_screen.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../data/authentication/authentication_respository.dart';
 
-class ForgetPasswordController extends GetxController{
-  static ForgetPasswordController get instance => Get.find();
+class ForgetPasswordController extends GetxController {
+  /// Text Controller
+  final emailController = TextEditingController();
 
-  ///Variables
-  final email = TextEditingController();
-  GlobalKey<FormState> forgetPasswordFormKey = GlobalKey<FormState>();
+  /// Form Key
+  final forgetPasswordFormKey = GlobalKey<FormState>();
 
+  /// ✅ Send Password Reset Email
+  Future<void> sendPasswordResetEmail() async {
+    if (forgetPasswordFormKey.currentState!.validate()) {
+      final email = emailController.text.trim();
 
-  /// Send Reset Password Email
-  sendPasswordResetEmail() async{
-    try {
-      //Start Loading
-      FullScreenLoader.openLoadingDialog('Processing your request...');
-
-      //Check Internet Connectivity
-      final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) {
-        FullScreenLoader.stopLoading();
+      if (email.isEmpty) {
+        AppLoaders.warningSnackBar(title: 'Email is required');
         return;
       }
 
-      //form Validation
-      if(!forgetPasswordFormKey.currentState!.validate()){
-        FullScreenLoader.stopLoading();
-        return;
+      AppFullScreenLoader.openLoadingDialog('Sending password reset email...');
+
+      try {
+        await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+
+        AppFullScreenLoader.stopLoading(); // Stop loading before showing success message
+
+        AppLoaders.successSnackBar(
+          title: 'Email Sent',
+          message: 'A password reset link has been sent to your email.',
+        );
+
+        Get.back(); // Navigate back to the previous screen
+      } on FirebaseAuthException catch (e) {
+        AppFullScreenLoader.stopLoading(); // Ensure the loader stops on error
+
+        if (e.code == 'user-not-found') {
+          AppLoaders.warningSnackBar(title: 'No user found with this email');
+        } else {
+          AppLoaders.errorSnackBar(title: 'Failed to send reset email: ${e.message}');
+        }
       }
-
-      //Send Email to reset Password
-      await AuthenticationRepository.instance.sendPasswordResetEmail(email.text.trim());
-
-      //Removed Loader
-      FullScreenLoader.stopLoading();
-
-      //Show Success Screen
-      AppLoaders.successSnackBar(title: 'Email Sent', message: 'Email Link Sent to Reset your password');
-
-      //Redirect to ResetPassword Screen
-      Get.to(()=> const SentScreen());
-    } catch (e) {}
-  }
-
-
-  resendPasswordResetEmail(String email) async {
-    try {
-      //Start Loading
-      FullScreenLoader.openLoadingDialog('Processing your request...');
-
-      //Check Internet Connectivity
-      final isConnected = await NetworkManager.instance.isConnected();
-      if (!isConnected) {
-        FullScreenLoader.stopLoading();
-        return;
-      }
-
-      //Send Email to reset Password
-      await AuthenticationRepository.instance.sendPasswordResetEmail(email);
-
-      //Removed Loader
-      FullScreenLoader.stopLoading();
-
-      //Show Success Screen
-      AppLoaders.successSnackBar(title: 'Email Sent', message: 'Email Link Sent to Reset your password');
-
-      //Redirect to ResetPassword Screen
-      Get.to(()=> const SentScreen());
-    } catch (e) {}
+    }
   }
 }

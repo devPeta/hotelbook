@@ -6,9 +6,14 @@ import 'package:bookhotel/presentation/controller/forgetpassword_controller.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-class ForgetPasswordScreen extends StatelessWidget {
+class ForgetPasswordScreen extends StatefulWidget {
   const ForgetPasswordScreen({Key? key}) : super(key: key);
 
+  @override
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
+}
+
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ForgetPasswordController());
@@ -50,7 +55,7 @@ class ForgetPasswordScreen extends StatelessWidget {
                child: Column(
                  children: [
                    AppKTextField(
-                     controller: controller.email,
+                     controller: controller.emailController,
                      validator: (value) => Validator.validateEmail(value),
                       labelText: 'Enter your mail',
                       hintText: 'devpxxxx@gmail.com',

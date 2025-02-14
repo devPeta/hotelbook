@@ -54,6 +54,7 @@ dependencies:
   carousel_slider: any
   flutter_rating_bar: any
   fan_carousel_image_slider: any
+  smooth_page_indicator: any
 
   #Map, And Launcher Caller
   flutter_map: ^6.1.0
@@ -68,17 +69,17 @@ dependencies:
 
   #date And image picker
   calendar_date_picker2: ^1.1.7
-  syncfusion_flutter_datepicker: any
   image_picker: ^0.8.7+5
   flutter_native_splash: ^2.4.0
 
-
+  flutter_datetime_picker: any
 
   #Fire_base
   firebase_auth: ^5.3.0
   cloud_firestore: ^5.4.2
   firebase_core: ^3.5.0
   google_sign_in: ^6.1.6
+
 
 
 dev_dependencies:

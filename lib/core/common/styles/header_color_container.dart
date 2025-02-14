@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 class AppHeaderContainer extends StatelessWidget {
   final Widget child;
-  const AppHeaderContainer({Key? key, required this.child}) : super(key: key);
+  final double height;
+  const AppHeaderContainer({Key? key, required this.child, required this.height}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 235,
+      height: height,
       width: double.infinity,
       decoration: BoxDecoration(
           gradient: const LinearGradient(

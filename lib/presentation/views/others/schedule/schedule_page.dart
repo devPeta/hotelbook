@@ -1,12 +1,12 @@
+import 'package:flutter/material.dart';
 import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:bookhotel/core/common/buttonliketextfieldcontainer.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:bookhotel/presentation/views/others/schedule/personal_data_page.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'widgets/text_header.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -17,44 +17,18 @@ class SchedulePage extends StatefulWidget {
 }
 
 class _SchedulePageState extends State<SchedulePage> {
-  DateTime? _selectedDateTo;
+  DateTime _liveDate = DateTime.now();
   DateTime? _selectedCheckInDate;
+
+  void selectDate(BuildContext context, {required bool isCheckIn}) {
+    // Implement date selection logic here
+  }
 
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
     final HotelProductController productController = Get.find<HotelProductController>();
     final product = productController.selectedProduct.value;
-
-    void selectDate(BuildContext context, {required bool isCheckIn}) {
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return Dialog(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SfDateRangePicker(
-                selectionMode: DateRangePickerSelectionMode.single,
-                onSelectionChanged: (DateRangePickerSelectionChangedArgs args) {
-                  setState(() {
-                    if (isCheckIn) {
-                      _selectedCheckInDate = args.value;
-                    } else {
-                      _selectedDateTo = args.value;
-                    }
-                  });
-                  Navigator.of(context).pop(); // Close dialog
-                },
-                initialSelectedDate: isCheckIn ? _selectedCheckInDate : _selectedDateTo,
-              ),
-            ),
-          );
-        },
-      );
-    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -63,16 +37,13 @@ class _SchedulePageState extends State<SchedulePage> {
           padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const ApplicationBar(title: 'Schedule', leadingIcon: null, showBackArrow: true),
               SizedBox(height: height * 0.01),
               Expanded(
                 child: SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       const TextHeader(textHeader: 'Personal Data'),
                       ButtonLikeTextField(
@@ -85,7 +56,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       const TextHeader(textHeader: 'Hotel name'),
                       ButtonLikeTextField(
                         prefixIcon: const Icon(Icons.home_repair_service_outlined, color: Color(0xff2D2D2D), size: 24),
-                        text: product?.name ?? 'Please Select a Place',
+                        text: product?.title ?? 'Please Select a Place',
                         suffixIcon: const Icon(Icons.navigate_next_sharp, color: Color(0xff2D2D2D), size: 24),
                       ),
                       SizedBox(height: height * 0.02),
@@ -98,9 +69,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       const TextHeader(textHeader: 'Live Date'),
                       ButtonLikeTextField(
                         onTap: () => selectDate(context, isCheckIn: false),
-                        text: _selectedDateTo != null
-                            ? 'Selected Date: ${DateFormat('yyyy-MM-dd').format(_selectedDateTo!)}'
-                            : 'Select Live Date',
+                        text: 'Live Date: ${DateFormat('yyyy-MM-dd').format(_liveDate)}',
                         prefixIcon: const Icon(Icons.timer, color: Color(0xff2D2D2D), size: 24),
                       ),
                       SizedBox(height: height * 0.01),
@@ -113,18 +82,21 @@ class _SchedulePageState extends State<SchedulePage> {
                         prefixIcon: const Icon(Icons.calendar_month_rounded, color: Color(0xff287D3C), size: 24),
                       ),
                       SizedBox(height: height * 0.02),
-                      const TextHeader(textHeader: 'Room & quantity'),
+                      const TextHeader(textHeader: 'Room & Quantity'),
                       const ButtonLikeTextField(
                         prefixIcon: Icon(Icons.bathroom_outlined, color: Color(0xff2D2D2D), size: 24),
                         text: 'Family Room',
-                        prefixIcon2: Icon(Icons.person_outlined, color: Color(0xff2D2D2D), size: 24),
-                        text2: '2 adults',
-                        prefixIcon3: Icon(Icons.person_outlined, color: Color(0xff2D2D2D), size: 24),
-                        text3: 'Zero Kids',
                       ),
                       SizedBox(height: height * 0.03),
                       const Divider(color: Color(0xff2D2D2D), thickness: 2),
                       SizedBox(height: height * 0.01),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Price', style: GoogleFonts.raleway(fontSize: 14, color: Color(0xff2D2D2D), fontWeight: FontWeight.w600)),
+                          Text(product!.price, style: GoogleFonts.raleway(fontSize: 14, color: Colors.amberAccent, fontWeight: FontWeight.w600)),
+                        ],
+                      ),
                       AppKButton(label: 'Pay Now', width: double.infinity, color: const Color(0xff2D2D2D)),
                     ],
                   ),
@@ -137,22 +109,3 @@ class _SchedulePageState extends State<SchedulePage> {
     );
   }
 }
-
-
-
-
-// const ButtonLikeTextField(
-// prefixIcon: Icon(Icons.bathroom_outlined, color: Color(0xff2D2D2D), size: 24),
-// text: 'Family Room',
-// prefixIcon2: Icon(Icons.person_outlined, color: Color(0xff2D2D2D), size: 24),
-// text2: '2 adults',
-// prefixIcon3: Icon(Icons.person_outlined, color: Color(0xff2D2D2D), size: 24),
-// text3: 'Zero Kids',
-// ),
-// SizedBox(height: height * 0.03),
-// ListItems(itemName: product!.name, itemCost: product!.price, itemColor:  Colors.amberAccent, itemCostColor: Colors.amberAccent,),
-// SizedBox(height: height * 0.01),
-// const Divider(
-// color: Color(0xff2D2D2D),
-// thickness: 2,
-// ),
