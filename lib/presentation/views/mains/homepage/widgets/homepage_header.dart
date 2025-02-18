@@ -1,3 +1,4 @@
+import 'package:bookhotel/presentation/views/others/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
@@ -38,7 +39,7 @@ class HomePageHeader extends StatelessWidget {
 
     final HomepageHeaderController controller = HomepageHeaderController();
     return AppHeaderContainer(
-      height:235,
+      height: 200,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -51,12 +52,20 @@ class HomePageHeader extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ///Profile
-              CircleAvatar(
-                radius: 12.5,
-                backgroundColor: const Color(0xff2D2D2D),
+              GestureDetector(
+                onTap:(){
+                  Get.to(const ProfilePage(),
+                      transition: Transition.rightToLeft,
+                      curve:Curves.easeInOut,
+                  );
+                },
                 child: CircleAvatar(
                   radius: 12.5,
-                  child: Image.asset('assets/images/Profile Picture.png'),
+                  backgroundColor: const Color(0xff2D2D2D),
+                  child: CircleAvatar(
+                    radius: 12.5,
+                    child: Image.asset('assets/images/Profile Picture.png'),
+                  ),
                 ),
               ),
               ///Icon Location + Name
@@ -80,14 +89,17 @@ class HomePageHeader extends StatelessWidget {
               ///Notification icon
               GestureDetector(
                   onTap: (){
-                    Get.to(const NotificationPage());
+                    Get.to(const NotificationPage(),
+                    transition: Transition.rightToLeft,
+                    curve:Curves.easeInOut,
+                    );
                   },
                   onTapDown: (_) => controller.onTapDown(),
                   onTapCancel: controller.onTapCancel,
                   child:  Obx(() => AnimatedContainer(
                       duration: const Duration(milliseconds: 100),
                       child: Icon(Icons.notifications_outlined, size: 32,
-                      color: controller.isPressed.value ? Colors.white.withOpacity(0.5) : Colors.white,
+                      color: controller.isPressed.value ? Colors.blue.withOpacity(0.5) : Colors.white,
                                   ),
                   ),
               ),

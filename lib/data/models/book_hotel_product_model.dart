@@ -3,6 +3,7 @@ class BookHotelProduct {
   final String title;
   final String location;
   final String price;
+  final double basePrice;
   final String description;
   final double latitude;
   final double longitude;
@@ -10,21 +11,11 @@ class BookHotelProduct {
   final String categoryId; // Make categoryId final
 
   /// Creates a [BookHotelProduct] instance.
-  ///
-  /// - [imgPaths]: The main image path or paths for the hotel.
-  /// - [name]: The name of the hotel.
-  /// - [title]: The title or tagline of the hotel.
-  /// - [location]: The location of the hotel.
-  /// - [price]: The price of the hotel stay.
-  /// - [description]: A description of the hotel.
-  /// - [latitude]: The latitude coordinate of the hotel.
-  /// - [longitude]: The longitude coordinate of the hotel.
-  /// - [images]: A list of additional images for the hotel.
-  /// - [categoryId]: The category ID of the hotel (defaults to an empty string).
   const BookHotelProduct({
     required this.imgPaths,
     required this.title,
     required this.location,
+    required this.basePrice,
     required this.price,
     required this.description,
     required this.latitude,
@@ -34,17 +25,6 @@ class BookHotelProduct {
   });
 
   /// Creates a copy of this [BookHotelProduct] with updated fields.
-  ///
-  /// - [imgPaths]: Updated image paths.
-  /// - [name]: Updated name.
-  /// - [title]: Updated title.
-  /// - [location]: Updated location.
-  /// - [price]: Updated price.
-  /// - [description]: Updated description.
-  /// - [latitude]: Updated latitude.
-  /// - [longitude]: Updated longitude.
-  /// - [images]: Updated images.
-  /// - [categoryId]: Updated category ID.
   BookHotelProduct copyWith({
     String? imgPaths,
     String? title,
@@ -52,6 +32,7 @@ class BookHotelProduct {
     String? price,
     String? description,
     double? latitude,
+    double? basePrice,
     double? longitude,
     List<String>? images,
     String? categoryId,
@@ -61,6 +42,7 @@ class BookHotelProduct {
       title: title ?? this.title,
       location: location ?? this.location,
       price: price ?? this.price,
+      basePrice: basePrice ?? this.basePrice,
       description: description ?? this.description,
       latitude: latitude ?? this.latitude,
       longitude: longitude ?? this.longitude,

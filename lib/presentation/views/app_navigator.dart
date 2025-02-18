@@ -1,9 +1,7 @@
-import 'package:bookhotel/presentation/views/mains/homepage/details_page.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/homepage.dart';
 import 'package:bookhotel/presentation/views/mains/search/search_page.dart';
-import 'package:bookhotel/presentation/views/others/profile/profile_page.dart';
-import 'package:bookhotel/presentation/views/others/profile/setting_page.dart';
-import 'package:bookhotel/presentation/views/others/schedule/schedule_page.dart';
+import 'package:bookhotel/presentation/views/others/favourite/favourite_screen.dart';
+import 'package:bookhotel/presentation/views/others/setting/setting_page.dart';
 import 'package:flutter/material.dart';
 
 
@@ -15,12 +13,11 @@ class AppNavigator extends StatefulWidget {
 }
 
 class _AppNavigatorState extends State<AppNavigator> {
-  @override
   int _selectedIndex = 0;
 
   final screens =  [
     const AppHomePage(),
-    const SchedulePage(),
+    FavouritePage(),
     const SearchPage(),
     const SettingPage(),
 
@@ -56,8 +53,8 @@ class _AppNavigatorState extends State<AppNavigator> {
                           label:'Home',
                   ),
                   BottomNavigationBarItem(
-                  icon: Icon(Icons.schedule_rounded),
-                      label:'Scheduling',
+                  icon: Icon(Icons.favorite_border_outlined),
+                      label:'Favourite',
                   ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.search),

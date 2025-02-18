@@ -3,7 +3,7 @@ import 'package:bookhotel/presentation/views/others/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:bookhotel/core/common/appbutton.dart';
+
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class SettingPage extends StatelessWidget {
               ///Profile Header
 
               AppHeaderContainer(
-                height: 140,
+                height: 130,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -32,7 +32,7 @@ class SettingPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                     ),
-                    const SizedBox(height: 8,),
+                    const SizedBox(height: 12,),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,7 +44,10 @@ class SettingPage extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: (){
-                                Get.to(const ProfilePage());
+                                Get.to(const ProfilePage(),
+                                  transition: Transition.rightToLeft,
+                                  curve:Curves.easeInOut,
+                                );
                               },
                              child: CircleAvatar(
                                 radius: 22.5,
@@ -103,28 +106,13 @@ class SettingPage extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                   ),
-                  const SizedBox(height: 16,),
+                  const SizedBox(height: 8,),
 
                   const SettingMenuTitle(title: 'My Addresses', subtitle: 'Set location address', icons: Icons.home_filled,),
-                  const SizedBox(height: 4,),
-
                   const SettingMenuTitle(title: 'Geolocations', subtitle: 'Set recommendation based on location', icons: Icons.location_city_outlined,),
-                  const SizedBox(height: 4,),
-
                   const SettingMenuTitle(title: 'Notifications', subtitle: 'Set any kind of notifications message', icons: Icons.notifications,),
-                  const SizedBox(height: 4,),
-
                   const SettingMenuTitle(title: 'Account Privacy ', subtitle: 'Manage data usage and connected accounts', icons: Icons.account_balance_outlined,),
-                  const SizedBox(height: 16,),
 
-                  AppKButton(
-                    label: 'Log Out',
-                    onTap: (){},
-                    width: double.infinity,
-                    color: const Color(0xff2D2D2D).withOpacity(0.5),
-                    shadowOpacity: 0.2,
-                    height: 51,
-                  ),
                     ],
                   ),
                 ),
@@ -149,6 +137,7 @@ class SettingMenuTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   ListTile(
+      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0,),
       leading: Icon(icons, size: 28, color: const Color(0xff2d2d2d),),
       title: Text(title,   style: GoogleFonts.raleway(
         color: const Color(0xff2d2d2d),

@@ -1,6 +1,6 @@
 import 'package:bookhotel/core/common/styles/spacebetween_text_textbutton.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
-import 'package:bookhotel/presentation/views/mains/homepage/details_page.dart';
+import 'package:bookhotel/presentation/views/mains/details/details_page.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/widgets/homepage_header.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/widgets/hotel_places.dart';
 import 'package:bookhotel/presentation/views/mains/homepage/widgets/hotel_product_tile.dart';
@@ -17,7 +17,6 @@ class AppHomePage extends StatefulWidget {
 class _AppHomePageState extends State<AppHomePage> {
   @override
   void onInit() {
-    // super.onInit();
     // Ensure the products are categorized upon initialization
     Get.find<HotelProductController>().separateCategories();
   }
@@ -58,8 +57,8 @@ class _AppHomePageState extends State<AppHomePage> {
                       const SizedBox(height: 4),
 
                       /// Book Hotel
-                      ConstrainedBox(
-                        constraints: const BoxConstraints(maxHeight: 120),
+                      SizedBox(
+                       height: 120,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: false,

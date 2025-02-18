@@ -33,8 +33,8 @@ class _HotelProductTileState extends State<HotelProductTile> {
     controller.loadImage();
 
     return Card(
-      elevation: 3,
-      color: Colors.white70,
+      elevation: 5,
+      color: Colors.white54,
       child: Container(
       width: 280,
       height: 100,

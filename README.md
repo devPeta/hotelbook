@@ -1,8 +1,9 @@
 # bookhotel
 
-A new Flutter project.
+## Hotel & Fun Explorer - Kaduna
 
-## Getting Started
+An intuitive application designed for users in Kaduna, allowing seamless hotel bookings and access to exciting tourist attractions. With this app, users can easily schedule stays at hotels and explore fun-filled locations like Ganji Gate, Kaduna Museum, and more. Whether you're looking for a relaxing getaway or an adventure-packed day, this app helps you plan your perfect visit in Kaduna.
+
 
 This project is a starting point for a Flutter application.
 

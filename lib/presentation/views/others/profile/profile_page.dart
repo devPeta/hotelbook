@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:bookhotel/core/common/appbar.dart';
-import 'package:bookhotel/core/common/styles/header_color_container.dart';
 import 'package:bookhotel/presentation/views/others/profile/widgets/profile_menu.dart';
 import 'package:bookhotel/presentation/views/others/profile/widgets/profile_section_header.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +40,7 @@ class _ProfileScreenState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ApplicationBar(title: 'Profile', leadingIcon: null, showBackArrow: false, ),
+                const ApplicationBar(title: 'Profile', leadingIcon: null, showBackArrow: false, ),
 
                 Center(
                     child: Column(
@@ -109,9 +108,14 @@ class _ProfileScreenState extends State<ProfilePage> {
                         SizedBox(height: height * 0.02),
 
                         Center(
-                          child: TextButton(onPressed: (){}, child: const Text('Delete Account', style: TextStyle(color: Colors.red),)
+                          child: TextButton(onPressed: (){}, child: const Text('Log Out', style: TextStyle(color: Colors.red),)
                           ),
-                        )
+                        ),
+                        SizedBox(height: height * 0.01),
+                        Center(
+                          child: TextButton(onPressed: (){}, child: const Text('Save', style: TextStyle(color: Colors.green),)
+                          ),
+                        ),
 
                       ],
                     ),
