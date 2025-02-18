@@ -1,12 +1,11 @@
-import 'package:bookhotel/presentation/controller/schedule_controller.dart';
-import 'package:bookhotel/presentation/views/others/schedule/widgets/hourtile.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:bookhotel/core/common/buttonliketextfieldcontainer.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
+import 'package:bookhotel/presentation/controller/schedule_controller.dart';
 import 'package:bookhotel/presentation/views/others/schedule/personal_data_page.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'widgets/text_header.dart';
@@ -22,8 +21,35 @@ class _SchedulePageState extends State<SchedulePage> {
   DateTime _liveDate = DateTime.now();
   DateTime? _selectedCheckInDate;
 
-  void selectDate(BuildContext context, {required bool isCheckIn}) {
-    // Implement date selection logic here
+  // Method to open the date picker
+  Future<void> selectDate(BuildContext context, {required bool isCheckIn}) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: isCheckIn ? _selectedCheckInDate ?? DateTime.now() : _liveDate,
+      firstDate: DateTime.now(),
+      lastDate: DateTime(2100),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Color(0xff287D3C), // Customize the primary color
+              onPrimary: Colors.white, // Text color on the primary color
+            ),
+          ),
+          child: child!,
+        );
+      },
+    );
+
+    if (picked != null && picked != (isCheckIn ? _selectedCheckInDate : _liveDate)) {
+      setState(() {
+        if (isCheckIn) {
+          _selectedCheckInDate = picked;
+        } else {
+          _liveDate = picked;
+        }
+      });
+    }
   }
 
   @override
@@ -72,7 +98,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       const TextHeader(textHeader: 'Live Date'),
                       ButtonLikeTextField(
                         onTap: () => selectDate(context, isCheckIn: false),
-                        text: 'Live Date: ${DateFormat('yyyy-MM-dd').format(_liveDate)}',
+                        text: '${DateFormat('yyyy-MM-dd').format(_liveDate)}',
                         prefixIcon: const Icon(Icons.timer, color: Color(0xff2D2D2D), size: 24),
                       ),
                       SizedBox(height: height * 0.01),
@@ -94,7 +120,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       const Divider(color: Color(0xff2D2D2D), thickness: 2),
                       SizedBox(height: height * 0.01),
                       Row(
-                        children:[
+                        children: [
                           Obx(() => HourTile(
                               text: _scheduleController.hours.toString(),
                               incrementButton: _scheduleController.increasedHours,
@@ -107,11 +133,9 @@ class _SchedulePageState extends State<SchedulePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text('Price', style: GoogleFonts.raleway(fontSize: 14, color: Color(0xff2D2D2D), fontWeight: FontWeight.w600)),
-                          // Use Obx to reactively update the price from the controller
                           Obx(() {
-                            // Assuming _scheduleController is your ScheduleController instance
                             return Text(
-                              '\$${_scheduleController.totalPrice.value.toStringAsFixed(2)}',  // Format as currency if needed
+                              '\$${_scheduleController.totalPrice.value.toStringAsFixed(2)}',
                               style: GoogleFonts.raleway(
                                 fontSize: 14,
                                 color: Colors.amberAccent,

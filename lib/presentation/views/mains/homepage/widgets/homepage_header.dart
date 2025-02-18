@@ -39,7 +39,7 @@ class HomePageHeader extends StatelessWidget {
 
     final HomepageHeaderController controller = HomepageHeaderController();
     return AppHeaderContainer(
-      height: 200,
+      height: 220,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,

@@ -17,6 +17,7 @@ class SearchPage extends StatefulWidget {
 class _SearchPageState extends State<SearchPage> {
   final _hotelController = Get.put(HotelProductController());
   List<BookHotelProduct> displayList = [];
+  Timer? _debounce;
 
   @override
   void initState() {
@@ -25,12 +26,21 @@ class _SearchPageState extends State<SearchPage> {
   }
 
   void updateList(String value) {
-    setState(() {
-      displayList = _hotelController.bookHotel
-          .where((element) =>
-          element.title.toLowerCase().contains(value.toLowerCase()))
-          .toList();
+    if (_debounce?.isActive ?? false) _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      setState(() {
+        displayList = _hotelController.bookHotel
+            .where((element) =>
+                element.title.toLowerCase().contains(value.toLowerCase()))
+            .toList();
+      });
     });
+  }
+
+  @override
+  void dispose() {
+    _debounce?.cancel();
+    super.dispose();
   }
 
   @override
@@ -63,35 +73,36 @@ class _SearchPageState extends State<SearchPage> {
               Expanded(
                 child: displayList.isEmpty
                     ? Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Oops',
-                        style: AppTextStyles.sectionTextStyle,
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        'No result found',
-                        style: AppTextStyles.sectionTextStyle.copyWith(
-                          fontSize: 12,
-                          fontWeight: FontWeight.w300,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Oops',
+                              style: AppTextStyles.sectionTextStyle,
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'No result found',
+                              style: AppTextStyles.sectionTextStyle.copyWith(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                )
+                      )
                     : ListView.builder(
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () {
-                      _hotelController.selectProduct(displayList[index]);
-                    },
-                    child: SearchTile(
-                      bookHotelProduct: displayList[index],
-                    ),
-                  ),
-                  itemCount: displayList.length,
-                ),
+                        itemBuilder: (context, index) => GestureDetector(
+                          onTap: () {
+                            _hotelController.selectProduct(displayList[index]);
+                            Get.to(() => HotelDetailsPage(hotel: displayList[index]));
+                          },
+                          child: SearchTile(
+                            bookHotelProduct: displayList[index],
+                          ),
+                        ),
+                        itemCount: displayList.length,
+                      ),
               ),
             ],
           ),
@@ -100,4 +111,3 @@ class _SearchPageState extends State<SearchPage> {
     );
   }
 }
-
