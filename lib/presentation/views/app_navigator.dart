@@ -52,10 +52,10 @@ class _AppNavigatorState extends State<AppNavigator> {
                   icon: Icon(Icons.home_outlined, ),
                           label:'Home',
                   ),
-                  // BottomNavigationBarItem(
-                  // icon: Icon(Icons.favorite_border_outlined),
-                  //     label:'Favourite',
-                  // ),
+                  BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite_border_outlined),
+                      label:'Favourite',
+                  ),
                   BottomNavigationBarItem(
                     icon: Icon(Icons.search),
                     label: 'Search',
