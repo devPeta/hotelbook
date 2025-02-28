@@ -15,65 +15,59 @@ class HotelProductController extends GetxController {
   /// Method to initialize the list of hotels
   void _initializeHotelProducts() {
     bookHotel.addAll([
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/hotel1.png',
+    const BookHotelProduct(imgPaths: 'assets/images/places/h1.jpg',
       title: 'Top Galaxy Hotel',
       location: 'Sabon Tasha',
-      price: '#35,000',
-      basePrice: 35000,
+      price: '#3500',
+      basePrice: 3500,
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg'
+      images: [ 'assets/images/places/h1.jpg', 'assets/images/places/h2.jpg', 'assets/images/places/h3.jpg','assets/images/places/h4.jpg'
       ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/hotel2.png',  location: 'Sabon Tasha', price: '#15,000',
+    const BookHotelProduct(imgPaths: 'assets/images/places/kk1.jpg',  location: 'Sabon Tasha', price: '#5000',
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
       title: 'Palm Palace Hotel',
-      basePrice: 15000,
-      images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg' ],
+      basePrice: 5000,
+      images: [ 'assets/images/places/kk1.jpg', 'assets/images/places/kk2.jpg', 'assets/images/places/kk3.jpg' ],
     ).withCategoryId('places_around'),
     const BookHotelProduct(
-      imgPaths: 'assets/images/hotel/hotel1.png',  location: 'Kaduna North', price: '#40,000',
+      imgPaths: 'assets/images/places/h4a.jpg',  location: 'Kaduna North', price: '#4000',
       title: 'Star Hotel',
-      basePrice: 40000,
+      basePrice: 4000,
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg' ],
+      images: [ 'assets/images/places/h4a.jpg', 'assets/images/places/h4b.jpg', 'assets/images/places/h4.jpg' ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/hotel2.png', title: 'Raw Hotel', location: 'Ungwan Rimi', price: '#25,000',
+    const BookHotelProduct(imgPaths: 'assets/images/places/h5a.jpg', title: 'Raw Hotel', location: 'Ungwan Rimi', price: '#6000',
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125,
-      basePrice: 25000,
+      basePrice: 6000,
       longitude: 7.6793,
-      images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg' ],
+      images: [ 'assets/images/places/h5b.jpg', 'assets/images/places/h5c.jpg', 'assets/images/places/h5a.jpg' ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/hotel2.png',
+    const BookHotelProduct(imgPaths: 'assets/images/places/hh1.jpg',
       title: 'Royal Hotel',
-      location: 'Trikiana', price: '#55,000',
+      location: 'Trikiana', price: '#5500',
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
-      latitude: 10.3125, longitude: 7.6793, basePrice: 55000,
-      images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg' ],
+      latitude: 10.3125, longitude: 7.6793, basePrice: 5500,
+      images: [ 'assets/images/places/hh1.jpg', 'assets/images/places/hh2.jpg', 'assets/images/places/hh3.jpg' ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/hotel2.png',
-      title:'Goshen Hotel',
-      location: 'Ungwan Pama', price: '#25,000',basePrice: 25000,
-      description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
-      latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg' ],
-    ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/hotel1.png',
+    const BookHotelProduct(imgPaths: 'assets/images/placees/vk1a.jpg',
       title:'Equatorial Hotel',
-      location: 'Kaduna North', price: '#75,000', basePrice: 75000,
+      location: 'Kaduna North', price: '#7500', basePrice: 7500,
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg' ],
+      images: [ 'assets/images/places/vk1a.jpg', 'assets/images/places/vk1b.jpg', 'assets/images/places/vk1c.jpg' ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/hotel1.png',
+    const BookHotelProduct(imgPaths: 'assets/images/places/0.jpg',
       title:'Protect Hotel',location: 'Romi', price: '#25,000',basePrice: 25000,
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
       images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg' ],
     ).withCategoryId('places_around'),
+
 
     const BookHotelProduct(
       imgPaths: 'assets/images/hotel/place3.png', title: 'Kaduna Museum',
@@ -86,11 +80,11 @@ class HotelProductController extends GetxController {
       price: '#35,000',basePrice: 35000,
       location: 'Ali Akilu Road, U/ Sarki',
     ).withCategoryId('visit_around'),
+
     const BookHotelProduct(
       imgPaths: 'assets/images/hotel/place2.png',
       title: 'Kagoro Hills',
       images: [
-
         'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg'
       ],
       description: 'Kagoro Hills is a stunning natural landmark\nlocated in southern Kaduna State, Nigeria, near the \ntown of kagoro in Kaura LGA.',
@@ -99,10 +93,24 @@ class HotelProductController extends GetxController {
       price: '#25,000',
       location: 'Southern Kaduna, Kaura LGA',
     ).withCategoryId('visit_around'),
+
+    const BookHotelProduct(
+      imgPaths: 'assets/images/places/zazzau1.jpg',
+      title: 'Zazzau Emir Palace',
+      images: [
+        'assets/images/places/zazzau1.jpg', 'assets/images/places/zazzau2.jpg', 'assets/images/places/zazzau3.jpg'
+      ],
+      description: 'Kagoro Hills is a stunning natural landmark\nlocated in southern Kaduna State, Nigeria, near the \ntown of kagoro in Kaura LGA.',
+      latitude: 9.5816,
+      longitude: 8.47298, basePrice: 25000,
+      price: '#25,000',
+      location: 'Zaria, Kaduna LGA',
+    ).withCategoryId('visit_around'),
+    
     const BookHotelProduct(
       imgPaths: 'assets/images/hotel/place2.png', title: 'Kajuru Castle',
       images: [
-        'assets/images/places/2.jpg', 'assets/images/places/3.jpg', 'assets/images/places/6.jpg',
+        'assets/images/places/castle1.jpg', 'assets/images/places/castle2.jpg', 'assets/images/places/castle3.jpg',
       ],
       description: 'Kajuru Castle is a unique medieval-style villa \nlocated in Kajuru Local Government Area, \nKaduna State, Nigeria.',
       latitude: 10.3125,
@@ -147,5 +155,4 @@ class HotelProductController extends GetxController {
     await Future.delayed(const Duration(seconds: 2)); // Simulate delay
     isImageLoaded.value = true; // Set as loaded after delay
   }
-
 }
