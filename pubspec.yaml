@@ -71,7 +71,6 @@ dependencies:
   calendar_date_picker2: ^1.1.7
   image_picker: ^0.8.7+5
   flutter_native_splash: ^2.4.0
-
   flutter_datetime_picker: any
 
   #Fire_base
@@ -79,6 +78,7 @@ dependencies:
   cloud_firestore: ^5.4.2
   firebase_core: ^3.5.0
   google_sign_in: ^6.1.6
+  flutter_facebook_auth: any
 
 
 

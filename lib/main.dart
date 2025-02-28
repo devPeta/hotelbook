@@ -1,7 +1,5 @@
 import 'package:bookhotel/core/theme/theme.dart';
-import 'package:bookhotel/data/authentication/authentication_respository.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -9,6 +7,7 @@ import 'presentation/views/auths/onboarding/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
+import 'package:bookhotel/presentation/controller/favourite_controller.dart';
 
 
 Future<void> main() async {
@@ -46,6 +45,8 @@ class MyApp extends StatelessWidget {
 
     ///Initializing Product Controller
     Get.put(HotelProductController());
+    Get.put(FavouriteController());
+
     return GetMaterialApp(
       title: 'Book Hotel',
       debugShowCheckedModeBanner: false,

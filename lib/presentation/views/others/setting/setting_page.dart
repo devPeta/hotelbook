@@ -20,7 +20,7 @@ class SettingPage extends StatelessWidget {
               ///Profile Header
 
               AppHeaderContainer(
-                height: 130,
+                height: 125,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -32,7 +32,7 @@ class SettingPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                     ),
-                    const SizedBox(height: 12,),
+                    const SizedBox(height: 5,),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -137,7 +137,7 @@ class SettingMenuTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return   ListTile(
-      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 0,),
+      contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0,),
       leading: Icon(icons, size: 28, color: const Color(0xff2d2d2d),),
       title: Text(title,   style: GoogleFonts.raleway(
         color: const Color(0xff2d2d2d),

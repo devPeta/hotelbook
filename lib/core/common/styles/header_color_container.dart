@@ -21,7 +21,7 @@ class AppHeaderContainer extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.lightBlueAccent.withOpacity(0.2),
+            color: Colors.white54.withOpacity(0.2),
             spreadRadius: 2,
             blurRadius: 4,
             offset: const Offset(0, 2),

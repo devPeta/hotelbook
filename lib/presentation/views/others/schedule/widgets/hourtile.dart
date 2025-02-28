@@ -13,17 +13,15 @@ class HourTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
         Container(
-        height: 24,
-        width: 24,
         decoration: const BoxDecoration(
           color: Color(0xff2D2D2D),
           shape: BoxShape.circle,
         ),
-        child: Center(
-            // child: Icon(Icons.add, color: Colors.white,  size: 18 )
+        child: Padding(
+          padding: EdgeInsets.all(4),
             child: IconButton(onPressed: incrementButton,
                 icon: const Icon(Icons.add, color: Colors.white,  size: 18 ),
             ),
@@ -38,14 +36,12 @@ class HourTile extends StatelessWidget {
     ),
 
  Container(
-          height: 24,
-          width: 24,
           decoration: const BoxDecoration(
               color: Color(0xff2D2D2D),
               shape: BoxShape.circle,
            ),
-          child: Center(
-            // child: Icon(Icons.remove, color: Colors.white,  size: 18 ),
+          child: Padding(
+            padding: EdgeInsets.all(4),
             child: IconButton(
               icon: const Icon(Icons.remove, color: Colors.white,  size: 18 ),
               onPressed: decrementButton,

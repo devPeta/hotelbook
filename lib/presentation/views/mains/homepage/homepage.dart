@@ -16,7 +16,8 @@ class AppHomePage extends StatefulWidget {
 
 class _AppHomePageState extends State<AppHomePage> {
   @override
-  void onInit() {
+  void initState() {
+    super.initState();
     // Ensure the products are categorized upon initialization
     Get.find<HotelProductController>().separateCategories();
   }
@@ -58,10 +59,9 @@ class _AppHomePageState extends State<AppHomePage> {
 
                       /// Book Hotel
                       SizedBox(
-                       height: 120,
+                        height: 120,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          shrinkWrap: false,
                           itemCount: productController.placesAround.length,
                           itemBuilder: (context, index) {
                             final product = productController.placesAround[index];
@@ -113,7 +113,6 @@ class _AppHomePageState extends State<AppHomePage> {
 
                           return ListView.separated(
                             scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
                             itemCount: visitAroundProducts.length,
                             itemBuilder: (context, index) {
                               final product = visitAroundProducts[index];

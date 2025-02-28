@@ -91,9 +91,10 @@ class FavouriteTile extends StatelessWidget {
                     ),
                   ],
                 ),
+                
                 const SizedBox(height: 4),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
                       price,
@@ -101,22 +102,6 @@ class FavouriteTile extends StatelessWidget {
                         color: Colors.green.withOpacity(0.5),
                         fontWeight: FontWeight.w800,
                         fontSize: 16,
-                      ),
-                    ),
-                    Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xff232323),
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(16),
-                          bottomLeft: Radius.circular(8),
-                        ),
-                      ),
-                      child: const SizedBox(
-                        width: 36,
-                        height: 36,
-                        child: Center(
-                          child: Icon(Icons.add, color: Colors.white),
-                        ),
                       ),
                     ),
                   ],

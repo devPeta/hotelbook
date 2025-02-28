@@ -2,6 +2,7 @@ import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/core/constant/textstyle_constant.dart';
 import 'package:bookhotel/data/models/book_hotel_product_model.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
+import 'package:bookhotel/presentation/views/mains/details/details_page.dart';
 import 'package:bookhotel/presentation/views/mains/search/widgets/search_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:bookhotel/core/common/apptextfield.dart';
@@ -96,7 +97,7 @@ class _SearchPageState extends State<SearchPage> {
                         itemBuilder: (context, index) => GestureDetector(
                           onTap: () {
                             _hotelController.selectProduct(displayList[index]);
-                            Get.to(() => HotelDetailsPage(hotel: displayList[index]));
+                            Get.to(() => DetailsPage());
                           },
                           child: SearchTile(
                             bookHotelProduct: displayList[index],

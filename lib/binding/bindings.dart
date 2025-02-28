@@ -34,7 +34,7 @@
 //     Get.lazyPut<BottomNavigationController>(() => BottomNavigationController());
 //   }
 // }
-//
+// 
 // class FarmBinding extends Bindings {
 //   @override
 //   void dependencies() {

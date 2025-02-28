@@ -14,7 +14,7 @@ import 'package:bookhotel/presentation/views/others/schedule/schedule_page.dart'
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class DetailsPage extends StatelessWidget {
-  DetailsPage({Key? key}) : super(key: key);
+  DetailsPage({Key? key, }) : super(key: key);
 
   final List<Map<String, dynamic>> items = [
     {'icon': Icons.pool_outlined, 'text': 'Swimming Pool'},

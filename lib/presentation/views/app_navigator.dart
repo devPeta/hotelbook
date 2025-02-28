@@ -4,7 +4,6 @@ import 'package:bookhotel/presentation/views/others/favourite/favourite_screen.d
 import 'package:bookhotel/presentation/views/others/setting/setting_page.dart';
 import 'package:flutter/material.dart';
 
-
 class AppNavigator extends StatefulWidget {
   const AppNavigator({Key? key}) : super(key: key);
 
@@ -34,7 +33,7 @@ class _AppNavigatorState extends State<AppNavigator> {
         bottomNavigationBar: BottomAppBar(
         color: Colors.white,
         shape: const CircularNotchedRectangle(),
-          elevation: 3.0,
+          elevation: 4.0,
           child: BottomNavigationBar(
           backgroundColor: const Color(0xFF2D2D2D),
           iconSize: 20,

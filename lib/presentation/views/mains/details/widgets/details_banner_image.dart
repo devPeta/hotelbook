@@ -30,7 +30,7 @@ class DetailsBannerImage extends StatelessWidget {
               items: imgBanner.map((url)=> RoundedImage(imgUrl: url,width: double.infinity, height: 250,),).toList(),
             ),
             Positioned(
-                top: 10,
+                top: 15,
                 left: 16,
                 child: GestureDetector(
                   onTap: (){
@@ -50,7 +50,7 @@ class DetailsBannerImage extends StatelessWidget {
 
 
             Positioned(
-                top: 10,
+                top: 15,
                 right: 16,
                 child: Container(
                   decoration: const BoxDecoration(
