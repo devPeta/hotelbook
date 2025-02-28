@@ -40,7 +40,7 @@ class _ProfileScreenState extends State<ProfilePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                const ApplicationBar(title: 'Profile', leadingIcon: null, showBackArrow: false, ),
+                const ApplicationBar(title: 'Profile', leadingIcon: null, showBackArrow: true, ),
 
                 Center(
                     child: Column(

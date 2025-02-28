@@ -21,6 +21,7 @@ class FavouritePage extends StatelessWidget {
               ApplicationBar(
                 title: 'Favourite',
                 centerTitle: false,
+                showBackArrow:false,
               ),
 
             Expanded(

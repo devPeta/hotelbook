@@ -68,7 +68,7 @@ class _SchedulePageState extends State<SchedulePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ApplicationBar(title: 'Schedule', leadingIcon: null, showBackArrow: true),
+              const ApplicationBar(title: 'Schedule', leadingIcon: null, showBackArrow:false),
               SizedBox(height: height * 0.01),
               Expanded(
                 child: SingleChildScrollView(
