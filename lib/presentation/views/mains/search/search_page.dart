@@ -57,9 +57,10 @@ class _SearchPageState extends State<SearchPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ApplicationBar(
+              ApplicationBar(
                 title: 'Search',
                 centerTitle: false,
+                showBackArrow: false,
               ),
               SizedBox(height: height * 0.02),
               AppKTextField(

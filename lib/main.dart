@@ -1,9 +1,9 @@
 import 'package:bookhotel/core/theme/theme.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
+import 'package:bookhotel/presentation/views/auths/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'presentation/views/auths/onboarding/onboarding_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
@@ -32,8 +32,6 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  // .then((FirebaseApp value)=>Get.put(AuthenticationRepository()),
-  // );
 }
 
 class MyApp extends StatelessWidget {
@@ -51,7 +49,7 @@ class MyApp extends StatelessWidget {
       title: 'Book Hotel',
       debugShowCheckedModeBanner: false,
       theme: TTheme.appTheme,
-      home: const OnBoardingScreen(),
+      home: Wrapper(),
     );
   }
 }

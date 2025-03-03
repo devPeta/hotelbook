@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:bookhotel/core/common/appbar.dart';
 import 'package:bookhotel/presentation/views/others/profile/widgets/profile_menu.dart';
 import 'package:bookhotel/presentation/views/others/profile/widgets/profile_section_header.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -26,6 +27,13 @@ class _ProfileScreenState extends State<ProfilePage> {
       });
     }
   }
+
+
+
+  ///Fetching User Records
+  final user = FirebaseAuth.instance.currentUser!;
+  
+
   @override
   Widget build(BuildContext context) {
     final double width = MediaQuery.of(context).size.width;
@@ -87,8 +95,9 @@ class _ProfileScreenState extends State<ProfilePage> {
                         ///Profile Menu
                         const ProfileSectionHeader(title: 'Profile Information',),
                         SizedBox(height: height * 0.01),
-                        ProfileMenu(title: 'Name', value: 'Yakubu Peter', onPressed: () {}, icon: Icons.navigate_next,),
-                        ProfileMenu(title: 'Username', value: 'Peta', onPressed: () {  }, icon: Icons.navigate_next,),
+                        ProfileMenu(title: 'Name', 
+                        value: 'Yakubu Peter', onPressed: () {}, icon: Icons.navigate_next,),
+                        ProfileMenu(title: 'Username', value: 'Peta', onPressed: () {}, icon: Icons.navigate_next,),
 
                         SizedBox(height: height * 0.02),
                         const Divider(),
@@ -99,16 +108,19 @@ class _ProfileScreenState extends State<ProfilePage> {
 
                         SizedBox(height: height * 0.01),
 
-                        ProfileMenu(title: 'userID', value: '134', onPressed: () {}, icon: Icons.copy,),
-                        ProfileMenu(title: 'Email', value: 'yakubupeta34@gmail.com', onPressed: () {}, icon: Icons.copy,),
-                        ProfileMenu(title: 'Phone Number', value: '+2348129425802', onPressed: () {}, icon: Icons.navigate_next,),
+                        ProfileMenu(title: 'userID', value: user.uid, onPressed: () {}, icon: Icons.copy,),
+                        ProfileMenu(title: 'Email', value: user.email!, onPressed: () {}, icon: Icons.copy,),
+                        ProfileMenu(title: 'Phone Number', value: user.phoneNumber!, onPressed: () {}, icon: Icons.navigate_next,),
                         ProfileMenu(title: 'Date Of Birth', value: '31 July 2001', onPressed: () {}, icon: Icons.navigate_next,),
                         ProfileMenu(title: 'Gender', value: 'M', onPressed: () {}, icon: Icons.navigate_next,),
 
                         SizedBox(height: height * 0.02),
 
                         Center(
-                          child: TextButton(onPressed: (){}, child: const Text('Log Out', style: TextStyle(color: Colors.red),)
+                          child: TextButton(onPressed: (){
+                            FirebaseAuth.instance.signOut();
+                          }, 
+                          child: const Text('Log Out', style: TextStyle(color: Colors.red),)
                           ),
                         ),
                         SizedBox(height: height * 0.01),

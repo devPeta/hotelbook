@@ -22,33 +22,6 @@ class LoginForm extends StatefulWidget {
 class _LoginFormState extends State<LoginForm> {
 
   final controller = Get.put(SignInController());
-  // final TextEditingController emailController = TextEditingController();
-  // final TextEditingController passwordController = TextEditingController();
-  // final _formKey = GlobalKey<FormState>();
-  // final RxBool hidePassword = true.obs;
-  // final RxBool rememberMe = false.obs;
-  //
-  // /// ✅ Sign In Function
-  // Future<void> signIn(String email, String password) async {
-  //   try {
-  //     await FirebaseAuth.instance.signInWithEmailAndPassword(
-  //       email: email,
-  //       password: password,
-  //     );
-  //     AppLoaders.successSnackBar(title: 'Logged in Successfully');
-  //     Get.off(() => const AppNavigator());
-  //   } on FirebaseAuthException catch (e) {
-  //     String message;
-  //     if (e.code == 'user-not-found') {
-  //       message = 'No user found for this email.';
-  //     } else if (e.code == 'wrong-password') {
-  //       message = 'Incorrect password. Please try again.';
-  //     } else {
-  //       message = 'Login failed';
-  //     }
-  //     AppLoaders.errorSnackBar(title: message);
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
