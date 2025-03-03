@@ -1,7 +1,6 @@
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:bookhotel/data/models/book_hotel_product_model.dart';
 // Import the HotelProductController
 
 class ScheduleController extends GetxController {
