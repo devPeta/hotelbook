@@ -1,5 +1,6 @@
 import 'package:bookhotel/core/theme/theme.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
+import 'package:bookhotel/presentation/controller/favourite_controller.dart';
 import 'package:bookhotel/presentation/views/auths/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,41 +8,35 @@ import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
-import 'package:bookhotel/presentation/controller/favourite_controller.dart';
-
 
 Future<void> main() async {
+  /// Ensure widgets binding before async operations
+  WidgetsFlutterBinding.ensureInitialized();
 
-  runApp(const MyApp());
-
-
-  ///Widgets Binding
-  final WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
-
-  ///Get Storage
+  /// Initialize GetStorage
   await GetStorage.init();
 
-  ///Cant switch to land space just portrait
+  /// Lock device orientation to portrait only
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-
-
+  /// Initialize Firebase
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  /// Run the app after initialization is complete
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
-    ///Initializing Product Controller
+    /// Initializing Controllers using Get.put()
     Get.put(HotelProductController());
     Get.put(FavouriteController());
 
