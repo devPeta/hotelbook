@@ -43,8 +43,7 @@ class SignupController extends GetxController {
 
       try {
         UserCredential userCredential = await FirebaseAuth.instance
-            .createUserWithEmailAndPassword(email: email, password: password);
-
+            .createUserWithEmailAndPassword(email: email, password: password); 
         AppLoaders.successSnackBar(
           title: 'Registered Successfully',
           message: 'Your account has been created! Please verify your email.',

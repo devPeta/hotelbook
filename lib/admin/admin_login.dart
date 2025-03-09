@@ -1,13 +1,13 @@
-import 'package:bookhotel/core/common/appsocialbutton.dart';
+import 'package:bookhotel/admin/widgets/admin_login_form.dart';
 import 'package:bookhotel/core/constant/textstyle_constant.dart';
-import 'package:bookhotel/presentation/views/app_navigator.dart';
-import 'package:bookhotel/presentation/views/auths/login/widgets/login_form.dart';
+import 'package:bookhotel/presentation/views/auths/login/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'widgets/dont_have_an_account.dart';
+import 'package:get/get.dart';
 
-class LoginScreen extends StatelessWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+
+class AdminLoginScreen extends StatelessWidget {
+  const AdminLoginScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: height * 0.03),
                 Center(
                   child: Text(
-                    'Sign In',
+                    'Admin Sign In',
                     style: AppTextStyles.onBoardingTitle.copyWith(
                       color: const Color(0xff2D2D2D),
                       fontSize: 20,
@@ -38,19 +38,10 @@ class LoginScreen extends StatelessWidget {
                 SizedBox(height: height * 0.02),
 
                 /// Login Form And Button
-                const LoginForm(),
+                const AdminLoginForm(),
                 SizedBox(height: height * 0.02),
 
-                /// Social Button
-                const AppKSocialButtons(),
-                SizedBox(height: height * 0.01),
 
-                /// Don't have an account Button
-                const DontHaveAnAccountLog().animate().fadeIn().scale().move(
-                      delay: 100.ms,
-                      duration: 600.ms,
-                      begin: const Offset(0, 200),
-                    ),
 
                 /// For Admin
                 Align(
@@ -58,11 +49,17 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Text('For Admin'),
+                      const Text('For User'),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(LoginScreen(),);
+                        },
                         child: const Text('Login Here'),
-                      ),
+                      ).animate().fadeIn().scale().move(
+                      delay: 100.ms,
+                      duration: 600.ms,
+                      begin: const Offset(0, 200),
+                    ),
                     ],
                   ),
                 ),

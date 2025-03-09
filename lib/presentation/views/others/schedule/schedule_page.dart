@@ -1,4 +1,6 @@
+import 'package:bookhotel/presentation/services/database.dart';
 import 'package:bookhotel/presentation/views/others/schedule/widgets/hourtile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:bookhotel/core/common/appbar.dart';
@@ -52,6 +54,10 @@ class _SchedulePageState extends State<SchedulePage> {
       });
     }
   }
+
+    ///Fetching User Records
+  final user = FirebaseAuth.instance.currentUser!;
+  
 
   @override
   Widget build(BuildContext context) {
@@ -146,7 +152,42 @@ class _SchedulePageState extends State<SchedulePage> {
                           }),
                         ],
                       ),
-                      AppKButton(label: 'Pay Now', width: double.infinity, color: const Color(0xff2D2D2D)),
+                      AppKButton(label: 'Pay Now', width: double.infinity, color: const Color(0xff2D2D2D),
+                          onTap: () async {
+                            if (_selectedCheckInDate == null) {
+                              Get.snackbar("Error", "Please select a check-in date", 
+                                snackPosition: SnackPosition.BOTTOM, 
+                                backgroundColor: Colors.red, 
+                                colorText: Colors.white
+                              );
+                              return;
+                            }
+
+                            Map<String, dynamic> addUserBookingMap = {
+                              "Date": _selectedCheckInDate.toString(),
+                              "Title": product?.title ?? "No Title",
+                              "Location": product?.location ?? "No Location",
+                              "Price": _scheduleController.totalPrice.value.toStringAsFixed(2),
+                              "Name": user.displayName ?? "Unknown User",
+                              "Email": user.email ?? "No Email",
+                            };
+
+                            await DatabaseMethods().addUserBooking(addUserBookingMap).then((value) {
+                              Get.snackbar("Success", "Booking completed successfully!",
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Colors.green,
+                                colorText: Colors.white,
+                                duration: const Duration(seconds: 3),
+                              );
+                            }).catchError((error) {
+                              Get.snackbar("Error", "Booking failed: $error",
+                                snackPosition: SnackPosition.BOTTOM,
+                                backgroundColor: Colors.red,
+                                colorText: Colors.white,
+                              );
+                            });
+                          },
+                      ),
                     ],
                   ),
                 ),
