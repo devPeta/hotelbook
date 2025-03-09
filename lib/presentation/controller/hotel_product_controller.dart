@@ -15,51 +15,51 @@ class HotelProductController extends GetxController {
   /// Method to initialize the list of hotels
   void _initializeHotelProducts() {
     bookHotel.addAll([
-    const BookHotelProduct(imgPaths: 'assets/images/places/h1.jpg',
+    const BookHotelProduct(imgPaths: 'assets/images/hotel/h1.jpg',
       title: 'Top Galaxy Hotel',
       location: 'Sabon Tasha',
       price: '#3500',
       basePrice: 3500,
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/places/h1.jpg', 'assets/images/places/h2.jpg', 'assets/images/places/h3.jpg','assets/images/places/h4.jpg'
+      images: [ 'assets/images/hotel/h1.jpg', 'assets/images/hotel/h2.jpg', 'assets/images/hotel/h3.jpg','assets/images/hotel/h4.jpg'
       ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/places/kk1.jpg',  location: 'Sabon Tasha', price: '#5000',
+    const BookHotelProduct(imgPaths: 'assets/images/hotel/kk1.jpg',  location: 'Sabon Tasha', price: '#5000',
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
       title: 'Palm Palace Hotel',
       basePrice: 5000,
-      images: [ 'assets/images/places/kk1.jpg', 'assets/images/places/kk2.jpg', 'assets/images/places/kk3.jpg' ],
+      images: [ 'assets/images/hotel/kk1.jpg', 'assets/images/hotel/kk2.jpg', 'assets/images/hotel/kk3.jpg' ],
     ).withCategoryId('places_around'),
     const BookHotelProduct(
-      imgPaths: 'assets/images/places/h4a.jpg',  location: 'Kaduna North', price: '#4000',
+      imgPaths: 'assets/images/hotel/h4a.jpg',  location: 'Kaduna North', price: '#4000',
       title: 'Star Hotel',
       basePrice: 4000,
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/places/h4a.jpg', 'assets/images/places/h4b.jpg', 'assets/images/places/h4.jpg' ],
+      images: [ 'assets/images/hotel/h4a.jpg', 'assets/images/hotel/h4b.jpg', 'assets/images/hotel/h4.jpg' ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/places/h5a.jpg', title: 'Raw Hotel', location: 'Ungwan Rimi', price: '#6000',
+    const BookHotelProduct(imgPaths: 'assets/images/hotel/h5a.jpg', title: 'Raw Hotel', location: 'Ungwan Rimi', price: '#6000',
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125,
       basePrice: 6000,
       longitude: 7.6793,
-      images: [ 'assets/images/places/h5b.jpg', 'assets/images/places/h5c.jpg', 'assets/images/places/h5a.jpg' ],
+      images: [ 'assets/images/hotel/h5b.jpg', 'assets/images/hotel/h5c.jpg', 'assets/images/hotel/h5a.jpg' ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/places/hh1.jpg',
+    const BookHotelProduct(imgPaths: 'assets/images/hotel/hh1.jpg',
       title: 'Royal Hotel',
       location: 'Trikiana', price: '#5500',
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793, basePrice: 5500,
-      images: [ 'assets/images/places/hh1.jpg', 'assets/images/places/hh2.jpg', 'assets/images/places/hh3.jpg' ],
+      images: [ 'assets/images/hotel/hh1.jpg', 'assets/images/hotel/hh2.jpg', 'assets/images/hotel/hh3.jpg' ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/placees/vk1a.jpg',
+    const BookHotelProduct(imgPaths: 'assets/images/hotel/vk1a.jpg',
       title:'Equatorial Hotel',
       location: 'Kaduna North', price: '#7500', basePrice: 7500,
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/places/vk1a.jpg', 'assets/images/places/vk1b.jpg', 'assets/images/places/vk1c.jpg' ],
+      images: [ 'assets/images/hotel/vk1a.jpg', 'assets/images/hotel/vk1b.jpg', 'assets/images/hotel/vk1c.jpg' ],
     ).withCategoryId('places_around'),
     const BookHotelProduct(imgPaths: 'assets/images/places/0.jpg',
       title:'Protect Hotel',location: 'Romi', price: '#25,000',basePrice: 25000,
@@ -70,7 +70,7 @@ class HotelProductController extends GetxController {
 
 
     const BookHotelProduct(
-      imgPaths: 'assets/images/hotel/place3.png', title: 'Kaduna Museum',
+      imgPaths: 'assets/images/places/m1.jpg', title: 'Kaduna Museum',
       images: [
         'assets/images/places/m1.jpg', 'assets/images/places/m2.jpg', 'assets/images/places/m3.jpg'
       ],
@@ -82,7 +82,7 @@ class HotelProductController extends GetxController {
     ).withCategoryId('visit_around'),
 
     const BookHotelProduct(
-      imgPaths: 'assets/images/hotel/place2.png',
+      imgPaths: 'assets/images/places/place2.png',
       title: 'Kagoro Hills',
       images: [
         'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg'
