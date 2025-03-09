@@ -3,34 +3,32 @@ import 'package:bookhotel/core/common/appbutton.dart';
 import 'package:bookhotel/core/common/apptextfield.dart';
 import 'package:bookhotel/core/validator/validator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AdminLoginForm extends StatefulWidget {
   const AdminLoginForm({super.key});
 
   @override
-  State<AdminLoginForm> createState() => _LoginFormState();
+  State<AdminLoginForm> createState() => _AdminLoginFormState();
 }
 
-class _LoginFormState extends State<AdminLoginForm> {
-
+class _AdminLoginFormState extends State<AdminLoginForm> {
   final controller = Get.put(AdminSignInController());
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
     return Form(
-      // key: controller.logInFormKey,
+      key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           /// Email Field
           AppKTextField(
             labelText: 'Email',
-            hintText: 'devpeta34@gmail.com',
+            hintText: 'admin@example.com',
             prefixIcon: const Icon(Icons.email_outlined, color: Color(0xff2D2D2D)),
             controller: controller.emailController,
             validator: (value) => Validator.validateEmail(value),
@@ -40,7 +38,7 @@ class _LoginFormState extends State<AdminLoginForm> {
 
           /// Password Field
           Obx(
-                () => AppKTextField(
+            () => AppKTextField(
               labelText: 'Password',
               hintText: '*******',
               controller: controller.passwordController,
@@ -68,6 +66,11 @@ class _LoginFormState extends State<AdminLoginForm> {
             color: const Color(0xff2D2D2D),
             shadowOpacity: 0.2,
             height: 51,
+            onTap: () {
+              if (_formKey.currentState!.validate()) {
+                controller.loginAdmin();
+              }
+            },
           ),
         ],
       ),
