@@ -22,10 +22,12 @@ Future<void> main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  /// Initialize Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  /// Initialize Firebase only if not already initialized
+  if (Firebase.apps.isEmpty) {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  }
 
   /// Run the app after initialization is complete
   runApp(const MyApp());
@@ -36,9 +38,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Initializing Controllers using Get.put()
-    Get.put(HotelProductController());
-    Get.put(FavouriteController());
+    /// Initializing Controllers using lazy loading to optimize memory
+    Get.lazyPut(() => HotelProductController());
+    Get.lazyPut(() => FavouriteController());
 
     return GetMaterialApp(
       title: 'Book Hotel',
