@@ -17,8 +17,10 @@ class SettingPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              ///Profile Header
 
+              const SizedBox(height: 16,),
+
+              ///Profile Header
               AppHeaderContainer(
                 height: 125,
                 child: Column(
@@ -44,7 +46,7 @@ class SettingPage extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: (){
-                                Get.to(const ProfilePage(),
+                                Get.to( ProfilePage(),
                                   transition: Transition.rightToLeft,
                                   curve:Curves.easeInOut,
                                 );

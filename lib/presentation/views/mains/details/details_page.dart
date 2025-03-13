@@ -50,93 +50,96 @@ class DetailsPage extends StatelessWidget {
             // Banner image with no shimmer effect
             DetailsBannerImage(imgBanner: product.images),
             const SizedBox(height: 16),
-            SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: height * 0.01),
-                    // Rating and Review, Contact Info (no shimmer effect)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        RatingBarIndicator(
-                          rating: 3.5,
-                          itemCount: 5,
-                          itemSize: 18,
-                          itemBuilder: (context, index) => const Icon(
-                            Icons.star_border_outlined,
-                            color: Colors.amber,
+            Expanded(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(height: height * 0.01),
+                      // Rating and Review, Contact Info (no shimmer effect)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          RatingBarIndicator(
+                            rating: 3.5,
+                            itemCount: 5,
+                            itemSize: 18,
+                            itemBuilder: (context, index) => const Icon(
+                              Icons.star_border_outlined,
+                              color: Colors.amber,
+                            ),
+                            direction: Axis.horizontal,
                           ),
-                          direction: Axis.horizontal,
+                          const PlaceACallTextButton(phoneNumber: '08129425802'),
+                        ],
+                      ),
+                      SizedBox(height: height * 0.01),
+                      // Hotel Name (no shimmer effect)
+                      Text(
+                        product.title,
+                        style: GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff2D2D2D),
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
-                        const PlaceACallTextButton(phoneNumber: '08129425802'),
-                      ],
-                    ),
-                    SizedBox(height: height * 0.01),
-                    // Hotel Name (no shimmer effect)
-                    Text(
-                      product.title,
-                      style: GoogleFonts.raleway(
-                        textStyle: const TextStyle(
-                          fontSize: 20,
-                          color: Color(0xff2D2D2D),
+                      ),
+                      SizedBox(height: 2),
+                      // Address (no shimmer effect)
+                      Text(
+                        product.location,
+                        style: GoogleFonts.raleway(
+                          textStyle: const TextStyle(
+                            fontSize: 16,
+                            color: Color(0xff2D2D2D),
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      SizedBox(height: height * 0.01),
+                      // Public Facilities (no shimmer effect)
+                      SizedBox(
+                        height: 42,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: false,
+                          itemBuilder: (context, index) {
+                            return PublicFacilitiesTile(
+                              icon: items[index]['icon'],
+                              text: items[index]['text'],
+                            );
+                          },
+                          separatorBuilder: (_, __) => const SizedBox(width: 16),
+                          itemCount: items.length,
+                        ),
+                      ),
+                      SizedBox(height: height * 0.01),
+                      // Description Text (no shimmer effect)
+                      Text('Description', style: AppTextStyles.sectionTextStyle),
+                      SizedBox(height: height * 0.02),
+                      // Details Sub Text Button (no shimmer effect)
+                      Text(
+                        product.description,
+                        style: AppTextStyles.sectionTextStyle.copyWith(
+                          color: const Color(0xff969696),
+                          fontSize: 14,
                           fontWeight: FontWeight.w700,
                         ),
                       ),
-                    ),
-                    SizedBox(height: 2),
-                    // Address (no shimmer effect)
-                    Text(
-                      product.location,
-                      style: GoogleFonts.raleway(
-                        textStyle: const TextStyle(
-                          fontSize: 16,
-                          color: Color(0xff2D2D2D),
-                          fontWeight: FontWeight.w400,
+                      SizedBox(
+                        height: 200,
+                        child: PlacesAroundMap(
+                          latitude: product.latitude,
+                          longitude: product.longitude,
                         ),
                       ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    SizedBox(height: height * 0.01),
-                    // Public Facilities (no shimmer effect)
-                    SizedBox(
-                      height: 42,
-                      child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) {
-                          return PublicFacilitiesTile(
-                            icon: items[index]['icon'],
-                            text: items[index]['text'],
-                          );
-                        },
-                        separatorBuilder: (_, __) => const SizedBox(width: 16),
-                        itemCount: items.length,
-                      ),
-                    ),
-                    SizedBox(height: height * 0.01),
-                    // Description Text (no shimmer effect)
-                    Text('Description', style: AppTextStyles.sectionTextStyle),
-                    SizedBox(height: height * 0.02),
-                    // Details Sub Text Button (no shimmer effect)
-                    Text(
-                      product.description,
-                      style: AppTextStyles.sectionTextStyle.copyWith(
-                        color: const Color(0xff969696),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 200,
-                      child: PlacesAroundMap(
-                        latitude: product.latitude,
-                        longitude: product.longitude,
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),

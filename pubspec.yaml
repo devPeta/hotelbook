@@ -79,7 +79,7 @@ dependencies:
   firebase_core: ^3.5.0
   google_sign_in: ^6.1.6
   flutter_facebook_auth: any
-  shared_preferences: ^2.0.5
+  firebase_storage: ^12.4.4
 
 
 
@@ -107,7 +107,6 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-     - assets/socials/
      - assets/images/hotel/
      - assets/images/places/
      - assets/images/bernard-hermant-KqOLr8OiQLU-unsplash 1.png

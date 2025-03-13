@@ -15,22 +15,15 @@ class HotelProductController extends GetxController {
   /// Method to initialize the list of hotels
   void _initializeHotelProducts() {
     bookHotel.addAll([
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/h1.jpg',
+    const BookHotelProduct(imgPaths: 'assets/images/hotel/h2.jpg',
       title: 'Top Galaxy Hotel',
       location: 'Sabon Tasha',
       price: '#3500',
       basePrice: 3500,
       description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
       latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/hotel/h1.jpg', 'assets/images/hotel/h2.jpg', 'assets/images/hotel/h3.jpg','assets/images/hotel/h4.jpg'
+      images: [ 'assets/images/hotel/h2.jpg', 'assets/images/hotel/h3.jpg','assets/images/hotel/h4.jpg'
       ],
-    ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/kk1.jpg',  location: 'Sabon Tasha', price: '#5000',
-      description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
-      latitude: 10.3125, longitude: 7.6793,
-      title: 'Palm Palace Hotel',
-      basePrice: 5000,
-      images: [ 'assets/images/hotel/kk1.jpg', 'assets/images/hotel/kk2.jpg', 'assets/images/hotel/kk3.jpg' ],
     ).withCategoryId('places_around'),
     const BookHotelProduct(
       imgPaths: 'assets/images/hotel/h4a.jpg',  location: 'Kaduna North', price: '#4000',
@@ -54,20 +47,6 @@ class HotelProductController extends GetxController {
       latitude: 10.3125, longitude: 7.6793, basePrice: 5500,
       images: [ 'assets/images/hotel/hh1.jpg', 'assets/images/hotel/hh2.jpg', 'assets/images/hotel/hh3.jpg' ],
     ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/hotel/vk1a.jpg',
-      title:'Equatorial Hotel',
-      location: 'Kaduna North', price: '#7500', basePrice: 7500,
-      description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
-      latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/hotel/vk1a.jpg', 'assets/images/hotel/vk1b.jpg', 'assets/images/hotel/vk1c.jpg' ],
-    ).withCategoryId('places_around'),
-    const BookHotelProduct(imgPaths: 'assets/images/places/0.jpg',
-      title:'Protect Hotel',location: 'Romi', price: '#25,000',basePrice: 25000,
-      description: 'Amet minim mollit non deserunt ullamco est sit\naliqua dolor do amet sint. Velit officia consequat\nduis enim velit mollit.',
-      latitude: 10.3125, longitude: 7.6793,
-      images: [ 'assets/images/places/0.jpg', 'assets/images/places/5.jpg', 'assets/images/places/4.jpg' ],
-    ).withCategoryId('places_around'),
-
 
     const BookHotelProduct(
       imgPaths: 'assets/images/places/m1.jpg', title: 'Kaduna Museum',
@@ -92,6 +71,32 @@ class HotelProductController extends GetxController {
       longitude: 8.47298, basePrice: 25000,
       price: '#25,000',
       location: 'Southern Kaduna, Kaura LGA',
+    ).withCategoryId('visit_around'),
+
+      const BookHotelProduct(
+      imgPaths: 'assets/images/places/kk2.jpg',
+      title: 'Kamuku Park',
+      images: [
+        'assets/images/places/kk1.jpg', 'assets/images/places/kk2.jpg', 'assets/images/places/kk3.jpg'
+      ],
+      description: 'The park is home to a diverse range of wildlife\nincluding elephants, antelopes, oribi, waterbucks,\nwildcats, green monkeys, side-striped hyenas, and jackals.',
+      latitude: 10.7,
+      longitude: 6.5, basePrice: 25000,
+      price: '#25,000',
+      location: 'Birnin Gwari, Kaduna',
+    ).withCategoryId('visit_around'),
+
+      const BookHotelProduct(
+      imgPaths: 'assets/images/places/matsirawaterfall1.jpg',
+      title: 'Matsirga Waterfalls',
+      images: [
+        'assets/images/places/matsirawaterfall1.jpg', 'assets/images/places/matsirawaterfall2.jpg', 'assets/images/places/matsirawaterfall3.jpg'
+      ],
+      description: 'Matsirga Waterfalls, also known as "River Wonderful," \nis a stunning natural attraction located in Batadon (Madakiya),\na small settlement near Kafanchan in southern Kaduna State, Nigeria.',
+      latitude: 9.6,
+      longitude: 8.312, basePrice: 25000,
+      price: '#25,000',
+      location: 'Birnin Gwari, Kaduna',
     ).withCategoryId('visit_around'),
 
     const BookHotelProduct(

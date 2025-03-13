@@ -24,7 +24,6 @@ class _AppHomePageState extends State<AppHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
     final HotelProductController productController = Get.find<HotelProductController>();
 

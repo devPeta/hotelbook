@@ -14,15 +14,16 @@ class AppKSocialButtons extends StatelessWidget {
       children: [
         Expanded(
           child: AppKButton(
-            height: 54,
-            width: 98,
+            height: 34,
+            width: 34,
             borderRadius: 4,
             color: Colors.white,
             label: '',
             imgPaths: AppImages.facebook,
             onTap: (){},
             border: Border.all(
-              color: const Color(0xffABABAB),
+              color: Colors.white, 
+              /// const Color(0xffABABAB),
               width: 1,
               style: BorderStyle.solid,
             ),
@@ -31,11 +32,12 @@ class AppKSocialButtons extends StatelessWidget {
         const SizedBox(width: AppSizes.spaceBtwItemsMd),
         Expanded(
           child: AppKButton(
-            height: 54,
-            width: 98,
+            height: 34,
+            width: 34,
             borderRadius: 4,
             border: Border.all(
-              color: const Color(0xffABABAB),
+              color: Colors.white,
+              /// const Color(0xffABABAB),
               width: 1,
               style: BorderStyle.solid,
             ),

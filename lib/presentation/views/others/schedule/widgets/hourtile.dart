@@ -14,40 +14,40 @@ class HourTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return  Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
         Container(
+          height: 24,
+          width: 24,
         decoration: const BoxDecoration(
           color: Color(0xff2D2D2D),
           shape: BoxShape.circle,
         ),
-        child: Padding(
-          padding: EdgeInsets.all(4),
-            child: IconButton(onPressed: incrementButton,
+        child: IconButton(onPressed: incrementButton,
                 icon: const Icon(Icons.add, color: Colors.white,  size: 18 ),
             ),
         ),
-              ),
 
-   Text(text, style: const TextStyle(
+    Text(text, style: const TextStyle(
       fontSize: 16,
       color: Color(0xff2D2D2D),
       fontWeight: FontWeight.w700,
     ),
     ),
 
- Container(
+      Container(
+                  height: 24,
+          width: 24,
           decoration: const BoxDecoration(
               color: Color(0xff2D2D2D),
               shape: BoxShape.circle,
            ),
-          child: Padding(
-            padding: EdgeInsets.all(4),
             child: IconButton(
               icon: const Icon(Icons.remove, color: Colors.white,  size: 18 ),
               onPressed: decrementButton,
             ),
              ),
-          ),
+        
     ]
     );
   }

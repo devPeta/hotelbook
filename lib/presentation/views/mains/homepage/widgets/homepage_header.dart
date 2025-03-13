@@ -2,7 +2,6 @@ import 'package:bookhotel/presentation/views/others/profile/profile_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get.dart';
-import 'package:bookhotel/core/common/apphometextfield.dart';
 import 'package:bookhotel/core/common/styles/header_color_container.dart';
 import 'package:bookhotel/presentation/views/mains/notifications/notification_page.dart';
 
@@ -34,12 +33,11 @@ class HomePageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
     final double height = MediaQuery.of(context).size.height;
 
     final HomepageHeaderController controller = HomepageHeaderController();
     return AppHeaderContainer(
-      height: 210,
+      height: 180,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.start,
@@ -54,7 +52,7 @@ class HomePageHeader extends StatelessWidget {
               ///Profile
               GestureDetector(
                 onTap:(){
-                  Get.to(const ProfilePage(),
+                  Get.to( ProfilePage(),
                       transition: Transition.rightToLeft,
                       curve:Curves.easeInOut,
                   );
@@ -115,13 +113,13 @@ class HomePageHeader extends StatelessWidget {
               style: GoogleFonts.raleway(fontSize: 20, color: Colors.white),
               children: [
                 TextSpan(
-                    text: 'Hotels, Villas,\nLodging',
+                    text: 'Hotels, Villas,\nLodging, Museum',
                     style: GoogleFonts.raleway(
                         fontWeight: FontWeight.bold,
                         fontSize: 20, color: Colors.white)
                 ),
                 TextSpan(
-                    text: ', that are around you!',
+                    text: ', \nthat are around you!',
                       style: GoogleFonts.raleway(
                         fontSize: 20, color: Colors.white)
                 ),
@@ -131,30 +129,30 @@ class HomePageHeader extends StatelessWidget {
           SizedBox(height: height * 0.01,),
 
           ///Search For the best Hotels
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Expanded(
-                child: AppHomeTextField(
-                  hintText: 'Find the best Hotels',
-                ),
-              ),
-              const SizedBox(width: 8,),
-              Center(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: const Color(0xff2194FF),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: const Padding(
-                    padding: EdgeInsets.all(12.0),
-                    child: Icon(Icons.search, color: Colors.white, size: 20,),
-                  ),
-                ),
-              )
-            ],
-          ),
+          // Row(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   children: [
+          //     const Expanded(
+          //       child: AppHomeTextField(
+          //         hintText: 'Find the best Hotels',
+          //       ),
+          //     ),
+          //     const SizedBox(width: 8,),
+          //     Center(
+          //       child: Container(
+          //         decoration: BoxDecoration(
+          //           color: const Color(0xff2194FF),
+          //           borderRadius: BorderRadius.circular(8.0),
+          //         ),
+          //         child: const Padding(
+          //           padding: EdgeInsets.all(12.0),
+          //           child: Icon(Icons.search, color: Colors.white, size: 20,),
+          //         ),
+          //       ),
+          //     )
+          //   ],
+          // ),
         ],
       ),
     );

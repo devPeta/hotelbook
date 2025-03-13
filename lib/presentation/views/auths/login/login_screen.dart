@@ -1,9 +1,12 @@
+import 'package:bookhotel/admin/admin_login.dart';
 import 'package:bookhotel/core/common/appsocialbutton.dart';
 import 'package:bookhotel/core/constant/textstyle_constant.dart';
 import 'package:bookhotel/presentation/views/app_navigator.dart';
 import 'package:bookhotel/presentation/views/auths/login/widgets/login_form.dart';
+import 'package:bookhotel/presentation/views/auths/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
 import 'widgets/dont_have_an_account.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -53,19 +56,30 @@ class LoginScreen extends StatelessWidget {
                     ),
 
                 /// For Admin
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Column(
+                    Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.end, // Moves to the bottom
                     children: [
-                      const Text('For Admin'),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text('Login Here'),
+                      Text('For Admin', style: AppTextStyles.onBoardingTitle.copyWith(
+                      color: const Color(0xff2D2D2D),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(const AdminLoginScreen());
+                        },
+                        child: Text('Login Here', style: AppTextStyles.onBoardingTitle.copyWith(
+                      color: const Color(0xff2D2D2D),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w900,
+                        ),
                       ),
+                    ),
+      
                     ],
                   ),
-                ),
               ],
             ),
           ),

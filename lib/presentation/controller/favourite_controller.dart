@@ -7,22 +7,36 @@ class FavouriteController extends GetxController {
   var favouriteHotels = <BookHotelProduct>[].obs;
 
   // Method to check if a hotel is in the favorite list
-  bool isFavourite(BookHotelProduct hotel) {
-    return favouriteHotels.any((favorite) =>
-    favorite.title == hotel.title && favorite.location == hotel.location);
-  }
+  // bool isFavourite(BookHotelProduct hotel) {
+  //   return favouriteHotels.any((favorite) =>
+  //   favorite.title == hotel.title && favorite.location == hotel.location);
+  // }
 
-  // Method to toggle the favorite status
-  void toggleFavourite(BookHotelProduct hotel) {
-    if (isFavourite(hotel)) {
-      favouriteHotels.removeWhere((favorite) =>
-      favorite.title == hotel.title && favorite.location == hotel.location);
-      _showSnackbar('Removed from Favorites');
-    } else {
-      favouriteHotels.add(hotel);
-      _showSnackbar('Added to Favorites');
-    }
+  // // Method to toggle the favorite status
+  // void toggleFavourite(BookHotelProduct hotel) {
+  //   if (isFavourite(hotel)) {
+  //     favouriteHotels.removeWhere((favorite) =>
+  //     favorite.title == hotel.title && favorite.location == hotel.location);
+  //     _showSnackbar('Removed from Favorites');
+  //   } else {
+  //     favouriteHotels.add(hotel);
+  //     _showSnackbar('Added to Favorites');
+  //   }
+  // }
+  bool isFavourite(BookHotelProduct hotel) {
+  return favouriteHotels.any((favorite) => favorite == hotel);
+}
+
+void toggleFavourite(BookHotelProduct hotel) {
+  if (isFavourite(hotel)) {
+    favouriteHotels.removeWhere((favorite) => favorite == hotel);
+    _showSnackbar('Removed from Favorites');
+  } else {
+    favouriteHotels.add(hotel);
+    _showSnackbar('Added to Favorites');
   }
+}
+
 
   // Helper method to show a snackbar with the appropriate message
   void _showSnackbar(String message) {

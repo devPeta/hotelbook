@@ -127,6 +127,8 @@ class _SchedulePageState extends State<SchedulePage> {
                       const Divider(color: Color(0xff2D2D2D), thickness: 2),
                       SizedBox(height: height * 0.01),
                       Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Obx(() => HourTile(
                               text: _scheduleController.hours.toString(),
