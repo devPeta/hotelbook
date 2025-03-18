@@ -106,26 +106,28 @@ class HomePageHeader extends StatelessWidget {
           ),
           SizedBox(height: height * 0.02,),
 
-          ///Find Hotels
-          Text.rich(
-            TextSpan(
-              text: 'Find ',
-              style: GoogleFonts.raleway(fontSize: 20, color: Colors.white),
-              children: [
-                TextSpan(
-                    text: 'Hotels, Villas,\nLodging, Museum',
-                    style: GoogleFonts.raleway(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20, color: Colors.white)
-                ),
-                TextSpan(
-                    text: ', \nthat are around you!',
-                      style: GoogleFonts.raleway(
-                        fontSize: 20, color: Colors.white)
-                ),
-              ],
-            ),
-          ),
+
+          
+                    ///Text
+                    Text.rich(
+                      TextSpan(
+                        text: 'Find ',
+                        style: GoogleFonts.raleway(fontSize: 20, color: Colors.white),
+                        children: [
+                          TextSpan(
+                              text: 'Hotels, Villas,\nLodging, Museum',
+                              style: GoogleFonts.raleway(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20, color: Colors.white)
+                          ),
+                          TextSpan(
+                              text: ', \nthat are around you!',
+                              style: GoogleFonts.raleway(
+                                  fontSize: 20, color: Colors.white)
+                          ),
+                        ],
+                      ),
+                    ),
           SizedBox(height: height * 0.01,),
 
           ///Search For the best Hotels
