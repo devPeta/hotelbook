@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 
 class EditProfileScreen extends StatelessWidget {
   final EditProfileController controller = Get.put(EditProfileController());
+  
+
 
   @override
   Widget build(BuildContext context) {
