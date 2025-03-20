@@ -16,8 +16,8 @@ class HourTile extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           IconButton(onPressed: incrementButton,
-                icon: const Icon(Icons.add, color: Color(0xffffffff),  size: 18 ),
-                color: const Color(0xff2D2D2D),
+                icon: const Icon(Icons.add, color: Color(0xff2D2D2D),  size: 18 ),
+                //color: const Color(0xffffffff),
             ),
     
     Text(text, style: const TextStyle(
@@ -28,9 +28,9 @@ class HourTile extends StatelessWidget {
     ),
 
       IconButton(
-              icon: const Icon(Icons.remove, color: Color(0xffffffff),  size: 18 ),
+              icon: const Icon(Icons.remove, color: Color(0xff2D2D2D),  size: 18 ),
               onPressed: decrementButton,
-              color: const Color(0xff2D2D2D),
+              //color: const Color(0xffffffff),
             ),
         
     ]

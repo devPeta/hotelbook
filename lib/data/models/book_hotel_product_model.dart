@@ -52,10 +52,22 @@ class BookHotelProduct {
   }
 
   /// Creates a copy of this [BookHotelProduct] with a new [categoryId].
-  ///
-  /// - [category]: The new category ID.
   BookHotelProduct withCategoryId(String category) {
     return copyWith(categoryId: category);
   }
-}
 
+  /// Override `==` and `hashCode` to allow correct object comparison
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other is BookHotelProduct &&
+            other.title == title &&
+            other.location == location &&
+            other.basePrice == basePrice &&
+            other.categoryId == categoryId);
+  }
+
+  @override
+  int get hashCode =>
+      title.hashCode ^ location.hashCode ^ basePrice.hashCode ^ categoryId.hashCode;
+}

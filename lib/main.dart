@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
       title: 'Book Hotel',
       debugShowCheckedModeBanner: false,
       theme: TTheme.appTheme,
-      home: Wrapper(),
+      home: const Wrapper(),
     );
   }
 }

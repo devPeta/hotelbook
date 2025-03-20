@@ -10,10 +10,9 @@ class AppKSocialButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Expanded(
-          child: AppKButton(
+      AppKButton(
             height: 34,
             width: 34,
             borderRadius: 4,
@@ -28,10 +27,9 @@ class AppKSocialButtons extends StatelessWidget {
               style: BorderStyle.solid,
             ),
           ),
-        ),
+
         const SizedBox(width: AppSizes.spaceBtwItemsMd),
-        Expanded(
-          child: AppKButton(
+     AppKButton(
             height: 34,
             width: 34,
             borderRadius: 4,
@@ -47,7 +45,6 @@ class AppKSocialButtons extends StatelessWidget {
             onTap: () async {
               await SignInController.instance.googleSignIn();
             },
-          ),
         ),
       ],
     );

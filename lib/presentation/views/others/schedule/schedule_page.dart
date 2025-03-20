@@ -84,7 +84,7 @@ class _SchedulePageState extends State<SchedulePage> {
                       const TextHeader(textHeader: 'Personal Data'),
                       ButtonLikeTextField(
                         prefixIcon: const Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D), size: 24),
-                        onTap: () => Get.to(const PersonalData()),
+                        onTap: () => Get.to(PersonalData()),
                         text: 'Check',
                         suffixIcon: const Icon(Icons.navigate_next_sharp, color: Color(0xff2D2D2D), size: 24),
                       ),
@@ -140,7 +140,7 @@ class _SchedulePageState extends State<SchedulePage> {
                           Text('Price', style: GoogleFonts.raleway(fontSize: 14, color: Color(0xff2D2D2D), fontWeight: FontWeight.w600)),
                           Obx(() {
                             return Text(
-                              '\$${_scheduleController.totalPrice.value.toStringAsFixed(2)}',
+                              '\$#{_scheduleController.totalPrice.value.toStringAsFixed(2)}',
                               style: GoogleFonts.raleway(
                                 fontSize: 14,
                                 color: Colors.amberAccent,

@@ -17,9 +17,6 @@ class SettingPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-
-              const SizedBox(height: 16,),
-
               ///Profile Header
               AppHeaderContainer(
                 height: 125,
@@ -34,7 +31,7 @@ class SettingPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                     ),
-                    const SizedBox(height: 5,),
+                    const SizedBox(height: 8,),
 
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

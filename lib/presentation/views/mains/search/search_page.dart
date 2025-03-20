@@ -59,7 +59,7 @@ class _SearchPageState extends State<SearchPage> {
             children: [
               ApplicationBar(
                 title: 'Search',
-                centerTitle: false,
+                centerTitle: true,
                 showBackArrow: false,
               ),
               SizedBox(height: height * 0.02),

@@ -1,66 +1,171 @@
 import 'package:bookhotel/core/common/appbar.dart';
+import 'package:bookhotel/presentation/controller/profile_controller.dart';
+import 'package:bookhotel/presentation/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
+
 class PersonalData extends StatelessWidget {
-  const PersonalData({Key? key}) : super(key: key);
+  PersonalData({Key? key}) : super(key: key);
+
+  final UserController controller = Get.put(UserController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ///AppBar
-              const ApplicationBar(title: 'Personal Data', leadingIcon: null,),
-              const SizedBox(height: 4),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            /// AppBar
+            const ApplicationBar(title: 'Personal Data', leadingIcon: null),
+            const SizedBox(height: 4),
 
-              ///Body
-              Expanded(child:
-              Padding(
+            /// Body
+            Expanded(
+              child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
-                   children: [
-                    Text('Data', style: GoogleFonts.raleway(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xff2D2D2D),
-                    ),
+                  children: [
+                    Text(
+                      'Data',
+                      style: GoogleFonts.raleway(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xff2D2D2D),
+                      ),
                     ),
                     const SizedBox(height: 4),
 
-                    const PersonalDataTile(
-                      prefixIcon: Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D),size: 24,), text: 'Yusuf Bagoe', title: 'Full name',
-                      prefixIcon2: Icon(Icons.location_on_outlined, color: Color(0xff2D2D2D),size: 24,), text2: '12 Galadima Road', title2: 'Address',
-                      prefixIcon3: Icon(Icons.credit_card_sharp, color: Color(0xff2D2D2D),size: 24,), text3: '3125089', title3: 'ID number',
-                    ),
+                    /// Personal Information
+                    Obx(() => PersonalDataTile(
+                      prefixIcon: const Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D), size: 24),
+                      text: controller.fullName.value,
+                      title: 'Full name',
+                      prefixIcon2: const Icon(Icons.location_on_outlined, color: Color(0xff2D2D2D), size: 24),
+                      text2: controller.address.value,
+                      title2: 'Address',
+                      prefixIcon3: const Icon(Icons.credit_card_sharp, color: Color(0xff2D2D2D), size: 24),
+                      text3: controller.idNumber.value,
+                      title3: 'ID number',
+                    )),
 
                     const SizedBox(height: 12),
-                    Text('Contact', style: GoogleFonts.raleway(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xff2D2D2D),
-                    ),
-                    ),
 
-                    const SizedBox(height: 4),
-                    const PersonalDataTile(
-                      prefixIcon: Icon(Icons.email, color: Color(0xff2D2D2D),size: 24,), text: 'yusufbago@gmail.com', title: 'Email',
-                      prefixIcon2: Icon(Icons.phone, color: Color(0xff2D2D2D),size: 24,), text2: '+2348129425802', title2: 'Phone number',
+                    Text(
+                      'Contact',
+                      style: GoogleFonts.raleway(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xff2D2D2D),
+                      ),
                     ),
+                    const SizedBox(height: 4),
+
+                    /// Contact Information
+                    Obx(() => PersonalDataTile(
+                      prefixIcon: const Icon(Icons.email, color: Color(0xff2D2D2D), size: 24),
+                      text: controller.email.value,
+                      title: 'Email',
+                      prefixIcon2: const Icon(Icons.phone, color: Color(0xff2D2D2D), size: 24),
+                      text2: controller.phoneNumber.value,
+                      title2: 'Phone number',
+                    )),
                   ],
                 ),
-              )),
-            ],
-          ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
+
+
+// import 'package:bookhotel/core/common/appbar.dart';
+// import 'package:flutter/material.dart';
+// import 'package:google_fonts/google_fonts.dart';
+// class PersonalData extends StatelessWidget {
+//   const PersonalData({Key? key}) : super(key: key);
+//
+//   final user = FirebaseAuth.instance.currentUser!;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       body: SafeArea(
+//           child: Column(
+//             crossAxisAlignment: CrossAxisAlignment.start,
+//             mainAxisAlignment: MainAxisAlignment.start,
+//             children: [
+//               ///AppBar
+//               const ApplicationBar(title: 'Personal Data', leadingIcon: null,),
+//               const SizedBox(height: 4),
+//
+//               ///Body
+//               Expanded(child:
+//               Padding(
+//                 padding: const EdgeInsets.all(16.0),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   mainAxisAlignment: MainAxisAlignment.start,
+//                    children: [
+//                     Text('Data', style: GoogleFonts.raleway(
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.w500,
+//                       color: const Color(0xff2D2D2D),
+//                     ),
+//                     ),
+//                     const SizedBox(height: 4),
+//
+//                     const PersonalDataTile(
+//                       prefixIcon: Icon(Icons.person_2_outlined, color: Color(0xff2D2D2D),size: 24,), text: 'Yusuf Bagoe', title: 'Full name',
+//                       prefixIcon2: Icon(Icons.location_on_outlined, color: Color(0xff2D2D2D),size: 24,), text2: '12 Galadima Road', title2: 'Address',
+//                       prefixIcon3: Icon(Icons.credit_card_sharp, color: Color(0xff2D2D2D),size: 24,), text3: '3125089', title3: 'ID number',
+//                     ),
+//
+//                     const SizedBox(height: 12),
+//                     Text('Contact', style: GoogleFonts.raleway(
+//                       fontSize: 18,
+//                       fontWeight: FontWeight.w500,
+//                       color: const Color(0xff2D2D2D),
+//                     ),
+//                     ),
+//
+//                     const SizedBox(height: 4),
+//                     PersonalDataTile(
+//                       prefixIcon: Icon(Icons.email, color: Color(0xff2D2D2D),size: 24,), text: user.email, title: 'Email',
+//                       prefixIcon2: Icon(Icons.phone, color: Color(0xff2D2D2D),size: 24,), text2: user.phoneNumber ?? 'Not Set', title2: 'Phone number',
+//                     ),
+//                   ],
+//                 ),
+//               )),
+//             ],
+//           ),
+//       ),
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 class PersonalDataTile extends StatelessWidget {
   final Icon prefixIcon;

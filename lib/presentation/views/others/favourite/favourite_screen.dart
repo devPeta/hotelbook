@@ -18,9 +18,9 @@ class FavouritePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-              ApplicationBar(
+              const ApplicationBar(
                 title: 'Favourite',
-                centerTitle: false,
+                centerTitle: true,
                 showBackArrow:false,
               ),
 

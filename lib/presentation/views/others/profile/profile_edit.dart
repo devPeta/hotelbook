@@ -14,7 +14,8 @@ class EditProfileScreen extends StatelessWidget {
     final double height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Padding(
+      body: SafeArea(
+        child:Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
@@ -44,6 +45,7 @@ class EditProfileScreen extends StatelessWidget {
                 ),
           ],
         ),
+      ),
       ),
     );
   }
