@@ -24,63 +24,65 @@ class SignupController extends GetxController {
   /// Form Key
   final signupFormKey = GlobalKey<FormState>();
 
-  /// ✅ Registration Function (With Firestore)
+  /// ✅ New Registration Function (With Firestore)
   Future<void> registerUser() async {
-    if (!signupFormKey.currentState!.validate()) return;
+    if (!signupFormKey.currentState!.validate()) {
+      final firstName = firstNameController.text.trim();
+      final lastName = lastNameController.text.trim();
+      final username = userNameController.text.trim();
+      final email = emailController.text.trim();
+      final password = passwordController.text.trim();
+      final phoneNumber = phoneNumberController.text.trim();
+      if ([firstName, lastName, username, email, password, phoneNumber]
+          .any((element) => element.isEmpty)) {
+        AppLoaders.warningSnackBar(title: 'All fields are required');
 
-    final firstName = firstNameController.text.trim();
-    final lastName = lastNameController.text.trim();
-    final username = userNameController.text.trim();
-    final email = emailController.text.trim();
-    final password = passwordController.text.trim();
-    final phoneNumber = phoneNumberController.text.trim();
+        AppFullScreenLoader.openLoadingDialog('Processing your information...');
 
-    if ([firstName, lastName, username, email, password, phoneNumber]
-        .any((element) => element.isEmpty)) {
-      AppLoaders.warningSnackBar(title: 'All fields are required');
-      return;
-    }
+        try {
+          UserCredential userCredential = await FirebaseAuth.instance
+              .createUserWithEmailAndPassword(email: email, password: password);
 
-    AppFullScreenLoader.openLoadingDialog('Processing your information...');
+          AppFullScreenLoader.openLoadingDialog(
+              'Processing your information...');
 
-    try {
-      /// 👉 Create user in Firebase Authentication
-      UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
+          /// 👉 Create user in Firebase Authentication
+          String uid = userCredential.user!.uid;
 
-      String uid = userCredential.user!.uid;
+          /// 👉 Store user data in Firestore
+          await FirebaseFirestore.instance.collection('users').doc(uid).set({
+            "firstName": "",
+            "lastName": "",
+            "email": email,
+            "address": "",
+            "idNumber": "",
+            "phoneNumber": "",
+            "createdAt": FieldValue.serverTimestamp(),
+          });
 
-      /// 👉 Store user data in Firestore
-      await FirebaseFirestore.instance.collection('users').doc(uid).set({
-        'uid': uid,
-        'firstName': firstName,
-        'lastName': lastName,
-        'username': username,
-        'email': email,
-        'phoneNumber': phoneNumber,
-        'createdAt': FieldValue.serverTimestamp(),
-      });
+          /// ✅ Success Message & Navigation
+          AppLoaders.successSnackBar(
+            title: 'Registered Successfully',
+            message: 'Your account has been created! Please verify your email.',
+          );
 
-      /// ✅ Success Message & Navigation
-      AppLoaders.successSnackBar(
-        title: 'Registered Successfully',
-        message: 'Your account has been created! Please verify your email.',
-      );
-
-      Get.off(() => AppNavigator());
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        AppLoaders.warningSnackBar(title: 'Password is too weak');
-      } else if (e.code == 'email-already-in-use') {
-        AppLoaders.warningSnackBar(title: 'Account already exists');
-      } else {
-        AppLoaders.errorSnackBar(title: 'Registration failed: ${e.message}');
+          Get.off(() => AppNavigator());
+        } on FirebaseAuthException catch (e) {
+          if (e.code == 'weak-password') {
+            AppLoaders.warningSnackBar(title: 'Password is too weak');
+          } else if (e.code == 'email-already-in-use') {
+            AppLoaders.warningSnackBar(title: 'Account already exists');
+          } else {
+            AppLoaders.errorSnackBar(
+                title: 'Registration failed: ${e.message}');
+          }
+        } finally {
+          AppFullScreenLoader.stopLoading();
+        }
       }
-    } finally {
-      AppFullScreenLoader.stopLoading();
     }
   }
-}
+
 
 // import 'package:bookhotel/core/common/appfullscreenloader.dart';
 // import 'package:bookhotel/core/common/appsnackbarloaders.dart';
@@ -148,3 +150,4 @@ class SignupController extends GetxController {
 //     }
 //   }
 // }
+}

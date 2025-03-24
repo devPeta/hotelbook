@@ -1,4 +1,4 @@
-import 'package:bookhotel/presentation/services/database.dart';
+import 'package:bookhotel/presentation/services/database_services.dart';
 import 'package:bookhotel/presentation/views/others/schedule/widgets/hourtile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -140,7 +140,7 @@ class _SchedulePageState extends State<SchedulePage> {
                           Text('Price', style: GoogleFonts.raleway(fontSize: 14, color: Color(0xff2D2D2D), fontWeight: FontWeight.w600)),
                           Obx(() {
                             return Text(
-                              '\$#{_scheduleController.totalPrice.value.toStringAsFixed(2)}',
+                              '\#{_scheduleController.totalPrice.value.toStringAsFixed(2)}',
                               style: GoogleFonts.raleway(
                                 fontSize: 14,
                                 color: Colors.amberAccent,

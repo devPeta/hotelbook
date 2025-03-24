@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class BookHotelProduct {
-  final String imgPaths; // Consider renaming to `imagePaths` if it's a list
+  final String imgPaths; // Consider renaming to imagePaths if it's a list
   final String title;
   final String location;
   final String price;
@@ -24,7 +26,42 @@ class BookHotelProduct {
     this.categoryId = '', // Default categoryId is empty
   });
 
-  /// Creates a copy of this [BookHotelProduct] with updated fields.
+
+  /// Convert Firestore document to `BookHotelProduct`
+  factory BookHotelProduct.fromFirestore(DocumentSnapshot doc) {
+    final data = doc.data() as Map<String, dynamic>;
+    return BookHotelProduct(
+      imgPaths: data['imgPaths'] ?? '',
+      title: data['title'] ?? '',
+      location: data['location'] ?? '',
+      price: data['price'] ?? '',
+      basePrice: (data['basePrice'] ?? 0).toDouble(),
+      description: data['description'] ?? '',
+      latitude: (data['latitude'] ?? 0).toDouble(),
+      longitude: (data['longitude'] ?? 0).toDouble(),
+      images: List<String>.from(data['images'] ?? []),
+      categoryId: data['categoryId'] ?? '',
+    );
+  }
+
+  /// Convert `BookHotelProduct` to Firestore document
+  Map<String, dynamic> toFirestore() {
+    return {
+      "imgPaths": imgPaths,
+      "title": title,
+      "location": location,
+      "price": price,
+      "basePrice": basePrice,
+      "description": description,
+      "latitude": latitude,
+      "longitude": longitude,
+      "images": images,
+      "categoryId": categoryId,
+      "createdAt": Timestamp.now(),
+    };
+  }
+
+  /// Creates a copy with updated fields
   BookHotelProduct copyWith({
     String? imgPaths,
     String? title,
@@ -51,23 +88,8 @@ class BookHotelProduct {
     );
   }
 
-  /// Creates a copy of this [BookHotelProduct] with a new [categoryId].
+  /// - [category]: The new category ID.
   BookHotelProduct withCategoryId(String category) {
     return copyWith(categoryId: category);
   }
-
-  /// Override `==` and `hashCode` to allow correct object comparison
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other is BookHotelProduct &&
-            other.title == title &&
-            other.location == location &&
-            other.basePrice == basePrice &&
-            other.categoryId == categoryId);
-  }
-
-  @override
-  int get hashCode =>
-      title.hashCode ^ location.hashCode ^ basePrice.hashCode ^ categoryId.hashCode;
 }

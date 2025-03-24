@@ -56,28 +56,21 @@ class LoginScreen extends StatelessWidget {
                     ),
 
                 /// For Admin
-                    Column(
+                    Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.end, // Moves to the bottom
                     children: [
-                      Text('For Admin', style: AppTextStyles.onBoardingTitle.copyWith(
+                      GestureDetector(
+                        onTap: () {
+                          Get.to(const AdminLoginScreen());
+                        },
+                        child:Text('For Admin', style: AppTextStyles.onBoardingTitle.copyWith(
                       color: const Color(0xff2D2D2D),
                       fontSize: 16,
                       fontWeight: FontWeight.w900,
                     ),
                   ),
-                      GestureDetector(
-                        onTap: () {
-                          Get.to(const AdminLoginScreen());
-                        },
-                        child: Text('Login Here', style: AppTextStyles.onBoardingTitle.copyWith(
-                      color: const Color(0xff2D2D2D),
-                      fontSize: 14,
-                      fontWeight: FontWeight.w900,
-                        ),
                       ),
-                    ),
-      
                     ],
                   ),
               ],
