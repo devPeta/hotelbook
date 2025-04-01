@@ -1,4 +1,5 @@
 import 'package:bookhotel/core/theme/theme.dart';
+import 'package:bookhotel/data/models/favourite_provider.dart';
 import 'package:bookhotel/presentation/controller/hotel_product_controller.dart';
 import 'package:bookhotel/presentation/controller/favourite_controller.dart';
 import 'package:bookhotel/presentation/views/auths/wrapper.dart';
@@ -7,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -15,6 +17,7 @@ Future<void> main() async {
 
   /// Initialize GetStorage
   await GetStorage.init();
+
 
   /// Lock device orientation to portrait only
   SystemChrome.setPreferredOrientations([
@@ -30,7 +33,13 @@ Future<void> main() async {
   }
 
   /// Run the app after initialization is complete
-  runApp(const MyApp());
+  runApp( MultiProvider(
+    providers: [
+      ChangeNotifierProvider(create: (_) => FavouriteProvider()),
+    ],
+    child: MyApp(),
+  ),
+  );
 }
 
 class MyApp extends StatelessWidget {
