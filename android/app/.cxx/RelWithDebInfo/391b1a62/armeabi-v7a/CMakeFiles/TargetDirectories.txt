@@ -1,0 +1,2 @@
+C:/android_dev/2024/bookhotel/android/app/.cxx/RelWithDebInfo/391b1a62/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/android_dev/2024/bookhotel/android/app/.cxx/RelWithDebInfo/391b1a62/armeabi-v7a/CMakeFiles/rebuild_cache.dir
